@@ -66,7 +66,7 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     private func setupProgressHUD() {
-        ProgressHUD.fontStatus = UIFont.boldSystemFont(ofSize: 20)
+        ProgressHUD.fontStatus = UIFont.boldSystemFont(ofSize: 19)
         ProgressHUD.colorStatus = UIColor(red:99/255, green:99/255, blue:100/255, alpha:1.0)
     }
     

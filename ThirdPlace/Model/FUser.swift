@@ -65,6 +65,18 @@ class FUser: Equatable {
         premium = 0
     }
     
+    init (_dictionary: NSDictionary) {
+        
+        objectId = _dictionary[kOBJECTID] as? String ?? ""
+        email = _dictionary[kEMAIL] as? String ?? ""
+        username = _dictionary[kUSERNAME] as? String ?? ""
+        personality = _dictionary[kPERSONALITY] as? String ?? ""
+        worry = _dictionary[kWORRY] as? String ?? ""
+        avatarLink = _dictionary[kAVATARLINK] as? String ?? ""
+        aboutMe = _dictionary[kABOUTME] as? String ?? ""
+        premium = _dictionary[kPREMIUM] as? Int ?? 0
+    }
+    
     //MARK: - Login
     class func loginUserWith(email: String, password: String, completion: @escaping (_ error: Error?, _ isEmailVerified: Bool) -> Void) {
         
@@ -74,7 +86,7 @@ class FUser: Equatable {
                 
                 if authDataResult!.user.isEmailVerified {
                     
-                    //check if user exists in FB
+                    FirebaseListener.shared.downloadCUrrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
                     completion(error, true)
                 } else {
                     print("Email not verified")
@@ -109,10 +121,55 @@ class FUser: Equatable {
         }
     }
     
+    //MARK: - Resend Links
+    class func resetPasswordFor(email: String, completion: @escaping (_ error: Error?) -> Void) {
+     
+        //Auth.auth().currentUser?.reload(completion: { error in
+            
+            Auth.auth().sendPasswordReset(withEmail: email) { error in
+                
+                completion(error)
+            }
+        //})
+    }
+    
+    //パスワード忘れた際のメアドが登録されたものかどうかをチェックする関数が必要、もしくはメール列挙保護を無効にすれば大丈夫かも
+    // After asking the user for their email.
+//    class func checkExistFor(email: String) {
+//        Auth.auth().fetchSignInMethods(forEmail: email) { signInMethods, error in
+//            // This returns the same array as fetchProviders(forEmail:completion:) but for email
+//            // provider identified by 'password' string, signInMethods would contain 2
+//            // different strings:
+//            // 'emailLink' if the user previously signed in with an email/link
+//            // 'password' if the user has a password.
+//            // A user could have both.
+//            if (error) {
+//                // Handle error case.
+//            }
+//            if (!signInMethods.contains(EmailPasswordAuthSignInMethod)) {
+//                // User can sign in with email/password.
+//            }
+//            if (!signInMethods.contains(EmailLinkAuthSignInMethod)) {
+//                // User can sign in with email/link.
+//            }
+//        }
+//    }
+    
+    //MARK: - Save user funcs
     func saveUserlocaly() {
         
-        userDefault.setValue(self.userDictionary as! [String : Any], forKey: kCURRENTUSER)
-        userDefault.synchronize()
+        userDefaults.setValue(self.userDictionary as! [String : Any], forKey: kCURRENTUSER)
+        userDefaults.synchronize()
+    }
+    
+    func saveUserToFireStore() {
+        
+        FirebaseReference(.User).document(self.objectId).setData(self.userDictionary as! [String : Any]) { error in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+        }
     }
     
 }
@@ -128,31 +185,31 @@ extension AuthErrorCode.Code {
         case .emailAlreadyInUse:
             return "このメールアドレスはすでに使われています。"
         case .userDisabled:
-            return "このアカウントは無効になっています"
+            return "このアカウントは無効になっています。"
         case .operationNotAllowed:
-            return "操作できませんa"
+            return "操作できません。"
         case .invalidEmail:
-            return "メールアドレスの形式が違います"
+            return "メールアドレスの形式が違います。"
         case .invalidCredential:
-            return "メールアドレスが登録されていません\nもしくはパスワードが違います"
+            return "メールアドレスが登録されていません。もしくはパスワードが違います。"
         case .wrongPassword:
-            return "パスワードが違います"
+            return "パスワードが違います。"
         case .userNotFound:
-            return "アカウントが見つかりません"
+            return "アカウントが見つかりません。"
         case .networkError:
-            return "サーバーへ接続できません"
+            return "サーバーへ接続できません。"
         case .weakPassword:
-            return "パスワードは6文字以上で入力してください"
+            return "パスワードは6文字以上で入力してください。"
         case .missingEmail:
-            return "メールアドレスの登録が必要です"
+            return "メールアドレスの登録が必要です。"
 //        case .internalError:
-//            return "内部エラーが発生しています"
+//            return "内部エラーが発生しています。"
         case .invalidCustomToken:
-            return "無効なカスタムトークンです"
+            return "無効なカスタムトークンです。"
 //        case .tooManyRequests:
-//            return "すでに多くのリクエストがサーバーに送信されています"
+//            return "すでに多くのリクエストがサーバーに送信されています。"
         default:
-            return "エラーが起きました\nメールアドレス・パスワードを再度ご確認ください"
+            return "エラーが起きました。しばらくしてから再度お試しください。"
         }
     }
 }

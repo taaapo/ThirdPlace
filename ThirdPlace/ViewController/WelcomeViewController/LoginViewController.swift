@@ -36,23 +36,34 @@ class LoginViewController: UIViewController {
                     ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
                 } else if isEmailVerified {
                     
-                    //enter the application
+                    self.goToApp()
                 } else {
                     
-                    ProgressHUD.symbol("メールを認証してください", name: "exclamationmark.circle")
+                    ProgressHUD.symbol("メールを認証してください。", name: "exclamationmark.circle")
                 }
             }
         } else {
-            ProgressHUD.symbol("すべての項目を入力してください", name: "exclamationmark.circle")
+            ProgressHUD.symbol("すべての項目を入力してください。", name: "exclamationmark.circle")
         }
     }
     
     @IBAction func forgotPasswordButtonPressed(_ sender: UIButton) {
         
         if emailTextField.text != ""{
-            //reset password
+            
+            FUser.resetPasswordFor(email: emailTextField.text!) { error in
+                
+                if error != nil {
+                    print(error!)
+                    ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle", delay: 5)
+                } else {
+                    
+                    ProgressHUD.symbol("パスワード再設定用メールを送信しました。メールが来ない場合はメールアドレスが登録されていません。", name: "exclamationmark.circle", delay: 6)
+                }
+            }
+            
         } else {
-            ProgressHUD.symbol("メールアドレスを入力してください", name: "exclamationmark.circle")
+            ProgressHUD.symbol("メールアドレスを入力してください。", name: "exclamationmark.circle")
         }
     }
     
@@ -66,16 +77,28 @@ class LoginViewController: UIViewController {
     
     @objc func backgroundTap() {
         dismissKeyboard()
+        ProgressHUD.dismiss()
     }
     
     private func setupProgressHUD() {
-        ProgressHUD.fontStatus = UIFont.boldSystemFont(ofSize: 20)
+        ProgressHUD.fontStatus = UIFont.boldSystemFont(ofSize: 19)
         ProgressHUD.colorStatus = UIColor(red:99/255, green:99/255, blue:100/255, alpha:1.0)
+        //ProgressHUD.mediaSize = 100
+        //ProgressHUD.marginSize = 50
     }
     
-    //MARK: - Gelpers
+    //MARK: - Helpers
     private func dismissKeyboard() {
         self.view.endEditing(false)
+    }
+    
+    //MARK: - Navigation
+    private func goToApp() {
+        
+        let mainView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
+        
+        mainView.modalPresentationStyle = .fullScreen
+        self.present(mainView, animated: true, completion: nil)
     }
     
 }
