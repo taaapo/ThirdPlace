@@ -28,6 +28,8 @@ class LoginViewController: UIViewController {
         
         if emailTextField.text != "" && passwordTextField.text != "" {
             
+            ProgressHUD.animate()
+            
             FUser.loginUserWith(email: emailTextField.text!, password: passwordTextField.text!) { error, isEmailVerified in
                 
                 if error != nil {
@@ -36,6 +38,7 @@ class LoginViewController: UIViewController {
                     ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
                 } else if isEmailVerified {
                     
+                    ProgressHUD.dismiss()
                     self.goToApp()
                 } else {
                     

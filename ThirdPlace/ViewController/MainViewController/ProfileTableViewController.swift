@@ -11,8 +11,6 @@ class ProfileTableViewController: UITableViewController {
     
     //MARK: - IBOutlets
     
-    @IBOutlet weak var editAndSaveBarButton: UIBarButtonItem!
-    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -20,30 +18,32 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var worryTextField: UITextField!
     @IBOutlet weak var aboutMeTextField: UITextView!
     
+    //MARK: - Vars
+    var editingMode = false
+    
     //MARK: - ViewLifrCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBackgrounds()
+        setupTableViewBackground()
+        setupAboutMeTextField()
+//        setupNavigationBar()
+//        setupEditAndSaveBarButton()
+        updateEditingMode()
+        //self.navigationController?.navigationBar.barTintColor = .clear
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
     
     //MARK: - IBActions
-    @IBAction func editAndSaveBarButtonPressed(_ sender: UIBarButtonItem) {
-    }
-    
-    @IBAction func settingsBarButtonPressed(_ sender: UIBarButtonItem) {
-    }
-    
+
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
     }
     
     //MARK: - Setup
-    private func setupBackgrounds() {
-        setupTableViewBackground()
-        setupAboutMeTextField()
-    }
-    
     private func setupTableViewBackground() {
         let image = UIImage(named: "プロフィール画面背景")
         let imageView = UIImageView(frame: CGRectMake(0, 0, self.tableView.frame.width, self.tableView.frame.height))
@@ -55,8 +55,25 @@ class ProfileTableViewController: UITableViewController {
         aboutMeTextField.layer.cornerRadius = 5
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+//    private func setupEditAndSaveBarButton() {
+//        editAndSaveBarButton.title
+//    }
+    
+    private func setupNavigationBar() {
+        
+        let navigationBar = UINavigationBar()
+        navigationBar.barStyle = .default
+        navigationBar.isTranslucent = true
+        navigationBar.tintColor = UIColor(red: 253/255, green: 87/255, blue: 86/255, alpha: 1)
+    }
+    
+    //MARK: - Editing Mode
+    private func updateEditingMode() {
+        
+        usernameTextField.isUserInteractionEnabled = editingMode
+        personalitytextField.isUserInteractionEnabled = editingMode
+        worryTextField.isUserInteractionEnabled = editingMode
+        aboutMeTextField.isUserInteractionEnabled = editingMode
     }
     
 }

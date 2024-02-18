@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Use Firebase library to configure APIs
+        FirebaseApp.configure()
+        setupConfigurations()
+        
         return true
     }
 
@@ -32,5 +38,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    //MARK: - UIConfiguration
+    private func setupConfigurations() {
+        
+        UITabBar.appearance().shadowImage = UIImage()
+        //UITabBar.appearance().backgroundImage = UIImage(named: "プロフィール画面背景")
+        UITabBar.appearance().backgroundColor = UIColor.clear
+        UITabBar.appearance().tintColor = UIColor(red: 253/255, green: 87/255, blue: 86/255, alpha: 1)
+        
+        UITabBar.appearance().scrollEdgeAppearance?.shadowImage = UIImage()
+        //UITabBar.appearance().scrollEdgeAppearance?.backgroundImage = UIImage(named: "プロフィール画面背景")
+        UITabBar.appearance().scrollEdgeAppearance?.backgroundColor = UIColor.clear
+    }
 }
 
