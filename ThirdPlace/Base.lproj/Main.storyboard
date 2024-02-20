@@ -273,7 +273,7 @@
             </objects>
             <point key="canvasLocation" x="1016.030534351145" y="4.9295774647887329"/>
         </scene>
-        <!--プロフィール-->
+        <!--Item-->
         <scene sceneID="plf-8c-VEJ">
             <objects>
                 <tableViewController id="i8K-xy-uKF" customClass="ProfileTableViewController" customModule="ThirdPlace" customModuleProvider="target" sceneMemberID="viewController">
@@ -475,7 +475,7 @@
                             <outlet property="delegate" destination="i8K-xy-uKF" id="aKz-MW-bwg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="プロフィール" id="RWA-gf-PGe"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="6HB-Q3-pqv"/>
                     <connections>
                         <outlet property="aboutMeTextField" destination="VgE-zA-Ujv" id="vOt-aj-qCL"/>
                         <outlet property="avatarImageView" destination="kv3-7l-iaZ" id="Lot-Nx-VlX"/>
@@ -486,7 +486,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9eq-ps-5bI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4014.5038167938928" y="376.76056338028172"/>
+            <point key="canvasLocation" x="3088" y="429"/>
         </scene>
         <!--Item-->
         <scene sceneID="RV8-bK-akn">
@@ -514,43 +514,21 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.9197074771" green="0.38908338549999999" blue="0.36468404529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tabBarAppearance>
+                        <tabBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tabBarAppearance>
                     </tabBar>
                     <connections>
                         <segue destination="MB9-Qm-FcF" kind="relationship" relationship="viewControllers" id="hoZ-dh-Wap"/>
-                        <segue destination="p3E-A1-saX" kind="relationship" relationship="viewControllers" id="ThV-3K-VEb"/>
+                        <segue destination="i8K-xy-uKF" kind="relationship" relationship="viewControllers" id="fBy-rd-se6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2uC-q1-d5Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2046" y="19"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="fjT-nT-oQa">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p3E-A1-saX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="L4p-q9-qpY"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zUC-O9-D8c">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        </textAttributes>
-                        <navigationBarAppearance key="standardAppearance">
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </navigationBarAppearance>
-                        <navigationBarAppearance key="scrollEdgeAppearance">
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </navigationBarAppearance>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="i8K-xy-uKF" kind="relationship" relationship="rootViewController" id="i8X-A7-Y7O"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8oL-NH-L1i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3087.7862595419847" y="376.76056338028172"/>
         </scene>
     </scenes>
     <resources>

@@ -28,6 +28,7 @@ class ProfileTableViewController: UITableViewController {
         
         setupTableViewBackground()
         setupAboutMeTextField()
+        tableView.estimatedSectionFooterHeight = 0.0
 //        setupNavigationBar()
 //        setupEditAndSaveBarButton()
         updateEditingMode()
