@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 import ProgressHUD
 
-class ProfileTableViewController: UITableViewController {
+class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: - IBOutlets
     
@@ -18,7 +18,7 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var personalityTextField: UITextField!
     @IBOutlet weak var worryTextField: UITextField!
-    @IBOutlet weak var aboutMeTextField: UITextView!
+    @IBOutlet weak var aboutMeTextView: UITextView!
     
     @IBOutlet weak var profileEditAndSaveImageView: UIImageView!
     @IBOutlet weak var profileEditAndSaveButton: UIButton!
@@ -26,7 +26,9 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet var backgroundTableView: UITableView!
     
     //MARK: - Vars
-    var editingMode = false
+    var avatarImage: UIImage?
+    
+    let imagePicker = UIImagePickerController()
     
     //MARK: - ViewLifrCycle
 
@@ -36,10 +38,10 @@ class ProfileTableViewController: UITableViewController {
         setupBackgroundTouch()
         setupTableView()
         setupAboutMeTextField()
+        notAllowedEditing()
         
         if FUser.currentUser() != nil {
             loadUserData()
-            updateEditingMode()
         }
     }
     
@@ -50,7 +52,9 @@ class ProfileTableViewController: UITableViewController {
     //MARK: - IBActions
 
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
+        
         showPictureOptions()
+        
     }
     
     @IBAction func profileEditAndSaveButtonPressed(_ sender: UIButton) {
@@ -60,40 +64,11 @@ class ProfileTableViewController: UITableViewController {
 
         editView.modalPresentationStyle = .fullScreen
         self.present(editView, animated: true, completion: nil)
-        
-//        if !editingMode {
-//            
-//            editingMode = true
-//            updateEditingMode()
-//            setupButton(title: "保存", titleColor: .white, buttonImage: "保存ボタン_v8")
-//        } else {
-//            
-//            if isTextDataImputed() {
-//                
-//                saveUserData()
-//                editingMode = false
-//                updateEditingMode()
-//                setupButton(title: "プロフィール編集", titleColor: UIColor().primaryGray(), buttonImage: "ボタン")
-//            } else {
-//                
-//                ProgressHUD.symbol("ユーザー名・性格・悩みを入力してください", name: "exclamationmark.circle")
-//            }
-//        }
     }
     
     private func isTextDataImputed() -> Bool {
         
         return usernameTextField.text != "" && personalityTextField.text != "" && worryTextField.text != ""
-    }
-    
-    private func saveUserData() {
-        
-        let user = FUser.currentUser()!
-        
-        user.username = usernameTextField.text!
-        user.personality = personalityTextField.text!
-        user.worry = worryTextField.text!
-        user.aboutMe = aboutMeTextField.text!
     }
     
     //MARK: - Setup
@@ -103,7 +78,7 @@ class ProfileTableViewController: UITableViewController {
     }
     
     private func setupAboutMeTextField() {
-        aboutMeTextField.layer.cornerRadius = 5
+        aboutMeTextView.layer.cornerRadius = 5
     }
     
     private func setupButton(title: String, titleColor: UIColor, buttonImage: String) {
@@ -131,27 +106,27 @@ class ProfileTableViewController: UITableViewController {
         dismissKeyboard()
     }
     
+    private func notAllowedEditing() {
+        
+        usernameTextField.isUserInteractionEnabled = false
+        personalityTextField.isUserInteractionEnabled = false
+        worryTextField.isUserInteractionEnabled = false
+        aboutMeTextView.isUserInteractionEnabled = false
+    }
+    
     //MARK: - LoadUserData
     private func loadUserData() {
         
         let currentUser = FUser.currentUser()!
         
-        avatarImageView.image = nil
-        //TODO: set avatar picture.
-        
         usernameTextField.text = currentUser.username
         personalityTextField.text = currentUser.personality
         worryTextField.text = currentUser.worry
-        aboutMeTextField.text = currentUser.aboutMe
-    }
-    
-    //MARK: - Editing Mode
-    private func updateEditingMode() {
+        aboutMeTextView.text = currentUser.aboutMe
         
-        usernameTextField.isUserInteractionEnabled = editingMode
-        personalityTextField.isUserInteractionEnabled = editingMode
-        worryTextField.isUserInteractionEnabled = editingMode
-        aboutMeTextField.isUserInteractionEnabled = editingMode
+        FileStorage.downloadImage(imageUrl: currentUser.avatarLink) { image in
+            
+        }
     }
     
     //MARK: - Helper
@@ -170,14 +145,72 @@ class ProfileTableViewController: UITableViewController {
         self.view.endEditing(false)
     }
     
+    private func openCamera() {
+        
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
+            
+            self.imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.delegate = self
+            self.present(self.imagePicker, animated: true, completion: nil)
+            } else {
+                
+                let alert  = UIAlertController(title: "警告", message: "このデバイスにはカメラがありません", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+    }
+    
+    private func openPhotoLibrary() {
+        
+        self.imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        self.imagePicker.allowsEditing = true
+        self.imagePicker.delegate = self
+        self.present(self.imagePicker, animated: true, completion: nil)
+    }
+    
+    //MARK: - FileStore
+    private func uploadAvatar(_ image: UIImage, completion: @escaping (_ avatarLink: String?) -> Void) {
+        
+        ProgressHUD.animate()
+        
+        let fileDirectory = "Avatars/_" + FUser.currentId() + ".jpg"
+        
+        FileStorage.uploadImage(image, directory: fileDirectory) { avatarLink in
+            
+            ProgressHUD.dismiss()
+            FileStorage.saveImageLocally(imageData: image.jpegData(compressionQuality: 1.0)! as NSData, fileName: FUser.currentId())
+            completion(avatarLink)
+        }
+    }
+    
+    //MARK: - Save User Data
+    private func saveUserData() {
+        
+        let user = FUser.currentUser()!
+        
+        saveUserData(user: user)
+    }
+    
+    private func saveUserData(user: FUser) {
+        
+        user.saveUserlocaly()
+        user.saveUserToFireStore()
+    }
+    
     //MARK: - AlertController
     private func showPictureOptions() {
         
-        let alertController = UIAlertController(title: "アップロード", message: "プロフィール画像を変更", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alertController.addAction(UIAlertAction(title: "プロフィール画像を変更", style: .default, handler: { alert in
+        alertController.addAction(UIAlertAction(title: "写真を撮る", style: .default, handler: { alert in
             
-            print("change Avatar")
+            self.openCamera()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "ライブラリから選択する", style: .default, handler: { alert in
+            
+            self.openPhotoLibrary()
         }))
         
         alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler:nil))
@@ -185,4 +218,35 @@ class ProfileTableViewController: UITableViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    //MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        // Get the image from the info dictionary.
+        if let editedImage = info[.editedImage] as? UIImage {
+            
+            self.avatarImageView.image = editedImage
+            self.avatarImage = editedImage
+            
+            uploadAvatar(self.avatarImage!) { avatarLink in
+                
+                let user = FUser.currentUser()!
+                
+                user.avatarLink = avatarLink ?? ""
+                user.avatar = self.avatarImage!
+                
+                self.saveUserData(user: user)
+                self.loadUserData()
+            }
+        }
+        
+        // Dismiss the UIImagePicker after selection
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.isNavigationBarHidden = false
+        self.dismiss(animated: true, completion: nil)
+    }
 }
+
+
