@@ -59,11 +59,11 @@ class FileStorage {
             } else {
                 
                 print("couldnt generate imge from local image")
-                completion(UIImage(named: kPLACEHOLDERIMAGE))
+                completion(nil)
             }
         } else {
             //download
-            
+            print("Downloading")
             if imageUrl != "" {
                 
                 let documentURL = URL(string: imageUrl)
@@ -86,7 +86,7 @@ class FileStorage {
                     }
                 }
             } else {
-                completion(UIImage(named: kPLACEHOLDERIMAGE))
+                completion(nil)
             }
         }
     }
