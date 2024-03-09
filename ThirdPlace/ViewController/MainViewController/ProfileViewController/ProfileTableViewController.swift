@@ -31,6 +31,15 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     let imagePicker = UIImagePickerController()
     
     //MARK: - ViewLifrCycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if FUser.currentUser() != nil {
+            print("FUser.currentUser is not nill")
+            loadUserData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +63,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     //MARK: - IBActions
 
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
-        
         showPictureOptions()
-        
     }
     
     @IBAction func profileEditAndSaveButtonPressed(_ sender: UIButton) {
@@ -125,6 +132,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         personalityTextField.text = currentUser.personality
         worryTextField.text = currentUser.worry
         aboutMeTextView.text = currentUser.aboutMe
+        print(currentUser.aboutMe)
         
         print("loadUserData")
         
@@ -176,7 +184,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         ProgressHUD.animate()
         
-        let fileDirectory = "Avatars/_" + FUser.currentId() + "/.jpg"
+        let fileDirectory = "Avatars/_" + FUser.currentId() + ".jpg"
         
         FileStorage.uploadImage(image, directory: fileDirectory) { avatarLink in
             

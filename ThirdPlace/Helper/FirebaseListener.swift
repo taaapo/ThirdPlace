@@ -18,18 +18,23 @@ class FirebaseListener {
      //MARK: - FUser
     func downloadCUrrentUserFromFirebase(userId: String, email: String) {
         
-        
         FirebaseReference(.User).document(userId).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else { return }
             
             if snapshot.exists {
                 
-                FUser(_dictionary: snapshot.data() as! NSDictionary).saveUserlocaly()
+                let user = FUser(_dictionary: snapshot.data() as! NSDictionary)
+                print("created user")
+                user.saveUserLocaly()
+                
+                user.getUserAvatarFromFirestore { (didSet) in
+                    
+                }
                 
             } else {
                 //first login
-                
+                print("first login")
                 if let user = userDefaults.object(forKey: kCURRENTUSER) {
                     FUser(_dictionary: user as! NSDictionary).saveUserToFireStore()
                 }
@@ -37,4 +42,6 @@ class FirebaseListener {
             }
         }
     }
+    
+    
 }

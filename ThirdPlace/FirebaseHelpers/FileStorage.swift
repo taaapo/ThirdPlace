@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseStorage
 import UIKit
+import ProgressHUD
 
 let storage = Storage.storage()
 
@@ -35,7 +36,7 @@ class FileStorage {
             storageRef.downloadURL { url, error in
                 
                 guard let downloadUrl = url else {
-                    
+
                     completion(nil)
                     return
                 }
@@ -44,18 +45,26 @@ class FileStorage {
                 completion(downloadUrl.absoluteString)
             }
         })
+        
+        
+        task.observe(StorageTaskStatus.progress) { (snapshot) in
+            
+            let progress = snapshot.progress!.completedUnitCount / snapshot.progress!.totalUnitCount
+//            ProgressHUD.showProgress(CGFloat(progress))
+        }
+        
     }
     
     class func downloadImage(imageUrl: String, completion: @escaping (_ image: UIImage?) -> Void) {
         
         let imageFileName = ((imageUrl.components(separatedBy: "_").last!).components(separatedBy: "?").first)!.components(separatedBy: ".").first!
         
-        if fileExistsAtPath(path: imageFileName) {
+        if fileExistsAt(path: imageFileName) {
             
-            print("we have local file")
             if let contentsOfFile = UIImage(contentsOfFile: fileInDocumentsDirectory(filename: imageFileName)) {
                 
                 completion(contentsOfFile)
+                
             } else {
                 
                 print("couldnt generate imge from local image")
@@ -66,8 +75,12 @@ class FileStorage {
             print("Downloading")
             if imageUrl != "" {
                 
+                print("imageUrl exists")
+                
                 let documentURL = URL(string: imageUrl)
+                
                 let downloadQueue = DispatchQueue(label: "downloadQueue")
+                
                 downloadQueue.async {
                     
                     let data = NSData(contentsOf: documentURL!)
@@ -79,8 +92,8 @@ class FileStorage {
                         FileStorage.saveImageLocally(imageData: data!, fileName: imageFileName)
                         
                         completion(imageToReturn)
-                    } else {
                         
+                    } else {
                         print("no image in database")
                         completion(nil)
                     }
@@ -109,22 +122,28 @@ func getDocumentsURL() -> URL {
 
 func fileInDocumentsDirectory(filename: String) -> String {
     
-    let fileURL = getDocumentsURL().appendingPathComponent(filename, conformingTo: .image)
+    let fileURL = getDocumentsURL().appendingPathComponent(filename)
     
     return fileURL.path
 }
 
-func fileExistsAtPath(path: String) -> Bool {
+//正常に動いていれば下記は必要ない
+//func fileExistsAtPath(path: String) -> Bool {
+//    
+//    var doesExist = false
+//    
+//    let filePath = fileInDocumentsDirectory(filename: path)
+//    
+//    if FileManager.default.fileExists(atPath: filePath) {
+//        doesExist = true
+//    } else {
+//        doesExist = false
+//    }
+//    
+//    return doesExist
+//}
+
+func fileExistsAt(path: String) -> Bool {
     
-    var doesExist = false
-    
-    let filePath = fileInDocumentsDirectory(filename: path)
-    
-    if FileManager.default.fileExists(atPath: filePath) {
-        doesExist = true
-    } else {
-        doesExist = false
-    }
-    
-    return doesExist
+    return FileManager.default.fileExists(atPath: fileInDocumentsDirectory(filename: path))
 }

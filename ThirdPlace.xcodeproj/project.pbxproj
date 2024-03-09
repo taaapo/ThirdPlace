@@ -60,6 +60,7 @@
 		31CC162C2B81E74D000360CE /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC162B2B81E74D000360CE /* ProfileTableViewController.swift */; };
 		31DD39842B7FA7730093AF4C /* FCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DD39832B7FA7730093AF4C /* FCollectionReference.swift */; };
 		31DD39862B7FA9030093AF4C /* FirebaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DD39852B7FA9030093AF4C /* FirebaseListener.swift */; };
+		31F02C542B9C2003009707FF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F02C532B9C2003009707FF /* SettingsViewController.swift */; };
 		31F234F82B86DFC6008943CA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F234F72B86DFC6008943CA /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		31CC162B2B81E74D000360CE /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		31DD39832B7FA7730093AF4C /* FCollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCollectionReference.swift; sourceTree = "<group>"; };
 		31DD39852B7FA9030093AF4C /* FirebaseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseListener.swift; sourceTree = "<group>"; };
+		31F02C532B9C2003009707FF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = ProfileViewController/SettingsViewController.swift; sourceTree = "<group>"; };
 		31F234F72B86DFC6008943CA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,14 @@
 			path = WelcomeViewController;
 			sourceTree = "<group>";
 		};
+		31A517DE2B9B67EA008F6AB4 /* FirebaseHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				3194FEA62B964533001FAA99 /* FileStorage.swift */,
+			);
+			path = FirebaseHelpers;
+			sourceTree = "<group>";
+		};
 		31ACD9672B8FBCC400816629 /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +186,7 @@
 				31CC162E2B81F2C6000360CE /* ViewController */,
 				31DD39812B7FA7070093AF4C /* Model */,
 				31DD39822B7FA70F0093AF4C /* Helper */,
+				31A517DE2B9B67EA008F6AB4 /* FirebaseHelpers */,
 				31B365962B71455700D29401 /* Main.storyboard */,
 				31B365992B71455900D29401 /* Assets.xcassets */,
 				31B3659B2B71455900D29401 /* LaunchScreen.storyboard */,
@@ -187,8 +198,8 @@
 		31CC162D2B81F2B9000360CE /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
-				316041822B79C8740013978C /* WelcomeViewController */,
 				31ACD9672B8FBCC400816629 /* ProfileViewController */,
+				31F02C532B9C2003009707FF /* SettingsViewController.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -196,6 +207,7 @@
 		31CC162E2B81F2C6000360CE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				316041822B79C8740013978C /* WelcomeViewController */,
 				31CC162D2B81F2B9000360CE /* MainViewController */,
 			);
 			path = ViewController;
@@ -213,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				3198D2E92B7BD92B00BE215D /* Constants.swift */,
-				3194FEA62B964533001FAA99 /* FileStorage.swift */,
 				31DD39832B7FA7730093AF4C /* FCollectionReference.swift */,
 				31DD39852B7FA9030093AF4C /* FirebaseListener.swift */,
 				31F234F72B86DFC6008943CA /* Extensions.swift */,
@@ -347,6 +358,7 @@
 				31B365932B71455700D29401 /* SceneDelegate.swift in Sources */,
 				316041812B79C8100013978C /* RegisterViewController.swift in Sources */,
 				31DD39842B7FA7730093AF4C /* FCollectionReference.swift in Sources */,
+				31F02C542B9C2003009707FF /* SettingsViewController.swift in Sources */,
 				31ACD9692B8FBCF500816629 /* EditViewController.swift in Sources */,
 				3198D2EA2B7BD92B00BE215D /* Constants.swift in Sources */,
 			);

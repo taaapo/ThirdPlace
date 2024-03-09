@@ -12,14 +12,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var authListener: AuthStateDidChangeListenerHandle?
+    var isLogin: Bool = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        autoLogin()
+        if let windowScene = scene as? UIWindowScene {
+                
+                self.authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+                    
+                    Auth.auth().removeStateDidChangeListener(self.authListener!)
+                    
+                    if user != nil && userDefaults.object(forKey: kCURRENTUSER) != nil {
+                        
+                        let window = UIWindow(windowScene: windowScene)
+                        window.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
+                        self.window = window
+                        window.makeKeyAndVisible()
+                        
+                    } else {
+                        
+                        let window = UIWindow(windowScene: windowScene)
+                        window.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "loginView")
+                        
+                        self.window = window
+                        window.makeKeyAndVisible()
+                    }
+                })
+        }
+        
+        
+        
+//        goToInitialViewController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,27 +78,59 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-    //MARK: - Autologin
-    func autoLogin() {
+    //MARK: - Go to Initial View Controller
+    
+    
+    func checkIsLogin() {
         
         authListener = Auth.auth().addStateDidChangeListener({ auth, user in
             
             Auth.auth().removeStateDidChangeListener(self.authListener!)
             
             if user != nil && userDefaults.object(forKey: kCURRENTUSER) != nil {
+                print("isLogin is true")
+                self.isLogin = true
+                
+            }
+        })
+    }
+        
+    
+    
+    func goToInitialViewController() {
+        
+        authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+            
+            Auth.auth().removeStateDidChangeListener(self.authListener!)
+            
+            if user != nil && userDefaults.object(forKey: kCURRENTUSER) != nil {
+                print("MainView")
                 
                 DispatchQueue.main.async {
-                    self.goToApp()
+                    self.goToMainView()
+                }
+            } else {
+                print("LoginView")
+                
+                DispatchQueue.main.sync {
+                    self.goToLoginView()
                 }
             }
         })
     }
     
-    private func goToApp() {
+    private func goToMainView() {
         
         let mainView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
         
         self.window?.rootViewController = mainView
+    }
+    
+    private func goToLoginView() {
+        
+        let loginView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "loginView")
+        
+        self.window?.rootViewController = loginView
     }
 
 }

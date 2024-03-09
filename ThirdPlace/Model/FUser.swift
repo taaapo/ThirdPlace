@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import UIKit
 
 class FUser: Equatable {
     
@@ -88,12 +89,28 @@ class FUser: Equatable {
     class func currentUser() -> FUser? {
         
         if Auth.auth().currentUser != nil {
+            
+            print("CurrentUser is not nil")
             if let userDictionary = userDefaults.object(forKey: kCURRENTUSER) {
+                
                 return FUser(_dictionary: userDictionary as! NSDictionary)
             }
+            print(userDefaults.object(forKey: kCURRENTUSER))
         }
         
+        print("CcurrentUser is nil")
+        
         return nil
+    }
+    
+    func getUserAvatarFromFirestore(completion: @escaping (_ didSet: Bool) -> Void) {
+        
+        FileStorage.downloadImage(imageUrl: self.avatarLink) { avatarImage in
+            
+            self.avatar = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
+            
+            completion(true)
+        }
     }
     
     //MARK: - Login
@@ -106,6 +123,7 @@ class FUser: Equatable {
                 if authDataResult!.user.isEmailVerified {
                     
                     FirebaseListener.shared.downloadCUrrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
+                    
                     completion(error, true)
                 } else {
                     print("Email not verified")
@@ -134,22 +152,51 @@ class FUser: Equatable {
                     
                     let user = FUser(_objectId: authData!.user.uid, _email: email, _username: username, _personality: personality, _worry: worry)
                     
-                    user.saveUserlocaly()
+                    user.saveUserLocaly()
                 }
             }
         }
     }
     
+    //MARK: - Edit User Email/Password
+    func updateUserEmail(beforeEmail: String, password: String, newEmail: String, completion: @escaping (_ error: Error?) -> Void) {
+        
+        let credential = EmailAuthProvider.credential(withEmail: beforeEmail, password: password)
+        
+        Auth.auth().currentUser?.reauthenticate(with: credential, completion: { authDataResult, error in
+            completion(error)
+        })
+        
+        //メールを変更し、変更前メールに変更したことを伝える認証用メールを送る
+        Auth.auth().currentUser?.updateEmail(to: newEmail, completion: { error in
+            
+            //認証用メールを送る
+            FUser.resendVerificationEmail { error in
+                completion(error)
+            }
+            completion(error)
+        })
+    }
+    
     //MARK: - Resend Links
+    
+    class func resendVerificationEmail(completion: @escaping (_ error: Error?) -> Void) {
+     
+        Auth.auth().currentUser?.reload(completion: { error in
+            
+            Auth.auth().currentUser?.sendEmailVerification(completion: { error in
+                
+                completion(error)
+            })
+        })
+    }
+    
     class func resetPasswordFor(email: String, completion: @escaping (_ error: Error?) -> Void) {
      
-        //Auth.auth().currentUser?.reload(completion: { error in
-            
             Auth.auth().sendPasswordReset(withEmail: email) { error in
                 
                 completion(error)
             }
-        //})
     }
     
     //パスワード忘れた際のメアドが登録されたものかどうかをチェックする関数が必要、もしくはメール列挙保護を無効にすれば大丈夫かも
@@ -174,8 +221,22 @@ class FUser: Equatable {
 //        }
 //    }
     
+    //MARK: - Logout user
+    class func logOutCurrentUser(completion: @escaping(_ error: Error?) -> Void) {
+        
+        do {
+            try Auth.auth().signOut()
+            
+            userDefaults.removeObject(forKey: kCURRENTUSER)
+            userDefaults.synchronize()
+            completion(nil)
+        } catch let error as NSError {
+            completion(error)
+        }
+    }
+    
     //MARK: - Save user funcs
-    func saveUserlocaly() {
+    func saveUserLocaly() {
         
         userDefaults.setValue(self.userDictionary as! [String : Any], forKey: kCURRENTUSER)
         userDefaults.synchronize()
