@@ -39,10 +39,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         setupTableView()
         setupAboutMeTextField()
         notAllowedEditing()
+        print(FUser.currentId())
         
         if FUser.currentUser() != nil {
+            print("FUser.currentUser is not nill")
             loadUserData()
-        }
+        } 
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -124,9 +126,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         worryTextField.text = currentUser.worry
         aboutMeTextView.text = currentUser.aboutMe
         
-        FileStorage.downloadImage(imageUrl: currentUser.avatarLink) { image in
-            
-        }
+        print("loadUserData")
+        
+        avatarImageView.image = currentUser.avatar?.circleMasked
     }
     
     //MARK: - Helper
@@ -169,12 +171,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         self.present(self.imagePicker, animated: true, completion: nil)
     }
     
-    //MARK: - FileStore
+    //MARK: - FileStorae
     private func uploadAvatar(_ image: UIImage, completion: @escaping (_ avatarLink: String?) -> Void) {
         
         ProgressHUD.animate()
         
-        let fileDirectory = "Avatars/_" + FUser.currentId() + ".jpg"
+        let fileDirectory = "Avatars/_" + FUser.currentId() + "/.jpg"
         
         FileStorage.uploadImage(image, directory: fileDirectory) { avatarLink in
             
@@ -194,7 +196,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     private func saveUserData(user: FUser) {
         
-        user.saveUserlocaly()
+        user.saveUserLocaly()
         user.saveUserToFireStore()
     }
     
@@ -224,7 +226,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         // Get the image from the info dictionary.
         if let editedImage = info[.editedImage] as? UIImage {
             
-            self.avatarImageView.image = editedImage
+            self.avatarImageView.image = editedImage.circleMasked
             self.avatarImage = editedImage
             
             uploadAvatar(self.avatarImage!) { avatarLink in
@@ -233,6 +235,11 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 
                 user.avatarLink = avatarLink ?? ""
                 user.avatar = self.avatarImage!
+                
+                FileStorage.downloadImage(imageUrl: user.avatarLink) { image in
+                    
+                    self.avatarImageView.image = image?.circleMasked
+                }
                 
                 self.saveUserData(user: user)
                 self.loadUserData()

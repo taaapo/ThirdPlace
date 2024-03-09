@@ -84,7 +84,7 @@ class EditViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     private func saveUserData(user: FUser) {
         
-        user.saveUserlocaly()
+        user.saveUserLocaly()
         user.saveUserToFireStore()
     }
     
