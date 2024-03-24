@@ -33,7 +33,16 @@ class CardViewController: UIViewController {
         //ユーザーを作るときはcreateUsersを加えてdownloadInitialUsersをコメントアウト
 //        createUsers()
         downloadInitialUsers()
-        
+    }
+    
+    //MARK: - IBActions
+    
+    @IBAction func goToChatButtonPressed(_ sender: UIButton) {
+        cardStack.swipe(.right, animated: true)
+    }
+    
+    @IBAction func goToNextButtonPressed(_ sender: UIButton) {
+        cardStack.swipe(.left, animated: true)
     }
     
     //MARK: - Layout cards
@@ -115,6 +124,40 @@ class CardViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: - Navigation
+    private func showUserProfileFor(userId: String) {
+        
+        let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "UserProfileTableView") as! UserProfileTableViewController
+        
+        profileView.userObject = getUserWithId(userId: userId)
+        profileView.delegate = self
+        
+        self.present(profileView, animated: true, completion: nil)
+    }
+    
+    //MARK: - Helpers
+    private func getUserWithId(userId: String) -> FUser? {
+        
+        for user in userObjects {
+            if user.objectId == userId {
+                return user
+            }
+        }
+        
+        return nil
+    }
+    
+    private func goToChat(user: FUser) {
+        
+        let chatRoomId = startChat(user1: FUser.currentUser()!, user2: user)
+        
+        let chatView = ChatViewController(chatId: chatRoomId, recipientId: user.objectId, recipientName: user.username)
+        
+        chatView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(chatView, animated: true)
+        
+    }
 }
 
 extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
@@ -155,12 +198,27 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
     
     func cardStack(_ cardStack: SwipeCardStack, didSwipeCardAt index: Int, with direction: SwipeDirection) {
         
-        print("Swipe to", direction)
+        if direction == .right {
+            let user = getUserWithId(userId: showReserve ? secondCardModel[index].id : initialCardModes[index].id)!
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.goToChat(user: user)
+            }
+        }
     }
     
     func cardStack(_ cardStack: SwipeCardStack, didSelectCardAt index: Int) {
         
-        print("selected card at", index)
+        showUserProfileFor(userId: showReserve ? secondCardModel[index].id : initialCardModes[index].id)
+    }
+}
+
+extension CardViewController: UserProfileTableViewControllerDelegate {
+    
+    func goToChat() {
+        cardStack.swipe(.right, animated: true)
     }
     
+    func goToNext() {
+        cardStack.swipe(.left, animated: true)
+    }
 }

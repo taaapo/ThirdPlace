@@ -26,4 +26,27 @@ public let kPREMIUM = "premium"
 public let kCURRENTUSER = "currentUser"
 
 //MARK: - Images
-public let kPLACEHOLDERIMAGE = "プロフィール画像_水墨画_ネコ_丸"
+public let kPLACEHOLDERIMAGE = "プロフィール画像_ヒトの影_丸_v2"
+
+//MARK: - Chat
+public let kCHATROOMID = "chatRoomId"
+public let kSENDERID = "senderId"
+public let kSENDERNAME = "senderName"
+public let kRECEIVERID = "receinverId"
+public let kRECEIVERNAME = "receiverName"
+public let kDATE = "date"
+public let kMEMBERIDS = "memberIds"
+public let kLASTMESSAGE = "lastMessage"
+public let kUNREADCOUNTER = "unreadCounter"
+
+//MARK: - Messages
+public let kMESSAGE = "message"
+public let kSTATUS = "status"
+
+public let kTEXT = "text"
+
+public let kSENT = "Sent"
+public let kREAD = "Read"
+
+
+public let kNUMBEROFMESSAGES = 10

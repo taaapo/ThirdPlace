@@ -26,9 +26,9 @@ class FileStorage {
         task = storageRef.putData(imageData!, metadata: nil, completion: { metaData, error in
             
             task.removeAllObservers()
+//            ProgressHUD.dismiss()
             
             if error != nil {
-                
                 print("error uploading image", error!.localizedDescription)
                 return
             }
@@ -36,7 +36,6 @@ class FileStorage {
             storageRef.downloadURL { url, error in
                 
                 guard let downloadUrl = url else {
-
                     completion(nil)
                     return
                 }
@@ -71,8 +70,7 @@ class FileStorage {
                 completion(nil)
             }
         } else {
-            //download
-            print("Downloading")
+            
             if imageUrl != "" {
                 
                 print("imageUrl exists")

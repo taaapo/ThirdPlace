@@ -92,7 +92,7 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     private func setupWorriesPickerView() {
         
-        appendworriesList()
+        appendWorriesList()
         
         //Setup PickerView
         let pickerView = UIPickerView()
@@ -169,7 +169,7 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
         personalities.append("みんなの癒しペットタイプ")
     }
     
-    private func appendworriesList() {
+    private func appendWorriesList() {
         worries.append("健康、美容、容姿")
         worries.append("将来、夢、キャリア")
         worries.append("人間関係、恋愛、結婚")

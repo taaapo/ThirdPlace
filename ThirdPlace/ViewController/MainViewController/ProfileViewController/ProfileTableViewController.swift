@@ -36,7 +36,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         super.viewWillAppear(animated)
         
         if FUser.currentUser() != nil {
-            print("FUser.currentUser is not nill")
             loadUserData()
         }
     }
@@ -48,14 +47,14 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         setupTableView()
         setupAboutMeTextField()
         notAllowedEditing()
-        print(FUser.currentId())
         
         if FUser.currentUser() != nil {
-            print("FUser.currentUser is not nill")
             loadUserData()
         } 
     }
     
+    //MARK: - TableViewDelegate
+    //下記を加えることでheaderの高さが0になり、スクロール時に上部に白色のheaderが表示されなくなる
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }

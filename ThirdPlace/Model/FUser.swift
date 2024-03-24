@@ -122,7 +122,7 @@ class FUser: Equatable {
                 
                 if authDataResult!.user.isEmailVerified {
                     
-                    FirebaseListener.shared.downloadCUrrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
+                    FirebaseListener.shared.downloadCurrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
                     
                     completion(error, true)
                 } else {
@@ -252,6 +252,23 @@ class FUser: Equatable {
         }
     }
     
+    //MARK: - Update User funcs
+    func updateCurrentUseraInFireStore(withValues: [String : Any], completion: @escaping (_ error: Error?) -> Void) {
+        
+        if let dictionary = userDefaults.object(forKey: kCURRENTUSER) {
+            
+            let userObject = (dictionary as! NSDictionary).mutableCopy() as! NSMutableDictionary
+            userObject.setValuesForKeys(withValues)
+            
+            FirebaseReference(.User).document(FUser.currentId()).updateData(withValues) { error in
+                
+                completion(error)
+                if error == nil {
+                    FUser(_dictionary: userObject).saveUserLocaly()
+                }
+            }
+        }
+    }
 }
 
 
@@ -308,5 +325,63 @@ public extension Error {
         }
         
         return error.localizedDescription
+    }
+}
+
+//MARK: - Options of Personalities and Worries
+
+var personalities: [String] = []
+var worries : [String] = []
+
+private func appendPersonalitiesList() {
+    personalities.append("人懐っこい後輩タイプ")
+    personalities.append("面倒見の良い先輩タイプ")
+    personalities.append("誰とでもフラットな同期タイプ")
+    personalities.append("みんなをまとめる部長タイプ")
+    personalities.append("陰の立役者マネージャータイプ")
+    //personalities.append("世話焼きな保護者タイプ")
+    personalities.append("1人が好きなオオカミタイプ")
+    personalities.append("みんなの癒しペットタイプ")
+}
+
+private func appendWorriesList() {
+    worries.append("健康、美容、容姿")
+    worries.append("将来、夢、キャリア")
+    worries.append("人間関係、恋愛、結婚")
+    worries.append("お金")
+    worries.append("その他")
+    worries.append("悩みはない")
+}
+
+//MARK: - Create Users
+func createUsers() {
+    
+    appendPersonalitiesList()
+    appendWorriesList()
+    
+    let names = ["めるる", "アッシュ", "ゾロ", "リボン", "竜巻"]
+    
+    var imageIndex = 1
+    var userIndex = 1
+    
+    for i in 0..<5 {
+        
+        let id = UUID().uuidString
+        
+        let fileDirectory = "Avatars/_" + id + ".jpg"
+        
+        FileStorage.uploadImage(UIImage(named: "user\(imageIndex)")!, directory: fileDirectory) { avatarLink in
+            
+            let user = FUser(_objectId: id, _email: "user\(userIndex)@mail.com", _username: names[i], _personality: personalities[userIndex], _worry: worries[userIndex], _avatarLink: avatarLink ?? "")
+            
+            userIndex += 1
+            user.saveUserToFireStore()
+        }
+        
+        imageIndex += 1
+        
+        if imageIndex == 6 {
+            imageIndex = 1
+        }
     }
 }
