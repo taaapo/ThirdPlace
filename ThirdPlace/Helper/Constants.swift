@@ -48,5 +48,4 @@ public let kTEXT = "text"
 public let kSENT = "Sent"
 public let kREAD = "Read"
 
-
 public let kNUMBEROFMESSAGES = 10

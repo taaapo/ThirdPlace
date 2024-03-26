@@ -77,6 +77,8 @@
 		31DD39862B7FA9030093AF4C /* FirebaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DD39852B7FA9030093AF4C /* FirebaseListener.swift */; };
 		31F02C542B9C2003009707FF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F02C532B9C2003009707FF /* SettingsViewController.swift */; };
 		31F234F82B86DFC6008943CA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F234F72B86DFC6008943CA /* Extensions.swift */; };
+		31F922E62BB1CCF900C15A86 /* MKMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F922E52BB1CCF900C15A86 /* MKMessage.swift */; };
+		31F922E82BB1CD7500C15A86 /* MessageDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F922E72BB1CD7500C15A86 /* MessageDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		31DD39852B7FA9030093AF4C /* FirebaseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseListener.swift; sourceTree = "<group>"; };
 		31F02C532B9C2003009707FF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		31F234F72B86DFC6008943CA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		31F922E52BB1CCF900C15A86 /* MKMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMessage.swift; sourceTree = "<group>"; };
+		31F922E72BB1CD7500C15A86 /* MessageDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +289,7 @@
 				319FCB142B7A755700199B7C /* FUser.swift */,
 				31AC3FF72BAC943600FE69EB /* Chat.swift */,
 				31B41D152BB0787D000B8213 /* Message.swift */,
+				31F922E52BB1CCF900C15A86 /* MKMessage.swift */,
 				31A09FD42B9F120E00CFB294 /* CardViews */,
 			);
 			path = Model;
@@ -296,6 +301,7 @@
 				3198D2E92B7BD92B00BE215D /* Constants.swift */,
 				31F234F72B86DFC6008943CA /* Extensions.swift */,
 				31CCCD4E2BAB152600754839 /* GlobalFunctions.swift */,
+				31F922E72BB1CD7500C15A86 /* MessageDefaults.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				31A09FD62B9F125F00CFB294 /* UserCardModel.swift in Sources */,
 				310667462B9CCC8000BF087B /* CardViewController.swift in Sources */,
 				316041812B79C8100013978C /* RegisterViewController.swift in Sources */,
+				31F922E82BB1CD7500C15A86 /* MessageDefaults.swift in Sources */,
 				31DD39842B7FA7730093AF4C /* FCollectionReference.swift in Sources */,
 				31F02C542B9C2003009707FF /* SettingsViewController.swift in Sources */,
 				31ACD9692B8FBCF500816629 /* EditViewController.swift in Sources */,
@@ -446,6 +453,7 @@
 				31AC3FF62BAC88E400FE69EB /* ChatListTableViewCell.swift in Sources */,
 				312C93F32BAAAFD700818E5F /* UserProfileTableViewController.swift in Sources */,
 				31A09FDC2B9F137900CFB294 /* UserCardFooterView.swift in Sources */,
+				31F922E62BB1CCF900C15A86 /* MKMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
