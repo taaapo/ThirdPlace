@@ -148,4 +148,36 @@ class FirebaseListener {
             }
         }
     }
+    
+    func updateChats(chatRoomId: String, lastMessage: String) {
+        
+        FirebaseReference(.Chat).whereField(kCHATROOMID, isEqualTo: chatRoomId).getDocuments { (snapshot, error) in
+            
+            guard let snapshot = snapshot else { return }
+            
+            if !snapshot.isEmpty {
+                
+                for chat in snapshot.documents {
+                    
+                    let latestChat = Chat(chat.data())
+                    
+                    self.updateChatItem(latestChat: latestChat, lastMessage: lastMessage)
+                }
+            }
+        }
+    }
+    
+    private func updateChatItem(latestChat: Chat, lastMessage: String) {
+        
+        if latestChat.senderId != FUser.currentId() {
+            latestChat.unreadCounter += 1
+        }
+        
+        let values = [kLASTMESSAGE : lastMessage, kUNREADCOUNTER: latestChat.unreadCounter, kDATE : Date()] as [String: Any]
+        
+        
+        FirebaseReference(.Chat).document(latestChat.objectId).updateData(values) { (error) in
+            print("error updating recent ", error)
+        }
+    }
 }
