@@ -63,9 +63,10 @@ class LikesViewController: UIViewController {
     
     private func showUserProfileFor(user: FUser) {
         
-        let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ProfileTableView") as! UserProfileTableViewController
+        let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "UserProfileTableView") as! UserProfileTableViewController
         
         profileView.userObject = user
+        profileView.isLikedUser = true
         self.navigationController?.pushViewController(profileView, animated: true)
     }
 

@@ -26,7 +26,7 @@ class FirebaseListener {
                 
                 let user = FUser(_dictionary: snapshot.data() as! NSDictionary)
                 print("created user")
-                user.saveUserLocaly()
+                user.saveUserLocally()
                 
                 user.getUserAvatarFromFirestore { (didSet) in
                     
@@ -71,12 +71,12 @@ class FirebaseListener {
                     for userData in snapshot.documents {
                         let userObject = userData.data() as NSDictionary
                         
-//                        if !(FUser.currentUser()?.likedIdArray?.cxontains(userObject[kOBJECTID] as! String) ?? false) && FUser.currentId() != userObject[kOBJECTID] as! String {
-//                            users.append(FUser(_dictionary: userObject))
-//                        }
+                        if !(FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false) && FUser.currentId() != userObject[kOBJECTID] as! String {
+                            users.append(FUser(_dictionary: userObject))
+                        }
                         
                         //上記を加える場合、下記はコメントアウト
-                        users.append(FUser(_dictionary: userObject))
+//                        users.append(FUser(_dictionary: userObject))
                     }
                     
                     completion(users, snapshot.documents.last!)
@@ -100,6 +100,7 @@ class FirebaseListener {
         
         for userId in withIds {
             
+            
             FirebaseReference(.User).document(userId).getDocument { (snapshot, error) in
                 
                 guard let snapshot = snapshot else { return }
@@ -120,6 +121,34 @@ class FirebaseListener {
             }
         }
     }
+    
+    //MARK: - Likes
+    func downloadUserLikes(completion: @escaping (_ likedUserIds: [String]) -> Void) {
+        
+        FirebaseReference(.Like).whereField(kUSERID, isEqualTo: FUser.currentId()).getDocuments { (snapshot, error) in
+            
+            var allLikedIds: [String] = []
+            
+            guard let snapshot = snapshot else {
+                completion(allLikedIds)
+                return
+            }
+            
+            if !snapshot.isEmpty {
+                
+                for likeDictionary in snapshot.documents {
+                    
+                    allLikedIds.append(likeDictionary[kLIKEDUSERID] as? String ?? "")
+                }
+                
+                completion(allLikedIds)
+            } else {
+                print("No likes found")
+                completion(allLikedIds)
+            }
+        }
+    }
+
     
     //MARK: - Chats
     func downloadChatsFromFireStore(completion: @escaping (_ allChats: [Chat]) -> Void) {

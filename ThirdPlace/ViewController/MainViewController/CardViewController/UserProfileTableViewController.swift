@@ -22,11 +22,17 @@ class UserProfileTableViewController: UITableViewController {
     @IBOutlet weak var worryTextField: UITextField!
     @IBOutlet weak var aboutMeTextView: UITextView!
     
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var gotoNextButton: UIButton!
+    
+    
     @IBOutlet var backgroundTableView: UITableView!
     
     //MARK: - Vars
     var userObject: FUser?
     var delegate: UserProfileTableViewControllerDelegate?
+    
+    var isLikedUser = false
     
     //MARK: - View lifecycle
     override func viewDidAppear(_ animated: Bool) {
@@ -43,10 +49,14 @@ class UserProfileTableViewController: UITableViewController {
         setupTableView()
         setupAboutMeTextField()
         notAllowedEditing()
+        
+        if isLikedUser {
+            updateUIForMatchedUser()
+        }
     }
     
     //MARK: - IBActions
-    @IBAction func goToChatButtonPressed(_ sender: UIButton) {
+    @IBAction func likeButtonPressed(_ sender: UIButton) {
         self.delegate?.goToChat()
         dismissView()
     }
@@ -54,6 +64,10 @@ class UserProfileTableViewController: UITableViewController {
     @IBAction func goToNextButtonPressed(_ sender: UIButton) {
         self.delegate?.goToNext()
         dismissView()
+    }
+    
+    @objc func startChatButtonPressed() {
+        goToChat()
     }
     
     //MARK: - TableViewDelegate
@@ -78,6 +92,21 @@ class UserProfileTableViewController: UITableViewController {
         personalityTextField.isUserInteractionEnabled = false
         worryTextField.isUserInteractionEnabled = false
         aboutMeTextView.isUserInteractionEnabled = false
+    }
+    
+    private func updateUIForMatchedUser() {
+        
+        self.likeButton.isHidden = isLikedUser
+        self.gotoNextButton.isHidden = isLikedUser
+        
+        showStartChatButton()
+    }
+    
+    private func showStartChatButton() {
+        
+        let messageButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(startChatButtonPressed))
+        
+        self.navigationItem.rightBarButtonItem = isLikedUser ? messageButton : nil
     }
     
     //MARK: - Show user profile
@@ -105,6 +134,17 @@ class UserProfileTableViewController: UITableViewController {
     
     private func dismissView() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - Navigation
+    private func goToChat() {
+        
+        let chatRoomId = startChat(user1: FUser.currentUser()!, user2: userObject!)
+        
+        let chatView = ChatViewController(chatId: chatRoomId, recipientId: userObject!.objectId, recipientName: userObject!.username, senderImage: (FUser.currentUser()?.avatar)!, recipientImage: (userObject?.avatar)!)
+        
+        chatView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(chatView, animated: true)
     }
 
 }

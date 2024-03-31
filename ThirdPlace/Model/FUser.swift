@@ -28,6 +28,8 @@ class FUser: Equatable {
     var pushId: String?
     var premium = 0
     
+    var likedIdArray: [String]?
+    
     var userDictionary: NSDictionary {
         
         return NSDictionary(objects:
@@ -37,6 +39,7 @@ class FUser: Equatable {
                                  self.personality,
                                  self.worry,
                                  self.avatarLink,
+                                 self.likedIdArray ?? [],
                                  self.aboutMe,
                                  self.registeredDate,
                                  self.pushId ?? "",
@@ -48,6 +51,7 @@ class FUser: Equatable {
                                  kPERSONALITY as NSCopying,
                                  kWORRY as NSCopying,
                                  kAVATARLINK as NSCopying,
+                                 kLIKEDIDARRAY as NSCopying,
                                  kABOUTME as NSCopying,
                                  kREGISTEREDDATE as NSCopying,
                                  kPUSHID as NSCopying,
@@ -65,6 +69,7 @@ class FUser: Equatable {
         avatarLink = _avatarLink
         aboutMe = ""
         premium = 0
+        likedIdArray = []
     }
     
     init (_dictionary: NSDictionary) {
@@ -77,6 +82,7 @@ class FUser: Equatable {
         avatarLink = _dictionary[kAVATARLINK] as? String ?? ""
         aboutMe = _dictionary[kABOUTME] as? String ?? ""
         premium = _dictionary[kPREMIUM] as? Int ?? 0
+        likedIdArray = _dictionary[kLIKEDIDARRAY] as? [String]
         
         avatar = UIImage(contentsOfFile: fileInDocumentsDirectory(filename: self.objectId)) ?? UIImage(named: kPLACEHOLDERIMAGE)
     }
@@ -90,7 +96,6 @@ class FUser: Equatable {
         
         if Auth.auth().currentUser != nil {
             
-            print("CurrentUser is not nil")
             if let userDictionary = userDefaults.object(forKey: kCURRENTUSER) {
                 
                 return FUser(_dictionary: userDictionary as! NSDictionary)
@@ -152,7 +157,7 @@ class FUser: Equatable {
                     
                     let user = FUser(_objectId: authData!.user.uid, _email: email, _username: username, _personality: personality, _worry: worry)
                     
-                    user.saveUserLocaly()
+                    user.saveUserLocally()
                 }
             }
         }
@@ -236,7 +241,7 @@ class FUser: Equatable {
     }
     
     //MARK: - Save user funcs
-    func saveUserLocaly() {
+    func saveUserLocally() {
         
         userDefaults.setValue(self.userDictionary as! [String : Any], forKey: kCURRENTUSER)
         userDefaults.synchronize()
@@ -253,6 +258,24 @@ class FUser: Equatable {
     }
     
     //MARK: - Update User funcs
+    func updateCurrentUserInFireStore(withValues: [String : Any], completion: @escaping (_ error: Error?) -> Void) {
+        
+        if let dictionary = userDefaults.object(forKey: kCURRENTUSER) {
+            
+            let userObject = (dictionary as! NSDictionary).mutableCopy() as! NSMutableDictionary
+            userObject.setValuesForKeys(withValues)
+            
+            FirebaseReference(.User).document(FUser.currentId()).updateData(withValues) {
+                error in
+                
+                completion(error)
+                if error == nil {
+                    FUser(_dictionary: userObject).saveUserLocally()
+                }
+            }
+        }
+    }
+    
     func updateCurrentUseraInFireStore(withValues: [String : Any], completion: @escaping (_ error: Error?) -> Void) {
         
         if let dictionary = userDefaults.object(forKey: kCURRENTUSER) {
@@ -264,7 +287,7 @@ class FUser: Equatable {
                 
                 completion(error)
                 if error == nil {
-                    FUser(_dictionary: userObject).saveUserLocaly()
+                    FUser(_dictionary: userObject).saveUserLocally()
                 }
             }
         }

@@ -172,7 +172,7 @@ class SettingsViewController: UIViewController {
     
     private func saveUserData(user: FUser) {
         
-        user.saveUserLocaly()
+        user.saveUserLocally()
         user.saveUserToFireStore()
     }
 }

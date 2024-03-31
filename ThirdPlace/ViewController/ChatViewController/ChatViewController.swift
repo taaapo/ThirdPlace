@@ -18,6 +18,9 @@ class ChatViewController: MessagesViewController {
     private var recipientId = ""
     private var recipientName = ""
     
+    var senderImage = UIImage(named: "プロフィール画像_ライオン")
+    var recipientImage = UIImage(named: "プロフィール画像_ライオン")
+    
     let refreshController = UIRefreshControl()
     
     let currentUser = MKSender(senderId: FUser.currentId(), displayName: FUser.currentUser()!.username)
@@ -40,13 +43,15 @@ class ChatViewController: MessagesViewController {
     var updateChatListener: ListenerRegistration?
 
     //MARK: - Inits
-    init(chatId: String, recipientId: String, recipientName: String) {
+    init(chatId: String, recipientId: String, recipientName: String, senderImage: UIImage, recipientImage: UIImage) {
         
         super.init(nibName: nil, bundle: nil)
         
         self.chatId = chatId
         self.recipientId = recipientId
         self.recipientName = recipientName
+        self.senderImage = senderImage
+        self.recipientImage = recipientImage
     }
     
     required init?(coder: NSCoder) {
@@ -604,7 +609,9 @@ extension ChatViewController: MessagesLayoutDelegate {
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) {
         
-        avatarView.set(avatar: Avatar(initials: "R"))
+//        avatarView.set(avatar: Avatar(initials: "R"))
+//        let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+        avatarView.image = isFromCurrentSender(message: message) ? senderImage : recipientImage
     }
     
     // messageBottomLabelの高さ

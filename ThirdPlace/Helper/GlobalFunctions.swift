@@ -8,6 +8,32 @@
 import Foundation
 import Firebase
 
+//MARK: - Like
+func saveLikeToUser(userId: String) {
+    
+    let like = LikeObject(id: UUID().uuidString, userId: FUser.currentId(), likedUserId: userId, date: Date())
+    like.saveToFireStore()
+    
+    print(userId, "is userId")
+    if let currentUser = FUser.currentUser() {
+        
+        if !didLikeUserWith(userId: userId) {
+            
+            currentUser.likedIdArray!.append(userId)
+            
+            currentUser.updateCurrentUserInFireStore(withValues: [kLIKEDIDARRAY: currentUser.likedIdArray!]) { (error) in
+                
+                print("updated current user with error ", error?.localizedDescription)
+            }
+        }
+    }
+}
+
+func didLikeUserWith(userId: String) -> Bool {
+    
+    return FUser.currentUser()?.likedIdArray?.contains(userId) ?? false
+}
+
 //MARK: - Starting chat
 func startChat(user1: FUser, user2: FUser) -> String {
     

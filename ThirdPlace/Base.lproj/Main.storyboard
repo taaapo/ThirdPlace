@@ -236,6 +236,7 @@
                         <constraints>
                             <constraint firstItem="JQA-NW-V3E" firstAttribute="trailing" secondItem="xRf-Nv-ApQ" secondAttribute="trailing" id="2pc-YS-Xl7"/>
                             <constraint firstItem="T1j-I4-oD6" firstAttribute="centerX" secondItem="YI2-1Y-FFB" secondAttribute="centerX" id="3Aw-v3-Tkp"/>
+                            <constraint firstAttribute="bottom" secondItem="JQA-NW-V3E" secondAttribute="bottom" id="4mF-oV-fsB"/>
                             <constraint firstItem="9MA-7c-58u" firstAttribute="top" secondItem="xRf-Nv-ApQ" secondAttribute="top" constant="154" id="5hZ-XR-dpD"/>
                             <constraint firstItem="s2t-3M-KQL" firstAttribute="top" secondItem="TZB-Ar-p1E" secondAttribute="bottom" constant="8" id="7Ev-d8-hVh"/>
                             <constraint firstItem="TZB-Ar-p1E" firstAttribute="top" secondItem="9MA-7c-58u" secondAttribute="bottom" constant="8" id="DX5-gK-t7D"/>
@@ -243,7 +244,6 @@
                             <constraint firstItem="2NI-Ox-GRJ" firstAttribute="top" secondItem="Lxl-X8-fh1" secondAttribute="bottom" constant="56" id="HBr-G5-p7C"/>
                             <constraint firstItem="Lxl-X8-fh1" firstAttribute="centerX" secondItem="T1j-I4-oD6" secondAttribute="centerX" id="JbR-RI-Dww"/>
                             <constraint firstItem="9MA-7c-58u" firstAttribute="centerX" secondItem="cYy-Za-ZXY" secondAttribute="centerX" id="NEs-vH-Hun"/>
-                            <constraint firstItem="JQA-NW-V3E" firstAttribute="bottom" secondItem="xRf-Nv-ApQ" secondAttribute="bottom" id="OZU-f4-NCl"/>
                             <constraint firstItem="s2t-3M-KQL" firstAttribute="centerX" secondItem="wNh-bv-tYj" secondAttribute="centerX" id="PhP-pq-sCH"/>
                             <constraint firstItem="wNh-bv-tYj" firstAttribute="centerX" secondItem="Lxl-X8-fh1" secondAttribute="centerX" id="R9n-GH-eM7"/>
                             <constraint firstItem="Lxl-X8-fh1" firstAttribute="top" secondItem="wNh-bv-tYj" secondAttribute="bottom" constant="8" id="SVF-Bz-WdL"/>
@@ -273,7 +273,7 @@
             </objects>
             <point key="canvasLocation" x="1016.030534351145" y="4.9295774647887329"/>
         </scene>
-        <!--プロフィール-->
+        <!--ホーム-->
         <scene sceneID="plf-8c-VEJ">
             <objects>
                 <tableViewController id="i8K-xy-uKF" customClass="ProfileTableViewController" customModule="ThirdPlace" customModuleProvider="target" sceneMemberID="viewController">
@@ -525,7 +525,7 @@
                             <outlet property="delegate" destination="i8K-xy-uKF" id="aKz-MW-bwg"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="プロフィール" image="person.circle" catalog="system" selectedImage="person.circle.fill" id="6HB-Q3-pqv">
+                    <tabBarItem key="tabBarItem" title="ホーム" image="house" catalog="system" selectedImage="house.fill" id="6HB-Q3-pqv">
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
@@ -571,9 +571,9 @@
                                     <constraint firstAttribute="width" constant="50" id="Ywz-Sj-GW9"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button" image="チャットボタン"/>
+                                <state key="normal" title="Button" image="いいねボタン"/>
                                 <connections>
-                                    <action selector="goToChatButtonPressed:" destination="MB9-Qm-FcF" eventType="touchUpInside" id="cYB-OX-mRC"/>
+                                    <action selector="likeButtonPressed:" destination="MB9-Qm-FcF" eventType="touchUpInside" id="cYB-OX-mRC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9O-9l-Mvc">
@@ -634,6 +634,7 @@
                         <segue destination="i8K-xy-uKF" kind="relationship" relationship="viewControllers" id="fBy-rd-se6"/>
                         <segue destination="qDR-mo-Gzn" kind="relationship" relationship="viewControllers" id="hoZ-dh-Wap"/>
                         <segue destination="1sO-fe-SGK" kind="relationship" relationship="viewControllers" id="a2h-xz-cej"/>
+                        <segue destination="mJH-zE-0tp" kind="relationship" relationship="viewControllers" id="P5b-6x-gjQ"/>
                         <segue destination="uxh-nj-JU6" kind="relationship" relationship="viewControllers" id="sYz-ro-UJN"/>
                     </connections>
                 </tabBarController>
@@ -722,7 +723,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bmi-b1-1aX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3053" y="1112"/>
+            <point key="canvasLocation" x="3053" y="1739"/>
         </scene>
         <!--Edit View Controller-->
         <scene sceneID="KRb-a2-gkI">
@@ -1041,9 +1042,9 @@
                                                         <constraint firstAttribute="height" constant="50" id="bvh-TX-yEx"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Button" image="チャットボタン"/>
+                                                    <state key="normal" title="Button" image="いいねボタン"/>
                                                     <connections>
-                                                        <action selector="goToChatButtonPressed:" destination="jgT-fv-UF3" eventType="touchUpInside" id="G3c-9m-aYh"/>
+                                                        <action selector="likeButtonPressed:" destination="jgT-fv-UF3" eventType="touchUpInside" id="G3c-9m-aYh"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sck-XJ-hcN">
@@ -1083,6 +1084,8 @@
                         <outlet property="aboutMeTextView" destination="b4f-Kh-CXW" id="2Gz-uF-hXr"/>
                         <outlet property="avatarImageView" destination="nnD-2Y-b3t" id="Mf6-rz-3rm"/>
                         <outlet property="backgroundTableView" destination="77V-n8-B8S" id="dbj-am-Iw2"/>
+                        <outlet property="gotoNextButton" destination="sck-XJ-hcN" id="dcK-Q7-2fG"/>
+                        <outlet property="likeButton" destination="V0B-yR-dZ6" id="G5B-XR-Tou"/>
                         <outlet property="personalityTextField" destination="8LE-fg-eiK" id="88O-qH-I7L"/>
                         <outlet property="usernameTextField" destination="zET-Qv-XrG" id="vF2-BN-AmI"/>
                         <outlet property="worryTextField" destination="x1l-Vr-8Lq" id="al1-jJ-bj0"/>
@@ -1200,7 +1203,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sc-o8-f4e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3862" y="361"/>
+            <point key="canvasLocation" x="3861.8320610687019" y="360.56338028169017"/>
         </scene>
         <!--メッセージ-->
         <scene sceneID="Dl9-wr-WSZ">
@@ -1224,6 +1227,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opY-0P-BTy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3053" y="361"/>
+        </scene>
+        <!--いいね-->
+        <scene sceneID="IFt-8u-ioQ">
+            <objects>
+                <viewController id="WSb-8f-SeA" customClass="LikesViewController" customModule="ThirdPlace" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ngD-4A-je0">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="Qie-lo-qYY" customClass="LikeTableViewCell" customModule="ThirdPlace" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qie-lo-qYY" id="Wvv-EV-HXk">
+                                    <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="プロフィール画像_ヒトの影_丸_v2" translatesAutoresizingMaskIntoConstraints="NO" id="nIU-jU-8js">
+                                            <rect key="frame" x="20" y="10" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="18E-Lq-pbp"/>
+                                                <constraint firstAttribute="width" constant="60" id="n4r-c5-IB9"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od2-Cu-o6k">
+                                            <rect key="frame" x="88" y="29.666666666666671" width="261.66666666666669" height="21"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Od2-Cu-o6k" firstAttribute="leading" secondItem="nIU-jU-8js" secondAttribute="trailing" constant="8" id="PPE-Hi-SBg"/>
+                                        <constraint firstItem="nIU-jU-8js" firstAttribute="centerY" secondItem="Wvv-EV-HXk" secondAttribute="centerY" id="Ylx-Uy-V5f"/>
+                                        <constraint firstItem="nIU-jU-8js" firstAttribute="leading" secondItem="Wvv-EV-HXk" secondAttribute="leading" constant="20" id="hfD-MC-w3H"/>
+                                        <constraint firstItem="Od2-Cu-o6k" firstAttribute="centerY" secondItem="Wvv-EV-HXk" secondAttribute="centerY" id="pPQ-jP-RB1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Od2-Cu-o6k" secondAttribute="trailing" constant="5" id="qJL-uE-fe6"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImageView" destination="nIU-jU-8js" id="5a5-X2-UTa"/>
+                                    <outlet property="nameLabel" destination="Od2-Cu-o6k" id="ku8-Hr-R4N"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WSb-8f-SeA" id="5ri-9c-jTV"/>
+                            <outlet property="delegate" destination="WSb-8f-SeA" id="Gjb-qZ-Yn0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="いいね" id="JZd-dn-X7E"/>
+                    <connections>
+                        <outlet property="tableView" destination="ngD-4A-je0" id="1t0-uW-hTP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yXZ-Mo-Wah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3861.8320610687019" y="1043.661971830986"/>
         </scene>
         <!--さがす-->
         <scene sceneID="BZJ-Xp-4bn">
@@ -1250,19 +1311,42 @@
             </objects>
             <point key="canvasLocation" x="3053" y="-358"/>
         </scene>
+        <!--いいね-->
+        <scene sceneID="mVf-10-5Wg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mJH-zE-0tp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="いいね" image="heart" catalog="system" selectedImage="heart.fill" id="PNx-EK-bj3"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a8h-g4-gmQ">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WSb-8f-SeA" kind="relationship" relationship="rootViewController" id="MNa-s2-3pw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FWm-3s-dSI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3052.6717557251909" y="1043.661971830986"/>
+        </scene>
     </scenes>
     <resources>
         <image name="TabBar背景_v7" width="1179" height="236"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="smiley" catalog="system" width="128" height="123"/>
         <image name="smiley.fill" catalog="system" width="128" height="123"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>
         <image name="text.bubble.fill" catalog="system" width="128" height="110"/>
+        <image name="いいねボタン" width="200" height="200"/>
         <image name="カメラアイコン" width="40" height="40"/>
-        <image name="チャットボタン" width="200" height="200"/>
         <image name="プロフィール画像_ヒトの影_丸_v2" width="200" height="200"/>
         <image name="ボタン" width="500" height="200"/>
         <image name="ログイン画面背景_v2" width="1179" height="2556"/>

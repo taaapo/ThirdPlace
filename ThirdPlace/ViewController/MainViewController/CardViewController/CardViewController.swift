@@ -37,7 +37,7 @@ class CardViewController: UIViewController {
     
     //MARK: - IBActions
     
-    @IBAction func goToChatButtonPressed(_ sender: UIButton) {
+    @IBAction func likeButtonPressed(_ sender: UIButton) {
         cardStack.swipe(.right, animated: true)
     }
     
@@ -152,7 +152,7 @@ class CardViewController: UIViewController {
         
         let chatRoomId = startChat(user1: FUser.currentUser()!, user2: user)
         
-        let chatView = ChatViewController(chatId: chatRoomId, recipientId: user.objectId, recipientName: user.username)
+        let chatView = ChatViewController(chatId: chatRoomId, recipientId: user.objectId, recipientName: user.username, senderImage: (FUser.currentUser()?.avatar)!, recipientImage: (user.avatar)!)
         
         chatView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(chatView, animated: true)
@@ -199,10 +199,14 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
     func cardStack(_ cardStack: SwipeCardStack, didSwipeCardAt index: Int, with direction: SwipeDirection) {
         
         if direction == .right {
-            let user = getUserWithId(userId: showReserve ? secondCardModel[index].id : initialCardModes[index].id)!
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.goToChat(user: user)
-            }
+            //let user = getUserWithId(userId: showReserve ? secondCardModel[index].id : initialCardModes[index].id)!
+            let userId = showReserve ? secondCardModel[index].id : initialCardModes[index].id
+            print(userId, "is userId")
+            saveLikeToUser(userId: userId)
+            //カードを右スワイプした時にチャットに行きたい場合は下記をコメントアウト
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                self.goToChat(user: user)
+//            }
         }
     }
     

@@ -41,8 +41,8 @@ class UserCardOverlay: UIView {
     }
     
     private func createRightOverlay() {
-//        let rightTextView = SampleOverlayLabelView(withTitle: "チャット▶︎", color: UIColor().primaryRed(), rotation: -CGFloat.pi/10)
-        let rightTextView = SampleOverlayLabelView(withTitle: "チャット▶︎", color: UIColor().primaryRed(), rotation: 0)
+//        let rightTextView = SampleOverlayLabelView(withTitle: "いいね▶︎", color: UIColor().primaryRed(), rotation: -CGFloat.pi/10)
+        let rightTextView = SampleOverlayLabelView(withTitle: "いいね▶︎", color: UIColor().primaryRed(), rotation: 0)
         
         addSubview(rightTextView)
         rightTextView.anchor(top: topAnchor,

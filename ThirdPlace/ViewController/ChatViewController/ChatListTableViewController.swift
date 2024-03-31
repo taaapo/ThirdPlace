@@ -20,6 +20,7 @@ class ChatListTableViewController: UITableViewController {
         downloadChats()
     }
     
+    
     //MARK: - Download
     private func downloadChats() {
         
@@ -38,7 +39,9 @@ class ChatListTableViewController: UITableViewController {
         
         restartChat(chatRoomId: chat.chatRoomId, memberIds: chat.memberIds)
         
-        let chatView = ChatViewController(chatId: chat.chatRoomId, recipientId: chat.receiverId, recipientName: chat.receiverName)
+        
+        
+        let chatView = ChatViewController(chatId: chat.chatRoomId, recipientId: chat.receiverId, recipientName: chat.receiverName, senderImage: (FUser.currentUser()?.avatar)!, recipientImage: setAvatar(avatarLink: chat.avatarLink)!)
         
         chatView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(chatView, animated: true)
@@ -103,6 +106,18 @@ class ChatListTableViewController: UITableViewController {
     
     private func setupTableViewSectionFooter() {
         tableView.estimatedSectionFooterHeight = 0.0
+    }
+    
+    private func setAvatar(avatarLink: String) -> UIImage?{
+        
+        var setAvatarImage = UIImage(named: kPLACEHOLDERIMAGE)
+        
+        FileStorage.downloadImage(imageUrl: avatarLink) { avatarImage in
+            if avatarImage != nil {
+                setAvatarImage =  avatarImage?.circleMasked
+            }
+        }
+        return setAvatarImage
     }
 }
 

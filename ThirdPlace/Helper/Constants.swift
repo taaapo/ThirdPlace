@@ -22,8 +22,13 @@ public let kAVATAR = "avatar"
 public let kREGISTEREDDATE = "registeredDate"
 public let kPUSHID = "pushId"
 public let kPREMIUM = "premium"
+public let kLIKEDIDARRAY = "likedIdArray"
 
 public let kCURRENTUSER = "currentUser"
+
+//MARK: - LikeObject
+public let kUSERID = "userId"
+public let kLIKEDUSERID = "likedUserId"
 
 //MARK: - Images
 public let kPLACEHOLDERIMAGE = "プロフィール画像_ヒトの影_丸_v2"

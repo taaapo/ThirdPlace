@@ -21,6 +21,7 @@ class ChatListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         unreadMessageBackgroundView.layer.cornerRadius = unreadMessageBackgroundView.frame.width / 2
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
