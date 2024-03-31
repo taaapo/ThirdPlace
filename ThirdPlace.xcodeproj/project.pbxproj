@@ -42,6 +42,8 @@
 		313C2ED52B7431CD00909037 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 313C2ED42B7431CD00909037 /* FirebaseRemoteConfigSwift */; };
 		313C2ED72B7431CD00909037 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 313C2ED62B7431CD00909037 /* FirebaseStorage */; };
 		313C2ED92B7431CD00909037 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 313C2ED82B7431CD00909037 /* FirebaseStorageCombine-Community */; };
+		315BB4F02BB928E900431010 /* IncomingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315BB4EF2BB928E900431010 /* IncomingMessage.swift */; };
+		315BB4F22BB92A9900431010 /* TypingListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315BB4F12BB92A9900431010 /* TypingListener.swift */; };
 		3160417F2B79C7FE0013978C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3160417E2B79C7FE0013978C /* LoginViewController.swift */; };
 		316041812B79C8100013978C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316041802B79C8100013978C /* RegisterViewController.swift */; };
 		3188820F2BB338C70021EB36 /* OutgoingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3188820E2BB338C70021EB36 /* OutgoingMessage.swift */; };
@@ -85,6 +87,8 @@
 /* Begin PBXFileReference section */
 		310667452B9CCC8000BF087B /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		312C93F22BAAAFD700818E5F /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
+		315BB4EF2BB928E900431010 /* IncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessage.swift; sourceTree = "<group>"; };
+		315BB4F12BB92A9900431010 /* TypingListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingListener.swift; sourceTree = "<group>"; };
 		3160417E2B79C7FE0013978C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		316041802B79C8100013978C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		3188820E2BB338C70021EB36 /* OutgoingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessage.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				31DD39852B7FA9030093AF4C /* FirebaseListener.swift */,
 				31DD39832B7FA7730093AF4C /* FCollectionReference.swift */,
 				3194FEA62B964533001FAA99 /* FileStorage.swift */,
+				315BB4F12BB92A9900431010 /* TypingListener.swift */,
 			);
 			path = FirebaseHelpers;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				31B41D152BB0787D000B8213 /* Message.swift */,
 				31F922E52BB1CCF900C15A86 /* MKMessage.swift */,
 				3188820E2BB338C70021EB36 /* OutgoingMessage.swift */,
+				315BB4EF2BB928E900431010 /* IncomingMessage.swift */,
 				31A09FD42B9F120E00CFB294 /* CardViews */,
 			);
 			path = Model;
@@ -450,8 +456,10 @@
 				31DD39842B7FA7730093AF4C /* FCollectionReference.swift in Sources */,
 				31F02C542B9C2003009707FF /* SettingsViewController.swift in Sources */,
 				31ACD9692B8FBCF500816629 /* EditViewController.swift in Sources */,
+				315BB4F02BB928E900431010 /* IncomingMessage.swift in Sources */,
 				31A09FD32B9F0FC700CFB294 /* UserCard.swift in Sources */,
 				3198D2EA2B7BD92B00BE215D /* Constants.swift in Sources */,
+				315BB4F22BB92A9900431010 /* TypingListener.swift in Sources */,
 				3188820F2BB338C70021EB36 /* OutgoingMessage.swift in Sources */,
 				31A09FDA2B9F135600CFB294 /* UserCardContentView.swift in Sources */,
 				31AC3FF62BAC88E400FE69EB /* ChatListTableViewCell.swift in Sources */,

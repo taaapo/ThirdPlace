@@ -53,16 +53,16 @@ class OutgoingMessage {
             FirebaseReference(.Messages).document(userId).collection(chatRoomId).document(messageId).setData(messageDictionary)
         }
     }
-//
-//    
-//    class func updateMessage(withId: String, chatRoomId: String, memberIds: [String]) {
-//        
-//        let values = [kSTATUS : kREAD] as [String : Any]
-//        
-//        for userId in memberIds {
-//            FirebaseReference(.Messages).document(userId).collection(chatRoomId).document(withId).updateData(values)
-//        }
-//        
-//    }
+
+    
+    class func updateMessage(withId: String, chatRoomId: String, memberIds: [String]) {
+        
+        let values = [kSTATUS : kREAD] as [String : Any]
+        
+        for userId in memberIds {
+            FirebaseReference(.Messages).document(userId).collection(chatRoomId).document(withId).updateData(values)
+        }
+        
+    }
 }
 

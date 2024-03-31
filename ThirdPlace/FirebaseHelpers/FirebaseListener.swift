@@ -180,4 +180,31 @@ class FirebaseListener {
             print("error updating recent ", error)
         }
     }
+    
+    func resetUnreadCounter(chatRoomId: String) {
+        
+        FirebaseReference(.Chat).whereField(kCHATROOMID, isEqualTo: chatRoomId).whereField(kSENDERID, isEqualTo: FUser.currentId()).getDocuments { (snapshot, error) in
+            
+            guard let snapshot = snapshot else { return }
+            
+            if !snapshot.isEmpty {
+                
+                if let chatData = snapshot.documents.first?.data() {
+                    let chat = Chat(chatData)
+                    self.clearUnreadCounter(chat: chat)
+                }
+            }
+        }
+    }
+    
+    func clearUnreadCounter(chat: Chat) {
+        
+        let values = [kUNREADCOUNTER : 0] as [String : Any]
+        
+        FirebaseReference(.Chat).document(chat.objectId).updateData(values) { (error) in
+            
+            print("Reset recent counter", error)
+        }
+    }
+    
 }

@@ -45,7 +45,7 @@ public let kSTATUS = "status"
 
 public let kTEXT = "text"
 
-public let kSENT = "Sent"
-public let kREAD = "Read"
+public let kSENT = ""
+public let kREAD = "既読"
 
 public let kNUMBEROFMESSAGES = 10
