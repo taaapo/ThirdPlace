@@ -12,6 +12,9 @@ import ProgressHUD
 
 class CardViewController: UIViewController {
     
+    //MARK: - IBOutlets
+    @IBOutlet weak var emptyDataView: EmptyDataView!
+    
     //MARK: - Vars
     private let cardStack = SwipeCardStack()
     private var initialCardModes: [UserCardModel] = []
@@ -30,10 +33,46 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        showEmptyDataView(loading: true)
+//        emptyDataView.delegate = self
+        
         //ユーザーを作るときはcreateUsersを加えてdownloadInitialUsersをコメントアウト
 //        createUsers()
         downloadInitialUsers()
     }
+    
+    private func showEmptyDataView(loading: Bool) {
+        
+        emptyDataView.isHidden = false
+        emptyDataView.reloadButton.isEnabled = true
+        
+        //loadingとそうでない時でimageNamgeを変えたいときは、下記を加える
+        //let imageName = loading ? "searchingBackground" : "seenAllBackground"
+        let imageName = "検索マーク"
+        let title = loading ? "Searching for users..." : "You have swiped all users"
+        let subTitle = loading ? "Please wait" : "Please check back later"
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.view.bringSubviewToFront(self.emptyDataView)
+        }
+        
+        emptyDataView.imageView.image = UIImage(named: imageName)
+        emptyDataView.titleLabel.text = title
+        emptyDataView.subTitleLabel.text = subTitle
+        emptyDataView.reloadButton.isHidden = loading
+    }
+    
+    private func hideEmptyDataView() {
+        emptyDataView.isHidden = true
+    }
+    
+    private func resetLoadCount() {
+        isInitialLoad = true
+        showReserve = false
+        lastDocumentSnapshot = nil
+        numberOfCardsAdded = 0
+    }
+    
     
     //MARK: - IBActions
     
@@ -47,6 +86,8 @@ class CardViewController: UIViewController {
     
     //MARK: - Layout cards
     private func layoutCardStackView() {
+        
+        hideEmptyDataView()
         
         cardStack.delegate = self
         cardStack.dataSource = self
@@ -225,4 +266,14 @@ extension CardViewController: UserProfileTableViewControllerDelegate {
     func goToNext() {
         cardStack.swipe(.left, animated: true)
     }
+}
+
+extension CardViewController: EmptyDataViewDelegate {
+    
+    func didClickReloadButton() {
+        resetLoadCount()
+        downloadInitialUsers()
+        emptyDataView.reloadButton.isEnabled = false
+    }
+    
 }

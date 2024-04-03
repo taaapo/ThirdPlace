@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		310667442B9CCB9900BF087B /* Shuffle in Frameworks */ = {isa = PBXBuildFile; productRef = 310667432B9CCB9900BF087B /* Shuffle */; };
 		310667462B9CCC8000BF087B /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310667452B9CCC8000BF087B /* CardViewController.swift */; };
+		311B58572BBC682E00235E1A /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311B58562BBC682E00235E1A /* EmptyDataView.swift */; };
+		311B58592BBC685000235E1A /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 311B58582BBC685000235E1A /* EmptyDataView.xib */; };
 		312C93F32BAAAFD700818E5F /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312C93F22BAAAFD700818E5F /* UserProfileTableViewController.swift */; };
 		313C2E9B2B74310000909037 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 313C2E9A2B74310000909037 /* FirebaseAnalytics */; };
 		313C2E9D2B74310000909037 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 313C2E9C2B74310000909037 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -89,6 +91,8 @@
 
 /* Begin PBXFileReference section */
 		310667452B9CCC8000BF087B /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		311B58562BBC682E00235E1A /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
+		311B58582BBC685000235E1A /* EmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyDataView.xib; sourceTree = "<group>"; };
 		312C93F22BAAAFD700818E5F /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		315BB4EF2BB928E900431010 /* IncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessage.swift; sourceTree = "<group>"; };
 		315BB4F12BB92A9900431010 /* TypingListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingListener.swift; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 			children = (
 				310667452B9CCC8000BF087B /* CardViewController.swift */,
 				312C93F22BAAAFD700818E5F /* UserProfileTableViewController.swift */,
+				311B58562BBC682E00235E1A /* EmptyDataView.swift */,
+				311B58582BBC685000235E1A /* EmptyDataView.xib */,
 			);
 			path = CardViewController;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 			files = (
 				31B3659D2B71455900D29401 /* LaunchScreen.storyboard in Resources */,
 				31B365A72B727C4500D29401 /* GoogleService-Info.plist in Resources */,
+				311B58592BBC685000235E1A /* EmptyDataView.xib in Resources */,
 				31B3659A2B71455900D29401 /* Assets.xcassets in Resources */,
 				31B365982B71455700D29401 /* Main.storyboard in Resources */,
 			);
@@ -478,6 +485,7 @@
 				31ACD9692B8FBCF500816629 /* EditViewController.swift in Sources */,
 				315BB4F02BB928E900431010 /* IncomingMessage.swift in Sources */,
 				31A09FD32B9F0FC700CFB294 /* UserCard.swift in Sources */,
+				311B58572BBC682E00235E1A /* EmptyDataView.swift in Sources */,
 				3198D2EA2B7BD92B00BE215D /* Constants.swift in Sources */,
 				315BB4F22BB92A9900431010 /* TypingListener.swift in Sources */,
 				3188820F2BB338C70021EB36 /* OutgoingMessage.swift in Sources */,
