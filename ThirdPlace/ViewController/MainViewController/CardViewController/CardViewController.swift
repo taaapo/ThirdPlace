@@ -27,17 +27,18 @@ class CardViewController: UIViewController {
     
     var numberOfCardsAdded = 0
     //下記のIntは自由に変更可能
-    var initialLoadNumber = 5
+    var initialLoadNumber = 20
 
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        showEmptyDataView(loading: true)
-//        emptyDataView.delegate = self
+        showEmptyDataView(loading: true)
+        emptyDataView.delegate = self
         
         //ユーザーを作るときはcreateUsersを加えてdownloadInitialUsersをコメントアウト
 //        createUsers()
+        
         downloadInitialUsers()
     }
     
@@ -49,8 +50,8 @@ class CardViewController: UIViewController {
         //loadingとそうでない時でimageNamgeを変えたいときは、下記を加える
         //let imageName = loading ? "searchingBackground" : "seenAllBackground"
         let imageName = "検索マーク"
-        let title = loading ? "Searching for users..." : "You have swiped all users"
-        let subTitle = loading ? "Please wait" : "Please check back later"
+        let title = loading ? "ユーザーを探しています" : "すべてのユーザーをスワイプしました"
+        let subTitle = loading ? "お待ちください" : "しばらく経ってから再度お試しください"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.view.bringSubviewToFront(self.emptyDataView)
@@ -137,6 +138,8 @@ class CardViewController: UIViewController {
                     }
                 }
             }
+            
+            
             print("initial \(allUsers.count) received")
             self.downloadMoreUsersInBackground()
         }
@@ -235,6 +238,11 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
         
         showReserve = true
         layoutCardStackView()
+        
+        
+        if secondCardModel.isEmpty {
+            showEmptyDataView(loading: false)
+        }
     }
     
     func cardStack(_ cardStack: SwipeCardStack, didSwipeCardAt index: Int, with direction: SwipeDirection) {

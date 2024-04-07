@@ -297,6 +297,7 @@
 				31ACD9672B8FBCC400816629 /* ProfileViewController */,
 				312C93F42BAAAFDD00818E5F /* CardViewController */,
 				31AC3FF42BAC883900FE69EB /* ChatViewController */,
+				315BB4F52BB96BC300431010 /* LikesViewController */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -306,7 +307,6 @@
 			children = (
 				316041822B79C8740013978C /* WelcomeViewController */,
 				31CC162D2B81F2B9000360CE /* MainViewController */,
-				315BB4F52BB96BC300431010 /* LikesViewController */,
 				31F02C532B9C2003009707FF /* SettingsViewController.swift */,
 			);
 			path = ViewController;

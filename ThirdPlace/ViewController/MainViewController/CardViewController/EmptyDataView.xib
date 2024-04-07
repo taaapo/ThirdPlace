@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,7 +17,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EmptyDataView" customModule="ThirdPlace" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="417"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -45,12 +44,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8df-gr-ELW">
-                            <rect key="frame" x="125.33333333333333" y="236" width="135.33333333333337" height="25"/>
+                            <rect key="frame" x="149.33333333333334" y="236" width="87.666666666666657" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="3Yu-12-rBc"/>
                             </constraints>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="リロードボタン"/>
+                            <buttonConfiguration key="configuration" style="plain" title="読み込み"/>
                             <connections>
                                 <action selector="reloadButtonPressed:" destination="-1" eventType="touchUpInside" id="ZIH-v0-dO5"/>
                             </connections>
@@ -70,7 +69,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dNi-wZ-2yO" secondAttribute="trailing" constant="14" id="5An-SO-5Bf"/>
                 <constraint firstItem="dNi-wZ-2yO" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="mqH-f1-nFG"/>
@@ -83,8 +82,5 @@
     </objects>
     <resources>
         <image name="検索マーク" width="300" height="300"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

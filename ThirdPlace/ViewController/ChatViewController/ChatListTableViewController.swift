@@ -85,6 +85,10 @@ class ChatListTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "削除"
+    }
+    
     //下記を加えることでheaderの高さが0になり、スクロール時に上部に白色のheaderが表示されなくなるけど、このViewではNavigation Varがあるため、変わらない
 //    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return 0
