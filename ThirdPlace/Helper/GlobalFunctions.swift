@@ -34,6 +34,32 @@ func didLikeUserWith(userId: String) -> Bool {
     return FUser.currentUser()?.likedIdArray?.contains(userId) ?? false
 }
 
+//MARK: - Do Next
+func saveNextToUser(userId: String) {
+    
+    let next = NextObject(id: UUID().uuidString, userId: FUser.currentId(), nextedUserId: userId, date: Date())
+    next.saveToFireStore()
+    
+    print(userId, "is userId")
+    if let currentUser = FUser.currentUser() {
+        
+        if !didNextUserWith(userId: userId) {
+            
+            currentUser.nextedIdArray!.append(userId)
+            
+            currentUser.updateCurrentUserInFireStore(withValues: [kNEXTEDIDARRAY: currentUser.nextedIdArray!]) { (error) in
+                
+                print("updated current user with error ", error?.localizedDescription)
+            }
+        }
+    }
+}
+
+func didNextUserWith(userId: String) -> Bool {
+    
+    return FUser.currentUser()?.nextedIdArray?.contains(userId) ?? false
+}
+
 //MARK: - Starting chat
 func startChat(user1: FUser, user2: FUser) -> String {
     

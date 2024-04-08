@@ -23,12 +23,14 @@ public let kREGISTEREDDATE = "registeredDate"
 public let kPUSHID = "pushId"
 public let kPREMIUM = "premium"
 public let kLIKEDIDARRAY = "likedIdArray"
+public let kNEXTEDIDARRAY = "nextedIdArray"
 
 public let kCURRENTUSER = "currentUser"
 
-//MARK: - LikeObject
+//MARK: - LikeObject and NextObject
 public let kUSERID = "userId"
 public let kLIKEDUSERID = "likedUserId"
+public let kNEXTEDUSERID = "nextedUserId"
 
 //MARK: - Images
 public let kPLACEHOLDERIMAGE = "プロフィール画像_ヒトの影_丸_v2"

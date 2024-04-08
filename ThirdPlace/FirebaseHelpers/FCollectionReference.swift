@@ -11,6 +11,7 @@ import Firebase
 enum FCollectionReference: String {
     case User
     case Like
+    case Next
     case Chat
     case Messages
     case Typing

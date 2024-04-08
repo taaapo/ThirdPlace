@@ -73,11 +73,12 @@ class FirebaseListener {
                     for userData in snapshot.documents {
                         let userObject = userData.data() as NSDictionary
                         
-                        if !(FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false) && FUser.currentId() != userObject[kOBJECTID] as! String {
+                        if !(FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
+                            && !(FUser.currentUser()?.nextedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
+                            && (FUser.currentId() != userObject[kOBJECTID] as! String) {
                             
                             users.append(FUser(_dictionary: userObject))
                         }
-                        //ここにユーザーがネクストした時もqueryから外す動作が必要
                         
                         //上記を加える場合、下記はコメントアウト
 //                        users.append(FUser(_dictionary: userObject))

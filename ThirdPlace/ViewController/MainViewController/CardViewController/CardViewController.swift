@@ -248,14 +248,19 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
     func cardStack(_ cardStack: SwipeCardStack, didSwipeCardAt index: Int, with direction: SwipeDirection) {
         
         if direction == .right {
-            //let user = getUserWithId(userId: showReserve ? secondCardModel[index].id : initialCardModes[index].id)!
+            
             let userId = showReserve ? secondCardModels[index].id : initialCardModels[index].id
-            //print(userId, "is userId")
             saveLikeToUser(userId: userId)
+            
             //カードを右スワイプした時にチャットに行きたい場合は下記をコメントアウト
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 //                self.goToChat(user: user)
 //            }
+        } else if direction == .left {
+            
+            let userId = showReserve ? secondCardModels[index].id : initialCardModels[index].id
+            saveNextToUser(userId: userId)
+            
         }
     }
     
