@@ -17,8 +17,8 @@ class CardViewController: UIViewController {
     
     //MARK: - Vars
     private let cardStack = SwipeCardStack()
-    private var initialCardModes: [UserCardModel] = []
-    private var secondCardModel: [UserCardModel] = []
+    private var initialCardModels: [UserCardModel] = []
+    private var secondCardModels: [UserCardModel] = []
     private var userObjects: [FUser] = []
     
     var lastDocumentSnapshot: DocumentSnapshot?
@@ -112,7 +112,7 @@ class CardViewController: UIViewController {
             
             self.lastDocumentSnapshot = snapshot
             self.isInitialLoad = false
-            self.initialCardModes = []
+            self.initialCardModels = []
             
             self.userObjects = allUsers
             
@@ -125,7 +125,7 @@ class CardViewController: UIViewController {
                                                   worry: user.worry,
                                                   image: user.avatar)
                     
-                    self.initialCardModes.append(cardModel)
+                    self.initialCardModels.append(cardModel)
                     self.numberOfCardsAdded += 1
                     
                     if self.numberOfCardsAdded == allUsers.count {
@@ -150,7 +150,7 @@ class CardViewController: UIViewController {
         FirebaseListener.shared.downloadUsersFromFirebase(isInitialLoad: isInitialLoad, limit: 1000, lastDocumentSnapshot: lastDocumentSnapshot) { allUsers, snapshot in
             
             self.lastDocumentSnapshot = snapshot
-            self.secondCardModel = []
+            self.secondCardModels = []
             
             self.userObjects += allUsers
             
@@ -163,7 +163,7 @@ class CardViewController: UIViewController {
                                                   worry: user.worry,
                                                   image: user.avatar)
                     
-                    self.secondCardModel.append(cardModel)
+                    self.secondCardModels.append(cardModel)
                 }
             }
         }
@@ -216,31 +216,31 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
             card.setOverlay(UserCardOverlay(direction: direction), forDirection: direction)
         }
         
-        card.configure(withModel: showReserve ? secondCardModel[index] : initialCardModes[index])
+        card.configure(withModel: showReserve ? secondCardModels[index] : initialCardModels[index])
         
         return card
     }
     
     func numberOfCards(in cardStack: Shuffle.SwipeCardStack) -> Int {
-        return showReserve ? secondCardModel.count : initialCardModes.count
+        return showReserve ? secondCardModels.count : initialCardModels.count
     }
     
     //MARK: - Delegate
     func didSwipeAllCards(_ cardStack: SwipeCardStack) {
         
-        print("finished with cards, show reserve is ", showReserve)
+        //print("finished with cards, show reserve is ", showReserve)
         
-        initialCardModes = []
+        initialCardModels = []
         
         if showReserve {
-            secondCardModel = []
+            secondCardModels = []
         }
         
         showReserve = true
         layoutCardStackView()
         
         
-        if secondCardModel.isEmpty {
+        if secondCardModels.isEmpty {
             showEmptyDataView(loading: false)
         }
     }
@@ -249,8 +249,8 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
         
         if direction == .right {
             //let user = getUserWithId(userId: showReserve ? secondCardModel[index].id : initialCardModes[index].id)!
-            let userId = showReserve ? secondCardModel[index].id : initialCardModes[index].id
-            print(userId, "is userId")
+            let userId = showReserve ? secondCardModels[index].id : initialCardModels[index].id
+            //print(userId, "is userId")
             saveLikeToUser(userId: userId)
             //カードを右スワイプした時にチャットに行きたい場合は下記をコメントアウト
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -261,7 +261,7 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
     
     func cardStack(_ cardStack: SwipeCardStack, didSelectCardAt index: Int) {
         
-        showUserProfileFor(userId: showReserve ? secondCardModel[index].id : initialCardModes[index].id)
+        showUserProfileFor(userId: showReserve ? secondCardModels[index].id : initialCardModels[index].id)
     }
 }
 
