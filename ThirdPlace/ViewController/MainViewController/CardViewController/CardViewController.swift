@@ -27,7 +27,7 @@ class CardViewController: UIViewController {
     
     var numberOfCardsAdded = 0
     //下記のIntは自由に変更可能
-    var initialLoadNumber = 20
+    var initialLoadNumber = 2
 
     //MARK: - View LifeCycle
     override func viewDidLoad() {
@@ -105,9 +105,10 @@ class CardViewController: UIViewController {
         ProgressHUD.animate()
         
         FirebaseListener.shared.downloadUsersFromFirebase(isInitialLoad: isInitialLoad, limit: initialLoadNumber, lastDocumentSnapshot: lastDocumentSnapshot) { allUsers, snapshot in
-            
+            print("allUsers.count is ", allUsers.count)
             if allUsers.count == 0 {
                 ProgressHUD.dismiss()
+                self.showEmptyDataView(loading: false)
             }
             
             self.lastDocumentSnapshot = snapshot
@@ -127,9 +128,11 @@ class CardViewController: UIViewController {
                     
                     self.initialCardModels.append(cardModel)
                     self.numberOfCardsAdded += 1
+                    print("numberOfCardsAdded is ",self.numberOfCardsAdded)
                     
                     if self.numberOfCardsAdded == allUsers.count {
                         print("reload")
+                        self.numberOfCardsAdded = 0
                         
                         DispatchQueue.main.async {
                             ProgressHUD.dismiss()
@@ -139,13 +142,14 @@ class CardViewController: UIViewController {
                 }
             }
             
-            
             print("initial \(allUsers.count) received")
             self.downloadMoreUsersInBackground()
         }
     }
     
     private func downloadMoreUsersInBackground() {
+        
+        self.showReserve = true
         
         FirebaseListener.shared.downloadUsersFromFirebase(isInitialLoad: isInitialLoad, limit: 1000, lastDocumentSnapshot: lastDocumentSnapshot) { allUsers, snapshot in
             
@@ -164,6 +168,19 @@ class CardViewController: UIViewController {
                                                   image: user.avatar)
                     
                     self.secondCardModels.append(cardModel)
+                    self.numberOfCardsAdded += 1
+                    print("second numberOfCardsAdded is ",self.numberOfCardsAdded)
+                    
+                    if self.numberOfCardsAdded == allUsers.count {
+                        print("second reload ")
+                        
+                        DispatchQueue.main.async {
+                            ProgressHUD.dismiss()
+                            print("call layoutCardStackView")
+                            self.layoutCardStackView()
+
+                        }
+                    }
                 }
             }
         }
@@ -284,6 +301,8 @@ extension CardViewController: UserProfileTableViewControllerDelegate {
 extension CardViewController: EmptyDataViewDelegate {
     
     func didClickReloadButton() {
+        
+        resetNext(userId: FUser.currentId())
         resetLoadCount()
         downloadInitialUsers()
         emptyDataView.reloadButton.isEnabled = false

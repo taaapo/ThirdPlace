@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct NextObject {
-    
-    let id: String
-    let userId: String
-    let nextedUserId: String
-    let date: Date
-    
-    var dictionary: [String : Any] {
-        return [kOBJECTID : id, kUSERID : userId, kNEXTEDUSERID : nextedUserId, kDATE : date]
-    }
-    
-    func saveToFireStore() {
-        
-        FirebaseReference(.Next).document(self.id).setData(self.dictionary)
-    }
-}
+//struct NextObject {
+//    
+//    let id: String
+//    let userId: String
+//    let nextedUserId: String
+//    let date: Date
+//    
+//    var dictionary: [String : Any] {
+//        return [kOBJECTID : id, kUSERID : userId, kNEXTEDUSERID : nextedUserId, kDATE : date]
+//    }
+//    
+//    func saveToFireStore() {
+//        
+//        FirebaseReference(.Next).document(self.id).setData(self.dictionary)
+//    }
+//}

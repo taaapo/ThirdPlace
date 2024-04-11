@@ -281,22 +281,37 @@ class FUser: Equatable {
         }
     }
     
-    func updateCurrentUseraInFireStore(withValues: [String : Any], completion: @escaping (_ error: Error?) -> Void) {
-        
-        if let dictionary = userDefaults.object(forKey: kCURRENTUSER) {
-            
-            let userObject = (dictionary as! NSDictionary).mutableCopy() as! NSMutableDictionary
-            userObject.setValuesForKeys(withValues)
-            
-            FirebaseReference(.User).document(FUser.currentId()).updateData(withValues) { error in
-                
-                completion(error)
-                if error == nil {
-                    FUser(_dictionary: userObject).saveUserLocally()
-                }
-            }
-        }
-    }
+//    下記の関数はいらないかも
+//    func updateCurrentUseraInFireStore(withValues: [String : Any], completion: @escaping (_ error: Error?) -> Void) {
+//        
+//        if let dictionary = userDefaults.object(forKey: kCURRENTUSER) {
+//            
+//            let userObject = (dictionary as! NSDictionary).mutableCopy() as! NSMutableDictionary
+//            userObject.setValuesForKeys(withValues)
+//            
+//            FirebaseReference(.User).document(FUser.currentId()).updateData(withValues) { error in
+//                
+//                completion(error)
+//                if error == nil {
+//                    FUser(_dictionary: userObject).saveUserLocally()
+//                }
+//            }
+//        }
+//    }
+    
+//    //MARK: - Delete User funcs
+//    func deleteUserFromFireStore(withField: String) async {
+//        
+//        do {
+//
+//            try await FirebaseReference(.User).document(FUser.currentId()).updateData(["capital": FieldValue.delete()])
+//            
+//          print("Document successfully updated")
+//        } catch {
+//            
+//          print("Error updating document: \(error)")
+//        }
+//    }
 }
 
 

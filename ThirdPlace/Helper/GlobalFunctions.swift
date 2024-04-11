@@ -37,8 +37,8 @@ func didLikeUserWith(userId: String) -> Bool {
 //MARK: - Do Next
 func saveNextToUser(userId: String) {
     
-    let next = NextObject(id: UUID().uuidString, userId: FUser.currentId(), nextedUserId: userId, date: Date())
-    next.saveToFireStore()
+//    let next = NextObject(id: UUID().uuidString, userId: FUser.currentId(), nextedUserId: userId, date: Date())
+//    next.saveToFireStore()
     
     print(userId, "is userId")
     if let currentUser = FUser.currentUser() {
@@ -58,6 +58,29 @@ func saveNextToUser(userId: String) {
 func didNextUserWith(userId: String) -> Bool {
     
     return FUser.currentUser()?.nextedIdArray?.contains(userId) ?? false
+}
+
+//MARK: - Reset Next
+func resetNext(userId: String) {
+    
+//    let next = NextObject(id: UUID().uuidString, userId: FUser.currentId(), nextedUserId: userId, date: Date())
+//    next.saveToFireStore()
+    
+    if let currentUser = FUser.currentUser() {
+        
+        deleteNextUserWith(userId:currentUser.nextedIdArray!)
+        
+        currentUser.nextedIdArray = []
+        
+        currentUser.updateCurrentUserInFireStore(withValues: [kNEXTEDIDARRAY: currentUser.nextedIdArray!]) { (error) in
+            
+            print("updated current user with error ", error?.localizedDescription)
+        }
+    }
+}
+
+func deleteNextUserWith(userId: [String]) {
+    
 }
 
 //MARK: - Starting chat

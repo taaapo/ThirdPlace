@@ -49,13 +49,15 @@ class FirebaseListener {
         var users: [FUser] = []
         
         if isInitialLoad {
+            //ToDo: 下記のorderを最新のログイン順等にしたい
             query = FirebaseReference(.User).order(by: kREGISTEREDDATE, descending: false).limit(to: limit)
             print("first \(limit) users loading")
             
         } else {
+            
             if lastDocumentSnapshot != nil {
                 
-                //下記のorderを最新のログイン順等にしたい
+                //ToDo: 下記のorderを最新のログイン順等にしたい
                 query = FirebaseReference(.User).order(by: kREGISTEREDDATE, descending: false).limit(to: limit).start(atDocument: lastDocumentSnapshot!)
                 print("next \(limit) user loading")
                 
@@ -67,16 +69,24 @@ class FirebaseListener {
         if query != nil {
             
             query.getDocuments { snapShot, error in
+                
                 guard let snapshot = snapShot else { return }
                 
                 if !snapshot.isEmpty {
+                    print("snapshot.documents is ", snapshot.documents.count)
                     for userData in snapshot.documents {
+                        
                         let userObject = userData.data() as NSDictionary
+                        
+                        print("likedIdArray: ", FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String))
+                        print("nextedIdArray: ", FUser.currentUser()?.nextedIdArray?.contains(userObject[kOBJECTID] as! String))
+                        print("userObject is currentUser: ", FUser.currentId() != userObject[kOBJECTID] as! String)
                         
                         if !(FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
                             && !(FUser.currentUser()?.nextedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
                             && (FUser.currentId() != userObject[kOBJECTID] as! String) {
                             
+                            print("line 84")
                             users.append(FUser(_dictionary: userObject))
                         }
                         
