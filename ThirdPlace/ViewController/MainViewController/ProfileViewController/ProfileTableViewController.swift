@@ -81,7 +81,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     //MARK: - Setup
     private func setupTableView() {
-        setupTableViewBackground()
+        //背景画像を設定したい場合は下記をコメントアウト
+//        setupTableViewBackground()
         setupTableViewSectionFooter()
     }
     

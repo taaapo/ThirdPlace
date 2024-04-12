@@ -96,7 +96,8 @@ class ChatListTableViewController: UITableViewController {
     
     //MARK: - Setup
     private func setupTableView() {
-        setupTableViewBackground()
+        //背景画像を設定したい場合は下記をコメントアウトする
+//        setupTableViewBackground()
         setupTableViewSectionFooter()
     }
     
