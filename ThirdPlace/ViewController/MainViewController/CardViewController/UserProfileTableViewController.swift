@@ -78,7 +78,7 @@ class UserProfileTableViewController: UITableViewController {
     
     //MARK: - Setup
     private func setupTableView() {
-        setupTableViewBackground()
+//        setupTableViewBackground()
         setupTableViewSectionFooter()
     }
     
