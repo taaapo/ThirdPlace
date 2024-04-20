@@ -268,34 +268,90 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         // Get the image from the info dictionary.
         if let editedImage = info[.editedImage] as? UIImage {
             
-            self.avatarImageView.image = editedImage.circleMasked
-            self.avatarImage = editedImage
-            
-            uploadAvatar(self.avatarImage!) { avatarLink in
+            if !isValidImage(editedImage) {
                 
-                let user = FUser.currentUser()!
+                displayErrorMessage()
+                print("DisplayErrorMessage")
+            } else {
                 
-                user.avatarLink = avatarLink ?? ""
-                user.avatar = self.avatarImage!
                 
-                FileStorage.downloadImage(imageUrl: user.avatarLink) { image in
+                print("is valid image")
+                
+                //            let croppedImage = cropImagetoSquare(image: editedImage)
+                
+                self.avatarImageView.image = editedImage.circleMasked
+                self.avatarImage = editedImage
+                
+                uploadAvatar(self.avatarImage!) { avatarLink in
                     
-                    self.avatarImageView.image = image?.circleMasked
+                    let user = FUser.currentUser()!
+                    
+                    user.avatarLink = avatarLink ?? ""
+                    user.avatar = self.avatarImage!
+                    
+                    FileStorage.downloadImage(imageUrl: user.avatarLink) { image in
+                        
+                        self.avatarImageView.image = image?.circleMasked
+                    }
+                    
+                    self.saveUserData(user: user)
+                    self.loadUserData()
                 }
-                
-                self.saveUserData(user: user)
-                self.loadUserData()
             }
+                
+                // Dismiss the UIImagePicker after selection
+                picker.dismiss(animated: true, completion: nil)
+            
         }
-        
-        // Dismiss the UIImagePicker after selection
-        picker.dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.isNavigationBarHidden = false
         self.dismiss(animated: true, completion: nil)
     }
+    
+    //MARK: - Helper for camera/phtolibrary functions
+    func isValidImage(_ image: UIImage) -> Bool {
+        
+        if image.cgImage?.width == image.cgImage?.height {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func displayErrorMessage() {
+        
+        ProgressHUD.symbol("枠が埋まるように写真のサイズを調整してください。", name: "exclamationmark.circle")
+    }
+    
+//    func cropImagetoSquare(image: UIImage) -> UIImage {
+//        
+//        let imageSize = image.size
+//        let width = imageSize.width
+//        let height = imageSize.height
+//        let newSize: CGSize
+//        
+//        if width > height {
+//            let ratio = CGFloat(1)
+//            newSize = CGSize(width: height * ratio, height: height)
+//        } else {
+//            let ratio = CGFloat(1)
+//            newSize = CGSize(width: width, height: width * ratio)
+//        }
+//        
+//        let rect = CGRect(x: CGFloat((width - newSize.width) / 2),
+//                          y: CGFloat((height - newSize.height) / 2),
+//                          width: newSize.width,
+//                          height: newSize.height)
+//        
+//        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+//        image.draw(in: rect)
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        
+//        return newImage ?? UIImage()
+//    }
     
     //MARK: - Alert Actions
     private func showChangeEmail() {
