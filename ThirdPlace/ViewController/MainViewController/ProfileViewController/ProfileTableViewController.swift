@@ -265,19 +265,19 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     //MARK: - UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        //画像の縦=横ではない場合にエラーメッセージを表示する実装だと、実機で試した際に何を選択してもエラーになってしまう。下記のURLを参考にしてみる
+        //https://stackoverflow.com/questions/59930458/how-to-change-frame-size-of-uiimagepicker-when-i-get-photo-from-photolibrary-or
+        //https://github.com/nkopilovskii/ImageCropper
+        //https://qiita.com/tetsufe/items/9ff5fe190ee190afa1bb
+        
         // Get the image from the info dictionary.
         if let editedImage = info[.editedImage] as? UIImage {
             
             if !isValidImage(editedImage) {
                 
                 displayErrorMessage()
-                print("DisplayErrorMessage")
+                
             } else {
-                
-                
-                print("is valid image")
-                
-                //            let croppedImage = cropImagetoSquare(image: editedImage)
                 
                 self.avatarImageView.image = editedImage.circleMasked
                 self.avatarImage = editedImage
@@ -324,34 +324,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         ProgressHUD.symbol("枠が埋まるように写真のサイズを調整してください。", name: "exclamationmark.circle")
     }
-    
-//    func cropImagetoSquare(image: UIImage) -> UIImage {
-//        
-//        let imageSize = image.size
-//        let width = imageSize.width
-//        let height = imageSize.height
-//        let newSize: CGSize
-//        
-//        if width > height {
-//            let ratio = CGFloat(1)
-//            newSize = CGSize(width: height * ratio, height: height)
-//        } else {
-//            let ratio = CGFloat(1)
-//            newSize = CGSize(width: width, height: width * ratio)
-//        }
-//        
-//        let rect = CGRect(x: CGFloat((width - newSize.width) / 2),
-//                          y: CGFloat((height - newSize.height) / 2),
-//                          width: newSize.width,
-//                          height: newSize.height)
-//        
-//        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-//        image.draw(in: rect)
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        
-//        return newImage ?? UIImage()
-//    }
     
     //MARK: - Alert Actions
     private func showChangeEmail() {
