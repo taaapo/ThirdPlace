@@ -8,8 +8,9 @@
 import UIKit
 import Foundation
 import ProgressHUD
+import CropViewController
 
-class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
     
     //MARK: - IBOutlets
     
@@ -182,7 +183,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     private func openPhotoLibrary() {
         
         self.imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        self.imagePicker.allowsEditing = true
+        self.imagePicker.allowsEditing = false
         self.imagePicker.delegate = self
         self.present(self.imagePicker, animated: true, completion: nil)
     }
@@ -271,38 +272,33 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         //https://qiita.com/tetsufe/items/9ff5fe190ee190afa1bb
         
         // Get the image from the info dictionary.
-        if let editedImage = info[.editedImage] as? UIImage {
+        if let originalImage = info[.originalImage] as? UIImage {
             
-            if !isValidImage(editedImage) {
-                
-                displayErrorMessage()
-                
-            } else {
-                
-                self.avatarImageView.image = editedImage.circleMasked
-                self.avatarImage = editedImage
-                
-                uploadAvatar(self.avatarImage!) { avatarLink in
-                    
-                    let user = FUser.currentUser()!
-                    
-                    user.avatarLink = avatarLink ?? ""
-                    user.avatar = self.avatarImage!
-                    
-                    FileStorage.downloadImage(imageUrl: user.avatarLink) { image in
-                        
-                        self.avatarImageView.image = image?.circleMasked
-                    }
-                    
-                    self.saveUserData(user: user)
-                    self.loadUserData()
-                }
+            print("get original image")
+            
+            let cropController = CropViewController(croppingStyle: .default, image: originalImage)
+            cropController.delegate = self
+            cropController.customAspectRatio = CGSize(width: 100, height: 100)
+            
+            //今回は使わないボタン等を非表示にする。
+            cropController.aspectRatioPickerButtonHidden = true
+            cropController.resetAspectRatioEnabled = false
+            cropController.aspectRatioLockEnabled = true
+            cropController.rotateButtonsHidden = true
+            
+            //cropBoxのサイズを固定する。
+            cropController.cropView.cropBoxResizeEnabled = true
+            //cropControllerを表示する。
+            picker.dismiss(animated: true) {
+                print("go to cropController")
+                self.present(cropController, animated: true, completion: nil)
             }
-                
-                // Dismiss the UIImagePicker after selection
-                picker.dismiss(animated: true, completion: nil)
             
         }
+        
+        // Dismiss the UIImagePicker after selection
+//        picker.dismiss(animated: true, completion: nil)
+        
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -310,20 +306,51 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         self.dismiss(animated: true, completion: nil)
     }
     
-    //MARK: - Helper for camera/phtolibrary functions
-    func isValidImage(_ image: UIImage) -> Bool {
+    //CropViewController
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+           updateImageViewWithImage(image, fromCropViewController: cropViewController)
+       }
+           
+    func updateImageViewWithImage(_ image: UIImage, fromCropViewController cropViewController: CropViewController) {
         
-        if image.cgImage?.width == image.cgImage?.height {
-            return true
-        } else {
-            return false
+        print("updating image view with image")
+        
+        self.avatarImageView.image = image.circleMasked
+        self.avatarImage = image
+        
+        uploadAvatar(self.avatarImage!) { avatarLink in
+            
+            let user = FUser.currentUser()!
+            
+            user.avatarLink = avatarLink ?? ""
+            user.avatar = self.avatarImage!
+            
+            FileStorage.downloadImage(imageUrl: user.avatarLink) { image in
+                
+                self.avatarImageView.image = image?.circleMasked
+            }
+            
+            self.saveUserData(user: user)
+            self.loadUserData()
+            
+            cropViewController.dismiss(animated: true, completion: nil)
         }
     }
     
-    func displayErrorMessage() {
-        
-        ProgressHUD.symbol("枠が埋まるように写真のサイズを調整してください。", name: "exclamationmark.circle")
-    }
+    //MARK: - Helper for camera/phtolibrary functions
+//    func isValidImage(_ image: UIImage) -> Bool {
+//        
+//        if image.cgImage?.width == image.cgImage?.height {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
+//    
+//    func displayErrorMessage() {
+//        
+//        ProgressHUD.symbol("枠が埋まるように写真のサイズを調整してください。", name: "exclamationmark.circle")
+//    }
     
     //MARK: - Alert Actions
     private func showChangeEmail() {

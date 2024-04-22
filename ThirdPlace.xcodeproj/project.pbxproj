@@ -82,6 +82,8 @@
 		31CCCD4F2BAB152600754839 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CCCD4E2BAB152600754839 /* GlobalFunctions.swift */; };
 		31CCCD512BAB18C400754839 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CCCD502BAB18C400754839 /* ChatViewController.swift */; };
 		31CCCD542BAB1A4900754839 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 31CCCD532BAB1A4900754839 /* MessageKit */; };
+		31D0A2492BD6AC3800CA2691 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 31D0A2482BD6AC3800CA2691 /* CropViewController */; };
+		31D0A24B2BD6AC3800CA2691 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 31D0A24A2BD6AC3800CA2691 /* TOCropViewController */; };
 		31DD39842B7FA7730093AF4C /* FCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DD39832B7FA7730093AF4C /* FCollectionReference.swift */; };
 		31DD39862B7FA9030093AF4C /* FirebaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DD39852B7FA9030093AF4C /* FirebaseListener.swift */; };
 		31F234F82B86DFC6008943CA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F234F72B86DFC6008943CA /* Extensions.swift */; };
@@ -152,8 +154,10 @@
 				313C2E9D2B74310000909037 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				313C2ECB2B7431CD00909037 /* FirebaseInstallations in Frameworks */,
 				313C2ED12B7431CD00909037 /* FirebasePerformance in Frameworks */,
+				31D0A2492BD6AC3800CA2691 /* CropViewController in Frameworks */,
 				313C2EC32B7431CD00909037 /* FirebaseFunctions in Frameworks */,
 				313C2E9F2B74310000909037 /* FirebaseAnalyticsSwift in Frameworks */,
+				31D0A24B2BD6AC3800CA2691 /* TOCropViewController in Frameworks */,
 				313C2EBF2B7431CD00909037 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				31B365AC2B727E1800D29401 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				313C2EA52B7431CD00909037 /* FirebaseAnalytics in Frameworks */,
@@ -395,6 +399,8 @@
 				31C8B97E2B7A0EEA0071FFFD /* ProgressHUD */,
 				310667432B9CCB9900BF087B /* Shuffle */,
 				31CCCD532BAB1A4900754839 /* MessageKit */,
+				31D0A2482BD6AC3800CA2691 /* CropViewController */,
+				31D0A24A2BD6AC3800CA2691 /* TOCropViewController */,
 			);
 			productName = ThirdPlace;
 			productReference = 31B3658D2B71455700D29401 /* ThirdPlace.app */;
@@ -429,6 +435,7 @@
 				31C8B97D2B7A0EEA0071FFFD /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				310667422B9CCB9900BF087B /* XCRemoteSwiftPackageReference "Shuffle" */,
 				31CCCD522BAB1A4900754839 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				31D0A2472BD6AC3800CA2691 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = 31B3658E2B71455700D29401 /* Products */;
 			projectDirPath = "";
@@ -752,6 +759,14 @@
 				minimumVersion = 4.2.0;
 			};
 		};
+		31D0A2472BD6AC3800CA2691 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -954,6 +969,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 31CCCD522BAB1A4900754839 /* XCRemoteSwiftPackageReference "MessageKit" */;
 			productName = MessageKit;
+		};
+		31D0A2482BD6AC3800CA2691 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31D0A2472BD6AC3800CA2691 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		31D0A24A2BD6AC3800CA2691 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31D0A2472BD6AC3800CA2691 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
