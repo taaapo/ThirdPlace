@@ -161,11 +161,14 @@ class CardViewController: UIViewController {
             for user in allUsers {
                 user.getUserAvatarFromFirestore { (didSet) in
                     
-                    let cardModel = UserCardModel(id: user.objectId, 
+                    let image = user.avatar
+                    let cardModel = UserCardModel(id: user.objectId,
                                                   name: user.username,
                                                   personality: user.personality,
                                                   worry: user.worry,
-                                                  image: user.avatar)
+                                                  image: user.avatar
+//                                                  image: self.setAvatar(avatarLink: user.avatarLink)
+                    )
                     
                     self.secondCardModels.append(cardModel)
                     self.numberOfCardsAdded += 1
@@ -219,6 +222,18 @@ class CardViewController: UIViewController {
         navigationController?.pushViewController(chatView, animated: true)
         
     }
+    
+    private func setAvatar(avatarLink: String) -> UIImage?{
+        
+        var setAvatarImage = UIImage(named: kPLACEHOLDERIMAGE)
+        
+        FileStorage.downloadImage(imageUrl: avatarLink) { avatarImage in
+            if avatarImage != nil {
+                setAvatarImage =  avatarImage?.circleMasked
+            }
+        }
+        return setAvatarImage
+    }
 }
 
 extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
@@ -232,7 +247,8 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
         for direction in card.swipeDirections {
             card.setOverlay(UserCardOverlay(direction: direction), forDirection: direction)
         }
-        
+        print(showReserve)
+        let image = showReserve ? secondCardModels[index] : initialCardModels[index]
         card.configure(withModel: showReserve ? secondCardModels[index] : initialCardModels[index])
         
         return card

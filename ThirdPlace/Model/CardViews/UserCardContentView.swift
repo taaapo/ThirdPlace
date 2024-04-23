@@ -28,10 +28,7 @@ class UserCardContentView: UIView {
     
     init(withImage image: UIImage?) {
         super.init(frame: .zero)
-        
         imageView.image = image
-//        imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = 10
         initializer()
     }
     

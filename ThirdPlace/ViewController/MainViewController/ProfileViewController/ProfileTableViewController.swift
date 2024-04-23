@@ -274,8 +274,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         // Get the image from the info dictionary.
         if let originalImage = info[.originalImage] as? UIImage {
             
-            print("get original image")
-            
             let cropController = CropViewController(croppingStyle: .default, image: originalImage)
             cropController.delegate = self
             cropController.customAspectRatio = CGSize(width: 100, height: 100)
@@ -290,7 +288,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             cropController.cropView.cropBoxResizeEnabled = true
             //cropControllerを表示する。
             picker.dismiss(animated: true) {
-                print("go to cropController")
                 self.present(cropController, animated: true, completion: nil)
             }
             

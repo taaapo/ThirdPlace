@@ -73,20 +73,15 @@ class FirebaseListener {
                 guard let snapshot = snapShot else { return }
                 
                 if !snapshot.isEmpty {
-                    print("snapshot.documents is ", snapshot.documents.count)
+                    
                     for userData in snapshot.documents {
                         
                         let userObject = userData.data() as NSDictionary
-                        
-                        print("likedIdArray: ", FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String))
-                        print("nextedIdArray: ", FUser.currentUser()?.nextedIdArray?.contains(userObject[kOBJECTID] as! String))
-                        print("userObject is currentUser: ", FUser.currentId() != userObject[kOBJECTID] as! String)
                         
                         if !(FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
                             && !(FUser.currentUser()?.nextedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
                             && (FUser.currentId() != userObject[kOBJECTID] as! String) {
                             
-                            print("line 84")
                             users.append(FUser(_dictionary: userObject))
                         }
                         

@@ -116,7 +116,7 @@ class FUser: Equatable {
     func getUserAvatarFromFirestore(completion: @escaping (_ didSet: Bool) -> Void) {
         
         FileStorage.downloadImage(imageUrl: self.avatarLink) { avatarImage in
-            
+            let image = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
             self.avatar = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
             
             completion(true)

@@ -11,6 +11,7 @@ import Shuffle
 class UserCard: SwipeCard {
         
     func configure(withModel model: UserCardModel) {
+        let image = model.image
         content = UserCardContentView(withImage: model.image)
         footer = UserCardFooterView(withTitle: model.name, subTitle: "性格　\(model.personality)\n悩み　\(model.worry)")
     }

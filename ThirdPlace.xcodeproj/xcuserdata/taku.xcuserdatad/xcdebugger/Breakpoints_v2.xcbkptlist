@@ -20,5 +20,483 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "96C06092-F4AD-46EC-A757-6AEB1D900DDD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/Model/CardViews/UserCard.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "configure(withModel:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "96C06092-F4AD-46EC-A757-6AEB1D900DDD - 33f080e52dbf5814"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.UserCard.configure(withModel: ThirdPlace.UserCardModel) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/Model/CardViews/UserCard.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "1138">
+               </Location>
+               <Location
+                  uuid = "96C06092-F4AD-46EC-A757-6AEB1D900DDD - 33f080e52dbf5814"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.UserCard.configure(withModel: ThirdPlace.UserCardModel) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/Model/CardViews/UserCard.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "866">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1FD288F1-A1CC-4920-BA93-AF29997C8289"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "cardStack(_:cardForIndexAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1FD288F1-A1CC-4920-BA93-AF29997C8289 - 7f3f91b255091c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.CardViewController.didSwipeAllCards(Shuffle.SwipeCardStack) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "1FD288F1-A1CC-4920-BA93-AF29997C8289 - 37bdcf0790150def"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.CardViewController.cardStack(_: Shuffle.SwipeCardStack, cardForIndexAt: Swift.Int) -&gt; Shuffle.SwipeCard"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "2632">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "78A549AD-8443-4B2E-A109-8A738C42E904"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "downloadMoreUsersInBackground()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "78A549AD-8443-4B2E-A109-8A738C42E904 - 124e4d69b39d52da"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 (Swift.Array&lt;ThirdPlace.FUser&gt;, Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;) -&gt; () in ThirdPlace.CardViewController.downloadMoreUsersInBackground() -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "723">
+               </Location>
+               <Location
+                  uuid = "78A549AD-8443-4B2E-A109-8A738C42E904 - 124e4d69b39d52f9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 (Swift.Array&lt;ThirdPlace.FUser&gt;, Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;) -&gt; () in ThirdPlace.CardViewController.downloadMoreUsersInBackground() -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "704">
+               </Location>
+               <Location
+                  uuid = "78A549AD-8443-4B2E-A109-8A738C42E904 - 124e4d69b39d52da"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 (Swift.Array&lt;ThirdPlace.FUser&gt;, Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;) -&gt; () in ThirdPlace.CardViewController.downloadMoreUsersInBackground() -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "493">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F45C654-829E-441F-9C4B-BDE58EAC86B6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/Model/FUser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "getUserAvatarFromFirestore(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3F45C654-829E-441F-9C4B-BDE58EAC86B6 - c64a3de8f344571e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in ThirdPlace.FUser.getUserAvatarFromFirestore(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/Model/FUser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "219">
+               </Location>
+               <Location
+                  uuid = "3F45C654-829E-441F-9C4B-BDE58EAC86B6 - c64a3de8f344571e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in ThirdPlace.FUser.getUserAvatarFromFirestore(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/Model/FUser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "3F45C654-829E-441F-9C4B-BDE58EAC86B6 - c64a3de8f344571e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in ThirdPlace.FUser.getUserAvatarFromFirestore(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/Model/FUser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "369">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84F663CB-113D-4E86-87E0-28E4EBD34178"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "downloadImage(imageUrl:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "84F663CB-113D-4E86-87E0-28E4EBD34178 - f388c62865209a5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "1616">
+               </Location>
+               <Location
+                  uuid = "84F663CB-113D-4E86-87E0-28E4EBD34178 - f388c62865209a7e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "1969">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D02D2A63-7111-48E7-98D6-BC5D1E638CE8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "downloadImage(imageUrl:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D02D2A63-7111-48E7-98D6-BC5D1E638CE8 - f388c62865209924"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "2345">
+               </Location>
+               <Location
+                  uuid = "D02D2A63-7111-48E7-98D6-BC5D1E638CE8 - f388c6286520991b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "1736">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF4278DE-4EEB-4AD5-B50A-3DFA0A84F2B3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "downloadImage(imageUrl:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BF4278DE-4EEB-4AD5-B50A-3DFA0A84F2B3 - f388c62865209a5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "1616">
+               </Location>
+               <Location
+                  uuid = "BF4278DE-4EEB-4AD5-B50A-3DFA0A84F2B3 - f388c62865209a3c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "1721">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2401ACB9-6AF6-4358-A568-9FEB3871221F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "fileInDocumentsDirectory(filename:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89957852-B568-4E43-8AAE-2AAAAB151665"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "fileInDocumentsDirectory(filename:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "89957852-B568-4E43-8AAE-2AAAAB151665 - 5e8eee1d39324b71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.fileInDocumentsDirectory(filename: Swift.String) -&gt; Swift.String"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "474">
+               </Location>
+               <Location
+                  uuid = "89957852-B568-4E43-8AAE-2AAAAB151665 - 5e8eee1d39324b71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.fileInDocumentsDirectory(filename: Swift.String) -&gt; Swift.String"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "452">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1817BF8B-A08C-4AA5-9EED-187870C1488C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "getDocumentsURL()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "1817BF8B-A08C-4AA5-9EED-187870C1488C - 2941b1d4661cd91d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.getDocumentsURL() -&gt; Foundation.URL"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "297">
+               </Location>
+               <Location
+                  uuid = "1817BF8B-A08C-4AA5-9EED-187870C1488C - 2941b1d4661cd91d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.getDocumentsURL() -&gt; Foundation.URL"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "396">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

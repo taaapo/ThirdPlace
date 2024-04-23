@@ -57,11 +57,12 @@ class FileStorage {
     class func downloadImage(imageUrl: String, completion: @escaping (_ image: UIImage?) -> Void) {
         
         let imageFileName = ((imageUrl.components(separatedBy: "_").last!).components(separatedBy: "?").first)!.components(separatedBy: ".").first!
+        print("imageFileName is ", imageFileName)
         
         if fileExistsAt(path: imageFileName) {
             
             if let contentsOfFile = UIImage(contentsOfFile: fileInDocumentsDirectory(filename: imageFileName)) {
-                
+                print("could generate img")
                 completion(contentsOfFile)
                 
             } else {
@@ -73,8 +74,6 @@ class FileStorage {
             
             if imageUrl != "" {
                 
-                print("imageUrl exists")
-                
                 let documentURL = URL(string: imageUrl)
                 
                 let downloadQueue = DispatchQueue(label: "downloadQueue")
@@ -84,7 +83,7 @@ class FileStorage {
                     let data = NSData(contentsOf: documentURL!)
                     
                     if data != nil {
-                        
+                        print("data is not nil")
                         let imageToReturn = UIImage(data: data! as Data)
                         
                         FileStorage.saveImageLocally(imageData: data!, fileName: imageFileName)
@@ -97,6 +96,7 @@ class FileStorage {
                     }
                 }
             } else {
+                print("nil")
                 completion(nil)
             }
         }
@@ -114,14 +114,14 @@ class FileStorage {
 func getDocumentsURL() -> URL {
     
     let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
-    
+    print(documentURL)
     return documentURL!
 }
 
 func fileInDocumentsDirectory(filename: String) -> String {
     
     let fileURL = getDocumentsURL().appendingPathComponent(filename)
-    
+    print("fileURL.path is ", fileURL.path)
     return fileURL.path
 }
 
