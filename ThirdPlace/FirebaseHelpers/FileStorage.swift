@@ -57,7 +57,6 @@ class FileStorage {
     class func downloadImage(imageUrl: String, completion: @escaping (_ image: UIImage?) -> Void) {
         
         let imageFileName = ((imageUrl.components(separatedBy: "_").last!).components(separatedBy: "?").first)!.components(separatedBy: ".").first!
-        print("imageFileName is ", imageFileName)
         
         if fileExistsAt(path: imageFileName) {
             
@@ -121,7 +120,6 @@ func getDocumentsURL() -> URL {
 func fileInDocumentsDirectory(filename: String) -> String {
     
     let fileURL = getDocumentsURL().appendingPathComponent(filename)
-    print("fileURL.path is ", fileURL.path)
     return fileURL.path
 }
 

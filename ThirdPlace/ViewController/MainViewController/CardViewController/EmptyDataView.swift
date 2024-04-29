@@ -40,6 +40,7 @@ class EmptyDataView: UIView {
         Bundle.main.loadNibNamed("EmptyDataView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
+        print("empty")
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     

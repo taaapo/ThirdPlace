@@ -11,7 +11,7 @@ import Firebase
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var authListener: AuthStateDidChangeListenerHandle?
+//    var authListener: AuthStateDidChangeListenerHandle?
     var isLogin: Bool = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -23,9 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
                 
-                self.authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+            FirebaseListener.shared.authListener = Auth.auth().addStateDidChangeListener({ auth, user in
                     
-                    Auth.auth().removeStateDidChangeListener(self.authListener!)
+                    Auth.auth().removeStateDidChangeListener(FirebaseListener.shared.authListener!)
                     
                     if user != nil && userDefaults.object(forKey: kCURRENTUSER) != nil {
                         
@@ -83,9 +83,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func checkIsLogin() {
         
-        authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+        FirebaseListener.shared.authListener = Auth.auth().addStateDidChangeListener({ auth, user in
             
-            Auth.auth().removeStateDidChangeListener(self.authListener!)
+            Auth.auth().removeStateDidChangeListener(FirebaseListener.shared.authListener!)
             
             if user != nil && userDefaults.object(forKey: kCURRENTUSER) != nil {
                 print("isLogin is true")
@@ -99,9 +99,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func goToInitialViewController() {
         
-        authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+        FirebaseListener.shared.authListener = Auth.auth().addStateDidChangeListener({ auth, user in
             
-            Auth.auth().removeStateDidChangeListener(self.authListener!)
+            Auth.auth().removeStateDidChangeListener(FirebaseListener.shared.authListener!)
             
             if user != nil && userDefaults.object(forKey: kCURRENTUSER) != nil {
                 print("MainView")

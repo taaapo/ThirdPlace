@@ -9,6 +9,7 @@ import Foundation
 
 public let userDefaults = UserDefaults.standard
 public let kFILEREFERENCE = "gs://thirdplace-d8324.appspot.com"
+public let kSERVERKEY = "AAAAsrZjdUM:APA91bGN-D6fi698DFfdREg48J-27QGrNo28eVINKwcfe0PuHsvkoHf4hVbOXDDZ7fCTQ696aE-xTI5VL5ssF7hxXTSRjTWW8OVNAz7Q6WEC04lpoPHSd2ra12b0rkC9nRp0xxtt42wX"
 
 //FUser
 public let kOBJECTID = "objectId"
@@ -18,6 +19,7 @@ public let kPERSONALITY = "personality"
 public let kWORRY = "worry"
 public let kAVATARLINK = "avatarLink"
 public let kABOUTME = "aboutMe"
+public let kIMAGEFLAG = "imageFlag"
 public let kAVATAR = "avatar"
 public let kREGISTEREDDATE = "registeredDate"
 public let kPUSHID = "pushId"

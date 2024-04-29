@@ -15,8 +15,14 @@ class FirebaseListener {
     
     private init() {}
     
+    //MARK: - Var
+    public var authListener: AuthStateDidChangeListenerHandle?
+    
      //MARK: - FUser
-    func downloadCurrentUserFromFirebase(userId: String, email: String) {
+    func downloadCurrentUserFromFirebase
+//    (userId: String, email: String, completion: @escaping () -> Void)
+    (userId: String, email: String)
+    {
         
         FirebaseReference(.User).document(userId).getDocument { snapshot, error in
             
@@ -25,12 +31,13 @@ class FirebaseListener {
             if snapshot.exists {
                 
                 let user = FUser(_dictionary: snapshot.data() as! NSDictionary)
-                print("created user")
-                user.saveUserLocally()
                 
+                user.saveUserLocally()
+                print("end saveUserLocally in downloadCurrentUserFromFirebase")
                 user.getUserAvatarFromFirestore { (didSet) in
                     
                 }
+                print("end getUserAvatarFromFirestore in downloadCurrentUserFromFirebase")
                 
             } else {
                 //first login
@@ -58,7 +65,7 @@ class FirebaseListener {
             if lastDocumentSnapshot != nil {
                 
                 //ToDo: 下記のorderを最新のログイン順等にしたい
-                query = FirebaseReference(.User).order(by: kREGISTEREDDATE, descending: false).limit(to: limit).start(atDocument: lastDocumentSnapshot!)
+                query = FirebaseReference(.User).order(by: kREGISTEREDDATE, descending: false).limit(to: limit).start(afterDocument: lastDocumentSnapshot!)
                 print("next \(limit) user loading")
                 
             } else {

@@ -463,7 +463,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自己紹介" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcm-FW-rnt">
-                                                    <rect key="frame" x="70" y="14" width="64" height="21"/>
+                                                    <rect key="frame" x="64" y="14" width="64" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="fF0-Mg-aDT"/>
                                                         <constraint firstAttribute="width" constant="64" id="waZ-vf-9KC"/>
@@ -473,10 +473,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VgE-zA-Ujv">
-                                                    <rect key="frame" x="155" y="11" width="200" height="143"/>
+                                                    <rect key="frame" x="149" y="11" width="206" height="143"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="4aT-D4-moG"/>
+                                                        <constraint firstAttribute="width" constant="206" id="4aT-D4-moG"/>
                                                         <constraint firstAttribute="height" constant="143" id="AhR-Hb-oxM"/>
                                                     </constraints>
                                                     <color key="textColor" red="0.065067924769999994" green="0.065214564320000001" blue="0.067452263949999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -801,13 +801,13 @@
                         <viewLayoutGuide key="safeArea" id="QyB-yv-1jz"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
-                            <constraint firstItem="806-1V-M8A" firstAttribute="centerX" secondItem="M6Y-RR-P9B" secondAttribute="centerX" id="6Sf-1Y-Xdi"/>
                             <constraint firstItem="eHg-AE-kY3" firstAttribute="top" secondItem="of9-7S-3SV" secondAttribute="top" id="9cS-v6-JpK"/>
                             <constraint firstItem="Mwl-Ek-eRj" firstAttribute="centerX" secondItem="gRy-rI-5rS" secondAttribute="centerX" id="AFJ-ne-uuh"/>
                             <constraint firstItem="gRy-rI-5rS" firstAttribute="top" secondItem="Mwl-Ek-eRj" secondAttribute="bottom" id="B5E-qD-yhB"/>
                             <constraint firstItem="Dac-qF-GoV" firstAttribute="centerY" secondItem="806-1V-M8A" secondAttribute="centerY" id="FEl-4L-Wik"/>
                             <constraint firstItem="806-1V-M8A" firstAttribute="leading" secondItem="Dac-qF-GoV" secondAttribute="trailing" constant="21" id="FpY-Tb-74c"/>
                             <constraint firstItem="XXp-67-nrr" firstAttribute="centerX" secondItem="806-1V-M8A" secondAttribute="centerX" id="Iho-5Q-tiY"/>
+                            <constraint firstItem="806-1V-M8A" firstAttribute="trailing" secondItem="M6Y-RR-P9B" secondAttribute="trailing" id="PhD-to-EDk"/>
                             <constraint firstItem="BDj-tM-Gys" firstAttribute="centerY" secondItem="3Yc-fn-gxS" secondAttribute="centerY" id="VGM-fZ-0uu"/>
                             <constraint firstItem="eHg-AE-kY3" firstAttribute="trailing" secondItem="QyB-yv-1jz" secondAttribute="trailing" id="W3W-dV-vFB"/>
                             <constraint firstItem="M6Y-RR-P9B" firstAttribute="leading" secondItem="zHT-HZ-V98" secondAttribute="trailing" constant="21" id="XPu-fp-EEf"/>
@@ -897,7 +897,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="lmo-Wg-OjL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -933,7 +933,7 @@
                                                         <constraint firstAttribute="width" constant="32" id="b8e-14-a80"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -969,7 +969,7 @@
                                                         <constraint firstAttribute="width" constant="32" id="iXk-OL-mMk"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -990,13 +990,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自己紹介" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuJ-QX-kdf">
-                                                    <rect key="frame" x="61" y="11" width="64" height="21"/>
+                                                    <rect key="frame" x="64" y="14" width="64" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="74w-T7-COy"/>
                                                         <constraint firstAttribute="height" constant="21" id="U8v-KS-xYJ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b4f-Kh-CXW">
@@ -1013,9 +1013,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="b4f-Kh-CXW" firstAttribute="top" secondItem="iKc-0u-L7C" secondAttribute="topMargin" id="43p-km-691"/>
-                                                <constraint firstItem="b4f-Kh-CXW" firstAttribute="leading" secondItem="fuJ-QX-kdf" secondAttribute="trailing" constant="24" id="YST-gz-oED"/>
+                                                <constraint firstItem="b4f-Kh-CXW" firstAttribute="leading" secondItem="fuJ-QX-kdf" secondAttribute="trailing" constant="21" id="YST-gz-oED"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="b4f-Kh-CXW" secondAttribute="trailing" constant="18" id="bnX-HM-5z2"/>
-                                                <constraint firstItem="fuJ-QX-kdf" firstAttribute="top" secondItem="b4f-Kh-CXW" secondAttribute="top" id="fpe-Vn-hjI"/>
+                                                <constraint firstItem="fuJ-QX-kdf" firstAttribute="top" secondItem="b4f-Kh-CXW" secondAttribute="top" constant="3" id="fpe-Vn-hjI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>

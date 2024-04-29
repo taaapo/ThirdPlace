@@ -59,15 +59,15 @@ class EditViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.dismiss(animated: true)
     }
     
-    @objc func editUserData() {
-        
-        let user = FUser.currentUser()!
-        
-        user.username = usernameTextField.text!
-        user.personality = personalityTextField.text!
-        user.worry = worryTextField.text!
-        user.aboutMe = aboutMeTextView.text ?? ""
-    }
+//    @objc func editUserData() {
+//        
+//        let user = FUser.currentUser()!
+//        
+//        user.username = usernameTextField.text!
+//        user.personality = personalityTextField.text!
+//        user.worry = worryTextField.text!
+//        user.aboutMe = aboutMeTextView.text ?? ""
+//    }
     
     //MARK: - Save User Data
     private func saveUserData() {

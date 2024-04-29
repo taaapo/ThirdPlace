@@ -20,6 +20,7 @@ class FUser: Equatable {
     var username: String
     var personality: String
     var worry: String
+    var imageFlag: Int
     var avatar: UIImage?
     var avatarLink: String
     var aboutMe: String
@@ -39,6 +40,7 @@ class FUser: Equatable {
                                  self.username,
                                  self.personality,
                                  self.worry,
+                                 self.imageFlag,
                                  self.avatarLink,
                                  self.likedIdArray ?? [],
                                  self.nextedIdArray ?? [],
@@ -52,6 +54,7 @@ class FUser: Equatable {
                                  kUSERNAME as NSCopying,
                                  kPERSONALITY as NSCopying,
                                  kWORRY as NSCopying,
+                                 kIMAGEFLAG as NSCopying,
                                  kAVATARLINK as NSCopying,
                                  kLIKEDIDARRAY as NSCopying,
                                  kNEXTEDIDARRAY as NSCopying,
@@ -69,6 +72,7 @@ class FUser: Equatable {
         username = _username
         personality = _personality
         worry = _worry
+        imageFlag = 0
         avatarLink = _avatarLink
         aboutMe = ""
         premium = 0
@@ -83,6 +87,7 @@ class FUser: Equatable {
         username = _dictionary[kUSERNAME] as? String ?? ""
         personality = _dictionary[kPERSONALITY] as? String ?? ""
         worry = _dictionary[kWORRY] as? String ?? ""
+        imageFlag = _dictionary[kIMAGEFLAG] as? Int ?? 0
         avatarLink = _dictionary[kAVATARLINK] as? String ?? ""
         aboutMe = _dictionary[kABOUTME] as? String ?? ""
         premium = _dictionary[kPREMIUM] as? Int ?? 0
@@ -98,17 +103,17 @@ class FUser: Equatable {
     }
     
     class func currentUser() -> FUser? {
-        
-        if Auth.auth().currentUser != nil {
             
-            if let userDictionary = userDefaults.object(forKey: kCURRENTUSER) {
+            if Auth.auth().currentUser != nil {
                 
-                return FUser(_dictionary: userDictionary as! NSDictionary)
+                if let userDictionary = userDefaults.object(forKey: kCURRENTUSER) {
+                    
+                    return FUser(_dictionary: userDictionary as! NSDictionary)
+                }
+                print(userDefaults.object(forKey: kCURRENTUSER))
             }
-            print(userDefaults.object(forKey: kCURRENTUSER))
-        }
         
-        print("CcurrentUser is nil")
+        print("currentUser is nil")
         
         return nil
     }
@@ -117,14 +122,16 @@ class FUser: Equatable {
         
         FileStorage.downloadImage(imageUrl: self.avatarLink) { avatarImage in
             let image = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
+            print("image is ", image)
             self.avatar = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
+            print("avatar is ", self.avatar)
             
             completion(true)
         }
     }
     
     //MARK: - Login
-    class func loginUserWith(email: String, password: String, completion: @escaping (_ error: Error?, _ isEmailVerified: Bool) -> Void) {
+    class func loginUserWith(email: String, password: String, completion: @escaping (_ error: Error?, _ isEmailVerified: Bool, _ userDefaultsObjecForCurrentUser: Any?) -> Void) {
         
         Auth.auth().signIn(withEmail: email, password: password) { authDataResult, error in
             
@@ -132,15 +139,19 @@ class FUser: Equatable {
                 
                 if authDataResult!.user.isEmailVerified {
                     
-                    FirebaseListener.shared.downloadCurrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
-                    
-                    completion(error, true)
+                    DispatchQueue.main.async{
+                        FirebaseListener.shared.downloadCurrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
+                    }
+                        
+                        print("just before completion in loginUserWith")
+                        completion(error, true, userDefaults.object(forKey: kCURRENTUSER))
+                        
                 } else {
                     print("Email not verified")
-                    completion(error, false)
+                    completion(error, false, nil)
                 }
             }else {
-                completion(error, false)
+                completion(error, false, nil)
             }
         }
     }
@@ -249,7 +260,8 @@ class FUser: Equatable {
     func saveUserLocally() {
         
         userDefaults.setValue(self.userDictionary as! [String : Any], forKey: kCURRENTUSER)
-        userDefaults.synchronize()
+//        userDefaults.synchronize()
+        print("save user locally")
     }
     
     func saveUserToFireStore() {

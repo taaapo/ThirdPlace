@@ -14,8 +14,8 @@
             filePath = "ThirdPlace/Model/FUser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "FUser"
             landmarkType = "3">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "cardStack(_:cardForIndexAt:)"
             landmarkType = "7">
             <Locations>
@@ -126,8 +126,8 @@
             filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "downloadMoreUsersInBackground()"
             landmarkType = "7">
             <Locations>
@@ -189,8 +189,8 @@
             filePath = "ThirdPlace/Model/FUser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "getUserAvatarFromFirestore(completion:)"
             landmarkType = "7">
             <Locations>
@@ -252,8 +252,8 @@
             filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "downloadImage(imageUrl:completion:)"
             landmarkType = "7">
             <Locations>
@@ -294,14 +294,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D02D2A63-7111-48E7-98D6-BC5D1E638CE8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "downloadImage(imageUrl:completion:)"
             landmarkType = "7">
             <Locations>
@@ -341,54 +341,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BF4278DE-4EEB-4AD5-B50A-3DFA0A84F2B3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "downloadImage(imageUrl:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BF4278DE-4EEB-4AD5-B50A-3DFA0A84F2B3 - f388c62865209a5d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "ThirdPlace"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "1616">
-               </Location>
-               <Location
-                  uuid = "BF4278DE-4EEB-4AD5-B50A-3DFA0A84F2B3 - f388c62865209a3c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static ThirdPlace.FileStorage.downloadImage(imageUrl: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "ThirdPlace"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/FirebaseHelpers/FileStorage.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "1721">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "2401ACB9-6AF6-4358-A568-9FEB3871221F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -396,8 +348,8 @@
             filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "fileInDocumentsDirectory(filename:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -412,8 +364,8 @@
             filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "fileInDocumentsDirectory(filename:)"
             landmarkType = "9">
             <Locations>
@@ -460,8 +412,8 @@
             filePath = "ThirdPlace/FirebaseHelpers/FileStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "getDocumentsURL()"
             landmarkType = "9">
             <Locations>
@@ -496,6 +448,182 @@
                   offsetFromSymbolStart = "396">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "975D448B-7EE7-424F-A692-350454EA3CE8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/ProfileViewController/ProfileTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "uploadAvatar(_:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9C09AC55-A296-4AB4-B2C4-5C9ED22B9873"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/ProfileViewController/ProfileTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "updateImageFlag()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1BD05903-44BC-409E-99AC-BDB8EEBA2D7D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "downloadInitialUsers()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1BD05903-44BC-409E-99AC-BDB8EEBA2D7D - b9caa684de09a215"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;ThirdPlace.FUser&gt;, Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;) -&gt; () in ThirdPlace.CardViewController.downloadInitialUsers() -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "980">
+               </Location>
+               <Location
+                  uuid = "1BD05903-44BC-409E-99AC-BDB8EEBA2D7D - b9caa684de09a215"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;ThirdPlace.FUser&gt;, Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;) -&gt; () in ThirdPlace.CardViewController.downloadInitialUsers() -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "1209">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "49BE63A8-1CEA-408C-9B2A-AE5C012F5C68"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "downloadMoreUsersInBackground()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4B38F97F-5EC8-4AF4-BBEA-2DCA62A59A8E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/EmptyDataView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "commonInit()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DFAEAEFC-4755-4251-B924-FE0A5A08EF00"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "downloadInitialUsers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "85B75DA3-1CBC-4E99-987E-06966ED5F344"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/ViewController/MainViewController/CardViewController/CardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "downloadInitialUsers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7D141C2E-CB83-401F-97BA-07B4E6B0F6C0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/Model/FUser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "loginUserWith(email:password:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "727A9A58-8535-4D70-89D6-6018A8103F17"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "messaging(_:didReceiveRegistrationToken:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

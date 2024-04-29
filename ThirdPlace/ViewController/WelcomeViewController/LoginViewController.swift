@@ -7,6 +7,7 @@
 
 import UIKit
 import ProgressHUD
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -15,10 +16,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
-
+    //MARK: - Var
+//    var authListener: AuthStateDidChangeListenerHandle?
+    
+    //MARK: - LifyCycle
     override func viewDidLoad() {
-        
-        
         
         super.viewDidLoad()
         
@@ -33,16 +35,34 @@ class LoginViewController: UIViewController {
             
             ProgressHUD.animate()
             
-            FUser.loginUserWith(email: emailTextField.text!, password: passwordTextField.text!) { error, isEmailVerified in
+            FUser.loginUserWith(email: emailTextField.text!, password: passwordTextField.text!) { error, isEmailVerified, userDefaultsObjecForCurrentUser in
                 
                 if error != nil {
-                    
+                    print("error is not nil in loginButtonPressed")
                     print(error!.localizedDescription)
                     ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
-                } else if isEmailVerified {
                     
-                    ProgressHUD.dismiss()
-                    self.goToApp()
+                } else if isEmailVerified {
+                    print("error is nil && isEmailVerified in loginButtonPressed")
+                    FirebaseListener.shared.authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+                        
+                        print("user is", user)
+                        print("userDefaults.object(forKey: kCURRENTUSER) is ", userDefaultsObjecForCurrentUser)
+                        
+                        if user != nil && userDefaultsObjecForCurrentUser != nil {
+                            
+                            ProgressHUD.dismiss()
+                            self.goToApp()
+                            
+                        } else {
+                            
+                            ProgressHUD.symbol("再度お試しください。", name: "exclamationmark.circle")
+                            
+                        }
+                        
+                        Auth.auth().removeStateDidChangeListener(FirebaseListener.shared.authListener!)
+                    })
+                   
                 } else {
                     
                     ProgressHUD.symbol("メールを認証してください。", name: "exclamationmark.circle")
@@ -104,6 +124,7 @@ class LoginViewController: UIViewController {
         let mainView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
         
         mainView.modalPresentationStyle = .fullScreen
+        print("Just before move to mainView, Fuser.currentUser is ", FUser.currentUser())
         self.present(mainView, animated: true, completion: nil)
     }
     

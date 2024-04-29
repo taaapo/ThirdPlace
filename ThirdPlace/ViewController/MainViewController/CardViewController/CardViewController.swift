@@ -96,7 +96,16 @@ class CardViewController: UIViewController {
         view.addSubview(cardStack)
         
         //下記でCardStackの場所を設定
-        cardStack.frame = CGRect(x: (view.frame.width - 350)/2, y: 150, width: 350, height: 500)
+        cardStack.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                         left: view.safeAreaLayoutGuide.leftAnchor,
+                         bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                         right: view.safeAreaLayoutGuide.rightAnchor,
+                         paddingLeft: 30,
+                         paddingBottom: 130,
+                         paddingRight: 30,
+                         height: 500)
+//        cardStack.frame = CGRect(x: (view.frame.width - 350)/2, y: 150, width: 350, height: 500)
+        print("view cardStacks")
     }
     
     //MARK: - Downloads Users
@@ -149,7 +158,7 @@ class CardViewController: UIViewController {
     
     private func downloadMoreUsersInBackground() {
         
-        self.showReserve = true
+//        self.showReserve = true
         
         FirebaseListener.shared.downloadUsersFromFirebase(isInitialLoad: isInitialLoad, limit: 1000, lastDocumentSnapshot: lastDocumentSnapshot) { allUsers, snapshot in
             
@@ -167,7 +176,6 @@ class CardViewController: UIViewController {
                                                   personality: user.personality,
                                                   worry: user.worry,
                                                   image: user.avatar
-//                                                  image: self.setAvatar(avatarLink: user.avatarLink)
                     )
                     
                     self.secondCardModels.append(cardModel)
@@ -247,7 +255,7 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
         for direction in card.swipeDirections {
             card.setOverlay(UserCardOverlay(direction: direction), forDirection: direction)
         }
-        print(showReserve)
+        print("show reserve is ",showReserve)
         let image = showReserve ? secondCardModels[index] : initialCardModels[index]
         card.configure(withModel: showReserve ? secondCardModels[index] : initialCardModels[index])
         
@@ -321,7 +329,7 @@ extension CardViewController: EmptyDataViewDelegate {
         resetNext(userId: FUser.currentId())
         resetLoadCount()
         downloadInitialUsers()
-        emptyDataView.reloadButton.isEnabled = false
+//        emptyDataView.reloadButton.isEnabled = false
     }
     
 }

@@ -37,13 +37,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     //MARK: - ViewLifrCycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if FUser.currentUser() != nil {
-            loadUserData()
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        if FUser.currentUser() != nil {
+//            loadUserData()
+//        }
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +54,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         if FUser.currentUser() != nil {
             loadUserData()
-        } 
+        }  else {
+            print("current User is nil")
+        }
     }
     
     //MARK: - TableViewDelegate
@@ -169,8 +170,11 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
             
             self.imagePicker.sourceType = UIImagePickerController.SourceType.camera
-            self.imagePicker.allowsEditing = true
+            self.imagePicker.allowsEditing = false
             self.imagePicker.delegate = self
+//            imagePicker.cameraOverlayView = getOverlayViewOnCamera()
+            imagePicker.navigationBar.topItem?.title = "写真"
+            imagePicker.navigationBar.backItem?.title = "キャンセル"
             self.present(self.imagePicker, animated: true, completion: nil)
             } else {
                 
@@ -188,12 +192,23 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         self.present(self.imagePicker, animated: true, completion: nil)
     }
     
+    private func updateImageFlag() {
+        
+        let user = FUser.currentUser()!
+        
+        user.imageFlag = user.imageFlag + 1
+        
+        saveUserData(user: user)
+    }
+    
     //MARK: - FileStorae
     private func uploadAvatar(_ image: UIImage, completion: @escaping (_ avatarLink: String?) -> Void) {
         
         ProgressHUD.animate()
         
-        let fileDirectory = "Avatars/_" + FUser.currentId() + ".jpg"
+        updateImageFlag()
+        
+        let fileDirectory = "Avatars/_" + FUser.currentId() + "-" + String(FUser.currentUser()!.imageFlag) + ".jpg"
         
         FileStorage.uploadImage(image, directory: fileDirectory) { avatarLink in
             
@@ -204,12 +219,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     }
     
     //MARK: - Save User Data
-    private func saveUserData() {
-        
-        let user = FUser.currentUser()!
-        
-        saveUserData(user: user)
-    }
+//    private func saveUserData() {
+//        
+//        let user = FUser.currentUser()!
+//        
+//        saveUserData(user: user)
+//    }
     
     private func saveUserData(user: FUser) {
         
@@ -251,13 +266,13 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             self.showChangePassword()
         }))
         
-        alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (alert) in
+        alertController.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { (alert) in
             
             self.showLogOutUser()
         }))
 
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         
         
         self.present(alertController, animated: true, completion: nil)
@@ -275,6 +290,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         if let originalImage = info[.originalImage] as? UIImage {
             
             let cropController = CropViewController(croppingStyle: .default, image: originalImage)
+            cropController.doneButtonTitle = "完了"
+            cropController.cancelButtonTitle = "キャンセル"
             cropController.delegate = self
             cropController.customAspectRatio = CGSize(width: 100, height: 100)
             
