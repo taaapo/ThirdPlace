@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
+	<true/>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>ja</string>

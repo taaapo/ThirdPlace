@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
+        
+        //初回起動時、プッシュ通知の許可ダイアログを表示させる
         requestPushNotificationPermission()
+        
         setupConfigurations()
+        
+        application.registerForRemoteNotifications()
+        application.applicationIconBadgeNumber = 0
         
         return true
     }
@@ -70,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in }
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
     }
     
     private func updateUserPushId(newPushId: String) {
@@ -78,8 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let user = FUser.currentUser() {
             user.pushId = newPushId
             user.saveUserLocally()
-            user.updateCurrentUserInFireStore(withValues: [kPUSHID : newPushId]) { error in
-                print("updated user push id with error", error?.localizedDescription)
+            user.updateCurrentUserInFireStore(withValues: [kPUSHID : newPushId]) { (error) in
+                print("updated user push id with error ", error?.localizedDescription)
             }
         }
     }
@@ -90,13 +97,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
 }
 
-extension AppDelegate: MessagingDelegate {
+extension AppDelegate : MessagingDelegate {
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        
         print("user push id is ", fcmToken)
-        let x = fcmToken
-        updateUserPushId(newPushId: fcmToken!)
+        updateUserPushId(newPushId: fcmToken ?? "")
     }
+    
 }
-
