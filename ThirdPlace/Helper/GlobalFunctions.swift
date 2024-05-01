@@ -8,6 +8,22 @@
 import Foundation
 import Firebase
 
+//MARK: - Push Notification in OutgoingMessage
+func removeCurrentUserIdFrom(userIds: [String]) -> [String] {
+    
+    var allIds = userIds
+
+    for id in allIds {
+        
+        if id == FUser.currentId() {
+            allIds.remove(at: allIds.firstIndex(of: id)!)
+        }
+    }
+
+    return allIds
+}
+
+
 //MARK: - Like
 func saveLikeToUser(userId: String) {
     

@@ -49,16 +49,16 @@ class LoginViewController: UIViewController {
                         print("user is", user)
                         print("userDefaults.object(forKey: kCURRENTUSER) is ", userDefaultsObjecForCurrentUser)
                         
-                        if user != nil && userDefaultsObjecForCurrentUser != nil {
+//                        if user != nil && userDefaultsObjecForCurrentUser != nil {
                             
                             ProgressHUD.dismiss()
-                            self.goToApp()
+                        self.goToApp(user: user)
                             
-                        } else {
-                            
-                            ProgressHUD.symbol("再度お試しください。", name: "exclamationmark.circle")
-                            
-                        }
+//                        } else {
+//                            
+//                            ProgressHUD.symbol("再度お試しください。", name: "exclamationmark.circle")
+//                            
+//                        }
                         
                         Auth.auth().removeStateDidChangeListener(FirebaseListener.shared.authListener!)
                     })
@@ -119,7 +119,7 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - Navigation
-    private func goToApp() {
+    private func goToApp(user: Any) {
         
         let mainView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
         

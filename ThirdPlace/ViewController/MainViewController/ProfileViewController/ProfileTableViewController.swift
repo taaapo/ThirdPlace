@@ -55,7 +55,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         if FUser.currentUser() != nil {
             loadUserData()
         }  else {
+            
             print("current User is nil")
+//            loadUserDataFromFirebase()
         }
     }
     
@@ -135,6 +137,21 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     //MARK: - LoadUserData
     private func loadUserData() {
+        
+        let currentUser = FUser.currentUser()!
+        
+        usernameTextField.text = currentUser.username
+        personalityTextField.text = currentUser.personality
+        worryTextField.text = currentUser.worry
+        aboutMeTextView.text = currentUser.aboutMe
+        print(currentUser.aboutMe)
+        
+        print("loadUserData")
+        
+        avatarImageView.image = currentUser.avatar?.circleMasked
+    }
+    
+    private func loadUserDataFromFirebase() {
         
         let currentUser = FUser.currentUser()!
         

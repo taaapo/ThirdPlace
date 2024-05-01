@@ -18,11 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //リリースの際は下記をコメントアウト
+        //デバッグトークンの検索方法は以下URL参照
+        //https://github.com/firebase/firebase-ios-sdk/issues/9547#issuecomment-1097424478
+        let providerFactory = AppCheckDebugProviderFactory()
+        AppCheck.setAppCheckProviderFactory(providerFactory)
+        
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         
-        //初回起動時、プッシュ通知の許可ダイアログを表示させる
+        //初回起動時、プッシュ通知の許可ダイアログを表示させる。表示タイミングに関してはもう少し考慮が必要
+        //https://qiita.com/rockname/items/4a092e39e571ddd19c5b
         requestPushNotificationPermission()
         
         setupConfigurations()

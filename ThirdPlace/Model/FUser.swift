@@ -90,6 +90,7 @@ class FUser: Equatable {
         imageFlag = _dictionary[kIMAGEFLAG] as? Int ?? 0
         avatarLink = _dictionary[kAVATARLINK] as? String ?? ""
         aboutMe = _dictionary[kABOUTME] as? String ?? ""
+        pushId = _dictionary[kPUSHID] as? String ?? ""
         premium = _dictionary[kPREMIUM] as? Int ?? 0
         likedIdArray = _dictionary[kLIKEDIDARRAY] as? [String]
         nextedIdArray = _dictionary[kNEXTEDIDARRAY] as? [String]
@@ -113,7 +114,7 @@ class FUser: Equatable {
                 print(userDefaults.object(forKey: kCURRENTUSER))
             }
         
-        print("currentUser is nil")
+        print("current user is nil in currentUser function")
         
         return nil
     }
@@ -138,7 +139,7 @@ class FUser: Equatable {
             if error == nil {
                 
                 if authDataResult!.user.isEmailVerified {
-                    
+                    print("authDataResult!.user.uid is ", authDataResult!.user.uid)
                     DispatchQueue.main.async{
                         FirebaseListener.shared.downloadCurrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
                     }

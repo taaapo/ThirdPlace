@@ -19,10 +19,7 @@ class FirebaseListener {
     public var authListener: AuthStateDidChangeListenerHandle?
     
      //MARK: - FUser
-    func downloadCurrentUserFromFirebase
-//    (userId: String, email: String, completion: @escaping () -> Void)
-    (userId: String, email: String)
-    {
+    func downloadCurrentUserFromFirebase(userId: String, email: String) {
         
         FirebaseReference(.User).document(userId).getDocument { snapshot, error in
             
@@ -111,28 +108,30 @@ class FirebaseListener {
     
     
     func downloadUsersFromFirebase(withIds: [String], completion: @escaping (_ users: [FUser]) -> Void) {
-        
+        print("downloadUsersFromFirbase")
         var usersArray: [FUser] = []
         var counter = 0
-        
+        print("withIds are ", withIds)
         for userId in withIds {
-            
             
             FirebaseReference(.User).document(userId).getDocument { (snapshot, error) in
                 
                 guard let snapshot = snapshot else { return }
                 
                 if snapshot.exists {
-                    
+                    print("snapshot.exists")
+                    let F = FUser(_dictionary: snapshot.data()! as NSDictionary)
                     usersArray.append(FUser(_dictionary: snapshot.data()! as NSDictionary))
                     counter += 1
+                    print("usersArray is ", usersArray)
                     
                     if counter == withIds.count {
-                        
+                        print("counter == withIds.count")
                         completion(usersArray)
                     }
                     
                 } else {
+                    print("snapshot is not exist")
                     completion(usersArray)
                 }
             }

@@ -40,8 +40,9 @@ class OutgoingMessage {
             outgoingMessage.sendMessage(chatRoomId: chatId, messageId: message.id, memberIds: memberIds)
         }
         
-//        PushNotificationService.shared.sendPushNotificationTo(userIds: removeCurrentUserIdFrom(userIds: memberIds), body: message.message)
-//        
+        print("Just before pushNotificationService")
+        PushNotificationService.shared.sendPushNotificationTo(userIds: removeCurrentUserIdFrom(userIds: memberIds), body: message.message)
+        
         FirebaseListener.shared.updateChats(chatRoomId: chatId, lastMessage: message.message)
     }
     
