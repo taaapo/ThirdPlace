@@ -37,12 +37,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     //MARK: - ViewLifrCycle
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if FUser.currentUser() != nil {
-//            loadUserData()
-//        }
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if FUser.currentUser() != nil {
+            loadUserData()
+        }  else {
+            
+            print("current User is nil")
+//            loadUserDataFromFirebase()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

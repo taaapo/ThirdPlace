@@ -140,12 +140,11 @@ class FUser: Equatable {
                 
                 if authDataResult!.user.isEmailVerified {
                     print("authDataResult!.user.uid is ", authDataResult!.user.uid)
-                    DispatchQueue.main.async{
-                        FirebaseListener.shared.downloadCurrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
-                    }
-                        
-                        print("just before completion in loginUserWith")
-                        completion(error, true, userDefaults.object(forKey: kCURRENTUSER))
+                    
+                    FirebaseListener.shared.downloadCurrentUserFromFirebase(userId: authDataResult!.user.uid, email: email)
+                    
+                    print("just before completion in loginUserWith")
+                    completion(error, true, userDefaults.object(forKey: kCURRENTUSER))
                         
                 } else {
                     print("Email not verified")

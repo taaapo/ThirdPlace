@@ -44,24 +44,20 @@ class LoginViewController: UIViewController {
                     
                 } else if isEmailVerified {
                     print("error is nil && isEmailVerified in loginButtonPressed")
-                    FirebaseListener.shared.authListener = Auth.auth().addStateDidChangeListener({ auth, user in
+                    
+                    print("userDefaults.object(forKey: kCURRENTUSER) is ", userDefaultsObjecForCurrentUser)
                         
-                        print("user is", user)
-                        print("userDefaults.object(forKey: kCURRENTUSER) is ", userDefaultsObjecForCurrentUser)
-                        
-//                        if user != nil && userDefaultsObjecForCurrentUser != nil {
+                        if userDefaultsObjecForCurrentUser != nil {
                             
                             ProgressHUD.dismiss()
-                        self.goToApp(user: user)
                             
-//                        } else {
-//                            
-//                            ProgressHUD.symbol("再度お試しください。", name: "exclamationmark.circle")
-//                            
-//                        }
-                        
-                        Auth.auth().removeStateDidChangeListener(FirebaseListener.shared.authListener!)
-                    })
+                            self.goToApp()
+                            
+                        } else {
+
+                            ProgressHUD.symbol("データの読み込みに時間がかかっております。\n再度お試しください。", name: "exclamationmark.circle")
+
+                        }
                    
                 } else {
                     
@@ -119,7 +115,7 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - Navigation
-    private func goToApp(user: Any) {
+    private func goToApp() {
         
         let mainView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
         
