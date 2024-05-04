@@ -91,7 +91,9 @@ class UserProfileTableViewController: UITableViewController {
         usernameTextField.isUserInteractionEnabled = false
         personalityTextField.isUserInteractionEnabled = false
         worryTextField.isUserInteractionEnabled = false
-        aboutMeTextView.isUserInteractionEnabled = false
+        aboutMeTextView.isEditable = false
+        aboutMeTextView.isSelectable = false
+        aboutMeTextView.isScrollEnabled = true
     }
     
     private func updateUIForMatchedUser() {

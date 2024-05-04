@@ -138,7 +138,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         usernameTextField.isUserInteractionEnabled = false
         personalityTextField.isUserInteractionEnabled = false
         worryTextField.isUserInteractionEnabled = false
-        aboutMeTextView.isUserInteractionEnabled = false
+        aboutMeTextView.isEditable = false
+        aboutMeTextView.isSelectable = false
+        aboutMeTextView.isScrollEnabled = true
     }
     
     //MARK: - LoadUserData
@@ -303,21 +305,26 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         let alertController = UIAlertController(title: "アカウント情報の編集", message: nil, preferredStyle: .actionSheet)
         
-        alertController.addAction(UIAlertAction(title: "メールアドレスの変更", style: .default, handler: { (alert) in
-            
-            self.showChangeEmail()
-        }))
+        //メアドの変更で障害が出てしまうためコメントアウト。メアド変更したい場合はお問い合わせしてもらうフローにする。
+//        alertController.addAction(UIAlertAction(title: "メールアドレスの変更", style: .default, handler: { (alert) in
+//            
+//            self.showChangeEmail()
+//        }))
         
         alertController.addAction(UIAlertAction(title: "パスワードの変更", style: .default, handler: { (alert) in
             
             self.showChangePassword()
         }))
         
+        alertController.addAction(UIAlertAction(title: "お問い合わせ", style: .default, handler: { (alert) in
+            
+            self.goToContactForm()
+        }))
+        
         alertController.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { (alert) in
             
             self.showLogOutUser()
         }))
-
         
         alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         
@@ -427,6 +434,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
         alertView.addTextField { textField in
             self.alertTextFieldCurrentPassword = textField
+            self.alertTextFieldCurrentPassword.isSecureTextEntry = true
             self.alertTextFieldCurrentPassword.placeholder = "現在のパスワード"
         }
         
@@ -479,10 +487,14 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     private func updateEmail() {
         
-        if self.alertTextFieldCurrentPassword.text != "" && self.alertTextFieldNewEmail.text != "" {
+        if self.alertTextFieldCurrentPassword.text != "" 
+            && self.alertTextFieldNewEmail.text != "" 
+            && self.alertTextFieldCurrentPassword.text != "" {
+            
             changeEmail()
+            
         } else {
-            ProgressHUD.symbol("現在のパスワードと新しいメールアドレスを入力してください。", name: "checkmark")
+            ProgressHUD.symbol("すべての項目を入力してください。", name: "exclamationmark.circle")
         }
     }
     
@@ -512,7 +524,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             
             if error == nil {
             
-            ProgressHUD.symbol("メールアドレスに認証用メールを送信しました", name: "checkmark")
+            ProgressHUD.symbol("メールアドレスにパスワード変更用メールを送信しました", name: "checkmark")
             } else {
                 
                 ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
@@ -540,6 +552,15 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                 
                 ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
             }
+        }
+    }
+    
+    //MARK: - Contact
+    private func goToContactForm() {
+        
+        let url = NSURL(string: "https://forms.gle/P1yCcmNC1ksTX5sW7")
+        if UIApplication.shared.canOpenURL(url! as URL) {
+            UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
         }
     }
 }

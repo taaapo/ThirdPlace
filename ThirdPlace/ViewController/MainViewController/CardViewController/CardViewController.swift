@@ -108,10 +108,11 @@ class CardViewController: UIViewController {
                          bottom: view.safeAreaLayoutGuide.bottomAnchor,
                          right: view.safeAreaLayoutGuide.rightAnchor,
                          paddingLeft: 30,
-                         paddingBottom: 100,
+                         paddingBottom: (view.frame.height - 600) / 2,
                          paddingRight: 30,
                          height: 500
         )
+//        cardStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 //        cardStack.frame = CGRect(x: (view.frame.width - 350)/2, y: 150, width: 350, height: 500)
         print("view cardStacks")
     }

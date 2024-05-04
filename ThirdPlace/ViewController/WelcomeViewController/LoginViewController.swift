@@ -61,7 +61,7 @@ class LoginViewController: UIViewController {
                    
                 } else {
                     
-                    ProgressHUD.symbol("メールを認証してください。", name: "exclamationmark.circle")
+                    ProgressHUD.symbol("認証用メールを送信したため、ご確認ください。", name: "exclamationmark.circle")
                 }
             }
         } else {
