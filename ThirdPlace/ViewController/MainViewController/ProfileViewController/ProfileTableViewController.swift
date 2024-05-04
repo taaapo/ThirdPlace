@@ -154,7 +154,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //        avatarImageView.image = currentUser.avatar?.circleMasked
         
         FileStorage.downloadImage(imageUrl: currentUser.avatarLink) { image in
-            
             self.avatarImageView.image = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
         }
         

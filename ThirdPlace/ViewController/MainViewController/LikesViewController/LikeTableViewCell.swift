@@ -20,7 +20,6 @@ class LikeTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
@@ -33,7 +32,7 @@ class LikeTableViewCell: UITableViewCell {
     private func setAvatar(avatarLink: String) {
         
         FileStorage.downloadImage(imageUrl: avatarLink) { (avatarImage) in
-            self.avatarImageView.image = avatarImage?.circleMasked
+            self.avatarImageView.image = avatarImage?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
         }
     }
 }

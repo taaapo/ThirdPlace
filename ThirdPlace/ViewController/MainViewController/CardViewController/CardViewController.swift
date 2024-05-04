@@ -232,7 +232,7 @@ class CardViewController: UIViewController {
         
         let chatRoomId = startChat(user1: FUser.currentUser()!, user2: user)
         
-        let chatView = ChatViewController(chatId: chatRoomId, recipientId: user.objectId, recipientName: user.username, senderImage: (FUser.currentUser()?.avatar)!, recipientImage: (user.avatar)!)
+        let chatView = ChatViewController(chatId: chatRoomId, recipientId: user.objectId, recipientName: user.username, senderImageLink: (FUser.currentUser()?.avatarLink)!, recipientImageLink: (user.avatarLink))
         
         chatView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(chatView, animated: true)

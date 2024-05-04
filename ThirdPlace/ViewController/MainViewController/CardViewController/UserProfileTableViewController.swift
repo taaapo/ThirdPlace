@@ -117,7 +117,11 @@ class UserProfileTableViewController: UITableViewController {
         worryTextField.text = userObject!.worry
         aboutMeTextView.text = userObject!.aboutMe
         
-        avatarImageView.image = userObject!.avatar?.circleMasked ?? UIImage(named: kPLACEHOLDERIMAGE)?.circleMasked
+//        avatarImageView.image = userObject!.avatar?.circleMasked ?? UIImage(named: kPLACEHOLDERIMAGE)?.circleMasked
+        
+        FileStorage.downloadImage(imageUrl: userObject!.avatarLink) { image in
+            self.avatarImageView.image = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+        }
     }
     
     //MARK: - Helper
@@ -141,7 +145,7 @@ class UserProfileTableViewController: UITableViewController {
         
         let chatRoomId = startChat(user1: FUser.currentUser()!, user2: userObject!)
         
-        let chatView = ChatViewController(chatId: chatRoomId, recipientId: userObject!.objectId, recipientName: userObject!.username, senderImage: (FUser.currentUser()?.avatar)!, recipientImage: (userObject?.avatar)!)
+        let chatView = ChatViewController(chatId: chatRoomId, recipientId: userObject!.objectId, recipientName: userObject!.username, senderImageLink: (FUser.currentUser()?.avatarLink)!, recipientImageLink: (userObject?.avatarLink)!)
         
         chatView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(chatView, animated: true)

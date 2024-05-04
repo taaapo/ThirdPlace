@@ -69,7 +69,6 @@ class LikesViewController: UIViewController {
         profileView.isLikedUser = true
         self.navigationController?.pushViewController(profileView, animated: true)
     }
-
 }
 
 
@@ -86,8 +85,6 @@ extension LikesViewController: UITableViewDataSource {
         cell.setupCell(user: allUsers[indexPath.row])
         return cell
     }
-    
-    
 }
 
 

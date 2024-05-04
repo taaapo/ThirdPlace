@@ -39,9 +39,7 @@ class ChatListTableViewController: UITableViewController {
         
         restartChat(chatRoomId: chat.chatRoomId, memberIds: chat.memberIds)
         
-        
-        
-        let chatView = ChatViewController(chatId: chat.chatRoomId, recipientId: chat.receiverId, recipientName: chat.receiverName, senderImage: (FUser.currentUser()?.avatar)!, recipientImage: setAvatar(avatarLink: chat.avatarLink)!)
+        let chatView = ChatViewController(chatId: chat.chatRoomId, recipientId: chat.receiverId, recipientName: chat.receiverName, senderImageLink: (FUser.currentUser()?.avatarLink)!, recipientImageLink: chat.avatarLink)
         
         chatView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(chatView, animated: true)

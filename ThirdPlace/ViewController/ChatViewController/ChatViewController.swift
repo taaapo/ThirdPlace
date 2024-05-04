@@ -18,8 +18,8 @@ class ChatViewController: MessagesViewController {
     private var recipientId = ""
     private var recipientName = ""
     
-    var senderImage = UIImage(named: "プロフィール画像_ライオン")
-    var recipientImage = UIImage(named: "プロフィール画像_ライオン")
+    var senderImage = UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+    var recipientImage = UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
     
     let refreshController = UIRefreshControl()
     
@@ -43,15 +43,23 @@ class ChatViewController: MessagesViewController {
     var updateChatListener: ListenerRegistration?
 
     //MARK: - Inits
-    init(chatId: String, recipientId: String, recipientName: String, senderImage: UIImage, recipientImage: UIImage) {
+    init(chatId: String, recipientId: String, recipientName: String, senderImageLink: String, recipientImageLink: String) {
         
         super.init(nibName: nil, bundle: nil)
         
         self.chatId = chatId
         self.recipientId = recipientId
         self.recipientName = recipientName
-        self.senderImage = senderImage
-        self.recipientImage = recipientImage
+        
+        FileStorage.downloadImage(imageUrl: senderImageLink) { image in
+            self.senderImage = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+        }
+        FileStorage.downloadImage(imageUrl: recipientImageLink) { image in
+            self.recipientImage = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+        }
+        
+//        self.senderImage = senderImage
+//        self.recipientImage = recipientImage
     }
     
     required init?(coder: NSCoder) {
@@ -331,7 +339,7 @@ class ChatViewController: MessagesViewController {
         }
         
         for i in (minMessageNumber ... maxMessageNumber).reversed() {
-            print("i is, ", i)
+            
             let messageDictionary = loadedMessageDictionaries[i]
             insertOldMessage(messageDictionary)
             displayingMessagesCount += 1
@@ -544,9 +552,31 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapImage(in cell: MessageCollectionViewCell) {
         
-        print(" tap on image message")
+        //ChatViewで画像をタップしたら相手のプロフィールを見れる仕様を作りたいが、できない
+        
+//        //下記URL参照
+//        //https://stackoverflow.com/questions/68969912/open-image-in-messagekit-when-user-tap
+//        guard let indexPath = messagesCollectionView.indexPath(for: cell),
+//              let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView) else {
+//            return
+//        }
+//        if case MessageKind.photo(let media) = message.kind, let imageURL = media.url {
+//            /// Here is the required url
+//            print("Here is the required url")
+//        }
+//        print("Image tapped")
+//        
+//        FirebaseListener.shared.downloadUsersFromFirebase(withIds: [recipientId]) { (allUsers) in
+//
+//            for user in allUsers {
+//                let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "UserProfileTableView") as! UserProfileTableViewController
+//                
+//                profileView.userObject = user
+//                profileView.isLikedUser = true
+//                self.navigationController?.pushViewController(profileView, animated: true)
+//            }
+//        }
     }
-    
 }
 
 
@@ -581,23 +611,22 @@ extension ChatViewController: MessagesDisplayDelegate {
         let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(tail, .curved)
     }
-    
 }
-
 
 extension ChatViewController: MessagesLayoutDelegate {
     
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         
-        if indexPath.section % 3 == 0 {
-            
-            if (indexPath.section == 0) && loadedMessageDictionaries.count > displayingMessagesCount {
-                
-                return 40
-            }
-            
-            return 18
-        }
+        //メッセージ3個ごとに間隔が広くなる使用を使いたい場合は下記を加える
+//        if indexPath.section % 3 == 0 {
+//            
+//            if (indexPath.section == 0) && loadedMessageDictionaries.count > displayingMessagesCount {
+//                
+//                return 40
+//            }
+//            
+//            return 18
+//        }
         
         return 0
     }
