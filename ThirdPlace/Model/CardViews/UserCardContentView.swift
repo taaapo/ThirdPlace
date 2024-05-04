@@ -44,9 +44,12 @@ class UserCardContentView: UIView {
         backgroundView.addSubview(imageView)
         //下記でbackgroundViewに対するimageViewの位置を設定
         imageView.anchor(left: backgroundView.leftAnchor, bottom: backgroundView.bottomAnchor, right: backgroundView.rightAnchor, paddingLeft: 30, paddingBottom: 145, paddingRight: 30, height: 270)
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
         
+        //imageIvewの角を丸くしたいけど、丸くなってくれない
+        imageView.backgroundColor = UIColor().primaryWhite()
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
     }
 }
 

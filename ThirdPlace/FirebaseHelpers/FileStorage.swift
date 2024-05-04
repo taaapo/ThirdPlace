@@ -113,7 +113,7 @@ class FileStorage {
 func getDocumentsURL() -> URL {
     
     let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
-    print(documentURL)
+    print("documentURL is ", documentURL, " in getDocumentsURL")
     return documentURL!
 }
 

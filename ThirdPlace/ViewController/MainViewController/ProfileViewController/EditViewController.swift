@@ -8,7 +8,7 @@
 import UIKit
 import ProgressHUD
 
-class EditViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class EditViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
     //MARK: - IBOutlets
     @IBOutlet weak var usernameTextField: UITextField!
@@ -34,6 +34,8 @@ class EditViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         setupAboutMeTextView()
         setupPersonalitiesPickerView()
         setupWorriesPickerView()
+        
+        usernameTextField.delegate = self
         
         if FUser.currentUser() != nil {
             loadUserData()
@@ -189,7 +191,7 @@ class EditViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         personalities.append("陰の立役者マネージャータイプ")
         //personalities.append("世話焼きな保護者タイプ")
         personalities.append("1人が好きなオオカミタイプ")
-        personalities.append("みんなの癒しペットタイプ")
+//        personalities.append("みんなの癒しペットタイプ")
     }
     
     private func appendworriesList() {
@@ -221,5 +223,18 @@ class EditViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         
         return usernameTextField.text != "" && personalityTextField.text != "" && worryTextField.text != ""
     }
+}
+
+extension EditViewController: UITextFieldDelegate {
     
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        guard let text = usernameTextField.text else { return }
+        
+        let maxLength = 10
+        
+        if text.count > maxLength {
+            usernameTextField.text = String(text.prefix(maxLength))
+        }
+    }
 }

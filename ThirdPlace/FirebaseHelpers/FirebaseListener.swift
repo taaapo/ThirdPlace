@@ -29,12 +29,13 @@ class FirebaseListener {
                 
                 let user = FUser(_dictionary: snapshot.data() as! NSDictionary)
                 
-                user.saveUserLocally()
-                print("end saveUserLocally in downloadCurrentUserFromFirebase")
                 user.getUserAvatarFromFirestore { (didSet) in
                     
                 }
                 print("end getUserAvatarFromFirestore in downloadCurrentUserFromFirebase")
+                
+                user.saveUserLocally()
+                print("end saveUserLocally in downloadCurrentUserFromFirebase")
                 
             } else {
                 //first login

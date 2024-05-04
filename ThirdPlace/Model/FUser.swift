@@ -78,6 +78,8 @@ class FUser: Equatable {
         premium = 0
         likedIdArray = []
         nextedIdArray = []
+        
+        print("end of init(_objectId:")
     }
     
     init (_dictionary: NSDictionary) {
@@ -96,6 +98,9 @@ class FUser: Equatable {
         nextedIdArray = _dictionary[kNEXTEDIDARRAY] as? [String]
         
         avatar = UIImage(contentsOfFile: fileInDocumentsDirectory(filename: self.objectId)) ?? UIImage(named: kPLACEHOLDERIMAGE)
+    
+        print("end of init (_dictionary:")
+        
     }
     
     //MARK: - Returning current user
@@ -111,10 +116,9 @@ class FUser: Equatable {
                     
                     return FUser(_dictionary: userDictionary as! NSDictionary)
                 }
-                print(userDefaults.object(forKey: kCURRENTUSER))
             }
         
-        print("current user is nil in currentUser function")
+        print("current user is nil in currentUser())")
         
         return nil
     }
@@ -122,8 +126,9 @@ class FUser: Equatable {
     func getUserAvatarFromFirestore(completion: @escaping (_ didSet: Bool) -> Void) {
         
         FileStorage.downloadImage(imageUrl: self.avatarLink) { avatarImage in
-            let image = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
-            print("image is ", image)
+            
+//            let image = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
+//            print("image is ", image)
             self.avatar = avatarImage ?? UIImage(named: kPLACEHOLDERIMAGE)
             print("avatar is ", self.avatar)
             
@@ -260,7 +265,7 @@ class FUser: Equatable {
     func saveUserLocally() {
         
         userDefaults.setValue(self.userDictionary as! [String : Any], forKey: kCURRENTUSER)
-//        userDefaults.synchronize()
+        userDefaults.synchronize()
         print("save user locally")
     }
     
@@ -414,12 +419,12 @@ func createUsers() {
     appendPersonalitiesList()
     appendWorriesList()
     
-    let names = ["めるる", "アッシュ", "ゾロ", "リボン", "竜巻"]
+//    let names = ["めるる", "アッシュ", "ゾロ", "リボン", "竜巻"]
     
     var imageIndex = 1
     var userIndex = 1
     
-    for i in 0..<5 {
+    for i in 0..<200 {
         
         let id = UUID().uuidString
         
@@ -427,16 +432,21 @@ func createUsers() {
         
         FileStorage.uploadImage(UIImage(named: "user\(imageIndex)")!, directory: fileDirectory) { avatarLink in
             
-            let user = FUser(_objectId: id, _email: "user\(userIndex)@mail.com", _username: names[i], _personality: personalities[userIndex], _worry: worries[userIndex], _avatarLink: avatarLink ?? "")
+            let user = FUser(_objectId: id, _email: "user\(userIndex)@mail.com", _username: "ユーザー（" + String(i) + "）", _personality: personalities[userIndex], _worry: worries[userIndex], _avatarLink: avatarLink ?? "")
             
-            userIndex += 1
             user.saveUserToFireStore()
+            
         }
         
         imageIndex += 1
+        userIndex += 1
         
         if imageIndex == 6 {
             imageIndex = 1
+        }
+        
+        if userIndex == 7 {
+            userIndex = 1
         }
     }
 }

@@ -27,7 +27,7 @@ class CardViewController: UIViewController {
     
     var numberOfCardsAdded = 0
     //下記のIntは自由に変更可能
-    var initialLoadNumber = 2
+    var initialLoadNumber = 20
 
     //MARK: - View LifeCycle
     override func viewDidLoad() {
@@ -88,7 +88,12 @@ class CardViewController: UIViewController {
     //MARK: - Layout cards
     private func layoutCardStackView() {
         
-        hideEmptyDataView()
+        let cardCount = showReserve ? secondCardModels.count : initialCardModels.count
+        
+        if cardCount != 0 {
+            
+            hideEmptyDataView()
+        }
         
         cardStack.delegate = self
         cardStack.dataSource = self
@@ -96,14 +101,17 @@ class CardViewController: UIViewController {
         view.addSubview(cardStack)
         
         //下記でCardStackの場所を設定
-        cardStack.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+        cardStack.anchor(
+            //topを設定するとsafeAreaLayoutGuide.topAnchorまでtopが伸びてしまう
+//            top: view.safeAreaLayoutGuide.topAnchor,
                          left: view.safeAreaLayoutGuide.leftAnchor,
                          bottom: view.safeAreaLayoutGuide.bottomAnchor,
                          right: view.safeAreaLayoutGuide.rightAnchor,
                          paddingLeft: 30,
-                         paddingBottom: 130,
+                         paddingBottom: 100,
                          paddingRight: 30,
-                         height: 500)
+                         height: 500
+        )
 //        cardStack.frame = CGRect(x: (view.frame.width - 350)/2, y: 150, width: 350, height: 500)
         print("view cardStacks")
     }

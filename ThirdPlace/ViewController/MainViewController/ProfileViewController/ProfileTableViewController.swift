@@ -40,11 +40,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if FUser.currentUser() != nil {
+            
             loadUserData()
+            
         }  else {
             
             print("current User is nil")
-//            loadUserDataFromFirebase()
         }
     }
 
@@ -57,11 +58,12 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         notAllowedEditing()
         
         if FUser.currentUser() != nil {
+            
             loadUserData()
+            
         }  else {
             
             print("current User is nil")
-//            loadUserDataFromFirebase()
         }
     }
     
@@ -148,26 +150,15 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         personalityTextField.text = currentUser.personality
         worryTextField.text = currentUser.worry
         aboutMeTextView.text = currentUser.aboutMe
-        print(currentUser.aboutMe)
+        
+//        avatarImageView.image = currentUser.avatar?.circleMasked
+        
+        FileStorage.downloadImage(imageUrl: currentUser.avatarLink) { image in
+            
+            self.avatarImageView.image = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+        }
         
         print("loadUserData")
-        
-        avatarImageView.image = currentUser.avatar?.circleMasked
-    }
-    
-    private func loadUserDataFromFirebase() {
-        
-        let currentUser = FUser.currentUser()!
-        
-        usernameTextField.text = currentUser.username
-        personalityTextField.text = currentUser.personality
-        worryTextField.text = currentUser.worry
-        aboutMeTextView.text = currentUser.aboutMe
-        print(currentUser.aboutMe)
-        
-        print("loadUserData")
-        
-        avatarImageView.image = currentUser.avatar?.circleMasked
     }
     
     //MARK: - Helper
@@ -197,6 +188,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             imagePicker.navigationBar.topItem?.title = "写真"
             imagePicker.navigationBar.backItem?.title = "キャンセル"
             self.present(self.imagePicker, animated: true, completion: nil)
+            
             } else {
                 
                 let alert  = UIAlertController(title: "警告", message: "このデバイスにはカメラがありません", preferredStyle: .alert)
@@ -211,6 +203,36 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         self.imagePicker.allowsEditing = false
         self.imagePicker.delegate = self
         self.present(self.imagePicker, animated: true, completion: nil)
+    }
+    
+    private func selectImageRandomly() {
+        
+        print("updating image view with image")
+        
+        let stringOfRandomInt = String(Int.random(in: 0..<27))
+        let image = UIImage(named: "RandomImage_" + stringOfRandomInt)!
+        
+        self.avatarImageView.image = image.circleMasked
+        self.avatarImage = image
+        
+        uploadAvatar(self.avatarImage!) { avatarLink in
+            
+            let user = FUser.currentUser()!
+            
+            user.avatarLink = avatarLink ?? ""
+            user.avatar = self.avatarImage!
+            
+            FileStorage.downloadImage(imageUrl: user.avatarLink) { image in
+                
+                self.avatarImageView.image = image?.circleMasked
+                
+            }
+            
+            self.saveUserData(user: user)
+            self.loadUserData()
+            
+        }
+        
     }
     
     private func updateImageFlag() {
@@ -266,6 +288,11 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         alertController.addAction(UIAlertAction(title: "ライブラリから選択する", style: .default, handler: { alert in
             
             self.openPhotoLibrary()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "おまかせ", style: .default, handler: { alert in
+            
+            self.selectImageRandomly()
         }))
         
         alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler:nil))
@@ -363,6 +390,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             FileStorage.downloadImage(imageUrl: user.avatarLink) { image in
                 
                 self.avatarImageView.image = image?.circleMasked
+                
             }
             
             self.saveUserData(user: user)
@@ -370,6 +398,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
             
             cropViewController.dismiss(animated: true, completion: nil)
         }
+//        cropViewController.dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Helper for camera/phtolibrary functions

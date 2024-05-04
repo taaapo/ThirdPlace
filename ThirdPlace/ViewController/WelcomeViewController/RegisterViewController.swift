@@ -35,6 +35,8 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
         setupProgressHUD()
         setupPersonalitiesPickerView()
         setupWorriesPickerView()
+        
+        usernameTextField.delegate = self
     }
     
     //MARK: - IBActions
@@ -166,7 +168,7 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
         personalities.append("陰の立役者マネージャータイプ")
         //personalities.append("世話焼きな保護者タイプ")
         personalities.append("1人が好きなオオカミタイプ")
-        personalities.append("みんなの癒しペットタイプ")
+//        personalities.append("みんなの癒しペットタイプ")
     }
     
     private func appendWorriesList() {
@@ -191,6 +193,20 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
             } else {
                 ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
             }
+        }
+    }
+}
+
+extension RegisterViewController: UITextViewDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        guard let text = usernameTextField.text else { return }
+        
+        let maxLength = 10
+        
+        if text.count > maxLength {
+            usernameTextField.text = String(text.prefix(maxLength))
         }
     }
 }
