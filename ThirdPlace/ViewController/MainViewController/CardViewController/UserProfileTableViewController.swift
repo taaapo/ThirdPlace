@@ -120,7 +120,7 @@ class UserProfileTableViewController: UITableViewController {
 //        avatarImageView.image = userObject!.avatar?.circleMasked ?? UIImage(named: kPLACEHOLDERIMAGE)?.circleMasked
         
         FileStorage.downloadImage(imageUrl: userObject!.avatarLink) { image in
-            self.avatarImageView.image = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+            self.avatarImageView.image = image?.circleMasked ?? UIImage(named: kPLACEHOLDERIMAGE)
         }
     }
     

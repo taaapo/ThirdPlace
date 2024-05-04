@@ -47,6 +47,9 @@ class LikesViewController: UIViewController {
                     ProgressHUD.dismiss()
 
                     self.allUsers = allUsers
+                    self.allUsers.sort(by: { $0.username.compare($1.username) == ComparisonResult.orderedDescending })
+                    //dump関数は与えられた値の出力を行う関数
+                    dump(self.allUsers)
                     
                     DispatchQueue.main.async {
                         self.tableView.reloadData()

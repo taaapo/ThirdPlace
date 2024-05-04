@@ -39,10 +39,18 @@ class ChatListTableViewController: UITableViewController {
         
         restartChat(chatRoomId: chat.chatRoomId, memberIds: chat.memberIds)
         
-        let chatView = ChatViewController(chatId: chat.chatRoomId, recipientId: chat.receiverId, recipientName: chat.receiverName, senderImageLink: (FUser.currentUser()?.avatarLink)!, recipientImageLink: chat.avatarLink)
+        FirebaseListener.shared.downloadUsersFromFirebase(withIds: [chat.receiverId]) { users in
+            
+            for user in users {
+                
+                let chatView = ChatViewController(chatId: chat.chatRoomId, recipientId: chat.receiverId, recipientName: chat.receiverName, senderImageLink: (FUser.currentUser()?.avatarLink)!, recipientImageLink: user.avatarLink)
+                
+                chatView.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(chatView, animated: true)
+            }
+        }
         
-        chatView.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(chatView, animated: true)
+        
     }
     
     //MARK: - TableView DataSorce & Delegate
@@ -111,16 +119,16 @@ class ChatListTableViewController: UITableViewController {
         tableView.estimatedSectionFooterHeight = 0.0
     }
     
-    private func setAvatar(avatarLink: String) -> UIImage?{
-        
-        var setAvatarImage = UIImage(named: kPLACEHOLDERIMAGE)
-        
-        FileStorage.downloadImage(imageUrl: avatarLink) { avatarImage in
-            if avatarImage != nil {
-                setAvatarImage =  avatarImage?.circleMasked
-            }
-        }
-        return setAvatarImage
-    }
+//    private func setAvatar(avatarLink: String) -> UIImage?{
+//        
+//        var setAvatarImage = UIImage(named: kPLACEHOLDERIMAGE)
+//        
+//        FileStorage.downloadImage(imageUrl: avatarLink) { avatarImage in
+//            if avatarImage != nil {
+//                setAvatarImage =  avatarImage?.circleMasked
+//            }
+//        }
+//        return setAvatarImage
+//    }
 }
 

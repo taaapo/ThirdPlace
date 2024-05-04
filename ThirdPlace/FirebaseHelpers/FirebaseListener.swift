@@ -109,17 +109,21 @@ class FirebaseListener {
     
     
     func downloadUsersFromFirebase(withIds: [String], completion: @escaping (_ users: [FUser]) -> Void) {
+        
         print("downloadUsersFromFirbase")
         var usersArray: [FUser] = []
         var counter = 0
-        print("withIds are ", withIds)
+        
         for userId in withIds {
             
-            FirebaseReference(.User).document(userId).getDocument { (snapshot, error) in
+            FirebaseReference(.User)
+                .document(userId)
+                .getDocument { (snapshot, error) in
                 
                 guard let snapshot = snapshot else { return }
                 
                 if snapshot.exists {
+                    
                     print("snapshot.exists")
                     let F = FUser(_dictionary: snapshot.data()! as NSDictionary)
                     usersArray.append(FUser(_dictionary: snapshot.data()! as NSDictionary))
@@ -127,6 +131,7 @@ class FirebaseListener {
                     print("usersArray is ", usersArray)
                     
                     if counter == withIds.count {
+                        
                         print("counter == withIds.count")
                         completion(usersArray)
                     }
@@ -142,7 +147,10 @@ class FirebaseListener {
     //MARK: - Likes
     func downloadUserLikes(completion: @escaping (_ likedUserIds: [String]) -> Void) {
         
-        FirebaseReference(.Like).whereField(kUSERID, isEqualTo: FUser.currentId()).getDocuments { (snapshot, error) in
+        FirebaseReference(.Like)
+            .whereField(kUSERID, isEqualTo: FUser.currentId())
+//            .order(by: kDATE, descending: true)
+            .getDocuments { (snapshot, error) in
             
             var allLikedIds: [String] = []
             

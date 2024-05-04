@@ -44,7 +44,13 @@ class ChatListTableViewCell: UITableViewCell {
             self.unreadMessageBackgroundView.isHidden = true
         }
         
-        setAvatar(avatarLink: chat.avatarLink)
+        FirebaseListener.shared.downloadUsersFromFirebase(withIds: [chat.receiverId]) { users in
+            
+            for user in users {
+                self.setAvatar(avatarLink: user.avatarLink)
+            }
+        }
+        
         dateLabel.text = timeElapsed(chat.date)
         //文字の大きさを調整したい場合は下記をコメントアウト
 //        dateLabel.adjustsFontSizeToFitWidth = true

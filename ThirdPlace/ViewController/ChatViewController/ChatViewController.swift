@@ -18,8 +18,8 @@ class ChatViewController: MessagesViewController {
     private var recipientId = ""
     private var recipientName = ""
     
-    var senderImage = UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
-    var recipientImage = UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+    var senderImage = UIImage(named: kPLACEHOLDERIMAGE)
+    var recipientImage = UIImage(named: kPLACEHOLDERIMAGE)
     
     let refreshController = UIRefreshControl()
     
@@ -52,10 +52,10 @@ class ChatViewController: MessagesViewController {
         self.recipientName = recipientName
         
         FileStorage.downloadImage(imageUrl: senderImageLink) { image in
-            self.senderImage = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+            self.senderImage = image?.circleMasked ?? UIImage(named: kPLACEHOLDERIMAGE)
         }
         FileStorage.downloadImage(imageUrl: recipientImageLink) { image in
-            self.recipientImage = image?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+            self.recipientImage = image?.circleMasked ?? UIImage(named: kPLACEHOLDERIMAGE)
         }
         
 //        self.senderImage = senderImage

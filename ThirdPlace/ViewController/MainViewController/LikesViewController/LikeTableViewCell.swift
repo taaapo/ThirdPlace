@@ -32,7 +32,7 @@ class LikeTableViewCell: UITableViewCell {
     private func setAvatar(avatarLink: String) {
         
         FileStorage.downloadImage(imageUrl: avatarLink) { (avatarImage) in
-            self.avatarImageView.image = avatarImage?.circleMasked ?? UIImage(named: "プロフィール画像_ヒトの影_丸_v2")
+            self.avatarImageView.image = avatarImage?.circleMasked ?? UIImage(named: kPLACEHOLDERIMAGE)
         }
     }
 }
