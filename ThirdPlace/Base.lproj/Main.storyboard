@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -230,6 +231,31 @@
                                     <action selector="registerButtonPressed:" destination="1UQ-Rz-Bh6" eventType="touchUpInside" id="u19-2Z-uU7"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HE9-Cd-o2O">
+                                <rect key="frame" x="106.66666666666669" y="783" width="180" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="75H-kA-Ye4"/>
+                                    <constraint firstAttribute="height" constant="24" id="ds1-m9-Gkj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="利用規約およびプライバシーポリシー">
+                                    <color key="titleColor" name="incomingAudioMessageTint"/>
+                                </state>
+                                <connections>
+                                    <action selector="policyButtonPressed:" destination="1UQ-Rz-Bh6" eventType="touchUpInside" id="6yH-PY-zQG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="「登録」をタップすることで、下記に同意するものとします。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAz-Ow-KlS">
+                                <rect key="frame" x="71" y="759" width="251" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="251" id="uSh-hp-knx"/>
+                                    <constraint firstAttribute="height" constant="24" id="vZ1-rJ-ySg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.37259072069999999" green="0.37641876940000002" blue="0.38039273019999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xRf-Nv-ApQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -238,6 +264,7 @@
                             <constraint firstItem="T1j-I4-oD6" firstAttribute="centerX" secondItem="YI2-1Y-FFB" secondAttribute="centerX" id="3Aw-v3-Tkp"/>
                             <constraint firstAttribute="bottom" secondItem="JQA-NW-V3E" secondAttribute="bottom" id="4mF-oV-fsB"/>
                             <constraint firstItem="9MA-7c-58u" firstAttribute="top" secondItem="xRf-Nv-ApQ" secondAttribute="top" constant="154" id="5hZ-XR-dpD"/>
+                            <constraint firstItem="xRf-Nv-ApQ" firstAttribute="bottom" secondItem="HE9-Cd-o2O" secondAttribute="bottom" constant="35" id="74o-wL-H4q"/>
                             <constraint firstItem="s2t-3M-KQL" firstAttribute="top" secondItem="TZB-Ar-p1E" secondAttribute="bottom" constant="8" id="7Ev-d8-hVh"/>
                             <constraint firstItem="TZB-Ar-p1E" firstAttribute="top" secondItem="9MA-7c-58u" secondAttribute="bottom" constant="8" id="DX5-gK-t7D"/>
                             <constraint firstItem="JQA-NW-V3E" firstAttribute="leading" secondItem="cYy-Za-ZXY" secondAttribute="leading" id="Eeg-tv-pxh"/>
@@ -245,6 +272,7 @@
                             <constraint firstItem="Lxl-X8-fh1" firstAttribute="centerX" secondItem="T1j-I4-oD6" secondAttribute="centerX" id="JbR-RI-Dww"/>
                             <constraint firstItem="9MA-7c-58u" firstAttribute="centerX" secondItem="cYy-Za-ZXY" secondAttribute="centerX" id="NEs-vH-Hun"/>
                             <constraint firstItem="s2t-3M-KQL" firstAttribute="centerX" secondItem="wNh-bv-tYj" secondAttribute="centerX" id="PhP-pq-sCH"/>
+                            <constraint firstItem="HE9-Cd-o2O" firstAttribute="centerX" secondItem="cYy-Za-ZXY" secondAttribute="centerX" id="QjR-eg-pZg"/>
                             <constraint firstItem="wNh-bv-tYj" firstAttribute="centerX" secondItem="Lxl-X8-fh1" secondAttribute="centerX" id="R9n-GH-eM7"/>
                             <constraint firstItem="Lxl-X8-fh1" firstAttribute="top" secondItem="wNh-bv-tYj" secondAttribute="bottom" constant="8" id="SVF-Bz-WdL"/>
                             <constraint firstItem="T1j-I4-oD6" firstAttribute="centerX" secondItem="2NI-Ox-GRJ" secondAttribute="centerX" id="SkC-Az-qlm"/>
@@ -252,6 +280,8 @@
                             <constraint firstItem="YI2-1Y-FFB" firstAttribute="top" secondItem="Lxl-X8-fh1" secondAttribute="bottom" constant="31" id="U4w-jc-ZJ7"/>
                             <constraint firstAttribute="trailing" secondItem="JQA-NW-V3E" secondAttribute="trailing" id="UKr-SH-D06"/>
                             <constraint firstItem="JQA-NW-V3E" firstAttribute="top" secondItem="xRf-Nv-ApQ" secondAttribute="top" id="VZ9-TV-rpY"/>
+                            <constraint firstItem="HE9-Cd-o2O" firstAttribute="top" secondItem="TAz-Ow-KlS" secondAttribute="bottom" id="YSN-oe-5oF"/>
+                            <constraint firstItem="TAz-Ow-KlS" firstAttribute="centerX" secondItem="cYy-Za-ZXY" secondAttribute="centerX" id="ZC9-TK-huE"/>
                             <constraint firstItem="wNh-bv-tYj" firstAttribute="top" secondItem="s2t-3M-KQL" secondAttribute="bottom" constant="8" id="emz-BT-FgI"/>
                             <constraint firstItem="TZB-Ar-p1E" firstAttribute="centerX" secondItem="s2t-3M-KQL" secondAttribute="centerX" id="gia-qD-YWj"/>
                             <constraint firstItem="T1j-I4-oD6" firstAttribute="top" secondItem="Lxl-X8-fh1" secondAttribute="bottom" constant="8" id="i6j-yW-4QM"/>
@@ -1328,12 +1358,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gearshape.fill" catalog="system" width="128" height="123"/>
+        <image name="gearshape.fill" catalog="system" width="32" height="32"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
-        <image name="house" catalog="system" width="128" height="104"/>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="person.circle" catalog="system" width="128" height="123"/>
+        <image name="house" catalog="system" width="32" height="32"/>
+        <image name="house.fill" catalog="system" width="32" height="32"/>
+        <image name="person.circle" catalog="system" width="32" height="32"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="smiley" catalog="system" width="128" height="123"/>
         <image name="smiley.fill" catalog="system" width="128" height="123"/>
@@ -1346,6 +1376,9 @@
         <image name="ログイン画面背景_v2" width="1179" height="2556"/>
         <image name="次へボタン" width="200" height="200"/>
         <image name="登録画面背景_v2" width="1179" height="2556"/>
+        <namedColor name="incomingAudioMessageTint">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

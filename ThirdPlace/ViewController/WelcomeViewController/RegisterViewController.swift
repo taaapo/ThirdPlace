@@ -55,6 +55,10 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
+    @IBAction func policyButtonPressed(_ sender: UIButton) {
+        goToReadMe()
+    }
+    
     //MARK: - Setup
     
     private func setupBackgroundTouch() {
@@ -156,6 +160,14 @@ class RegisterViewController: UIViewController, UIPickerViewDataSource, UIPicker
     private func isTextDataImputed() -> Bool {
         
         return usernameTextField.text != "" && personalityTextField.text != "" && worryTextField.text != "" && emailTextField.text != "" && passwordTextField.text != "" && comfirmPasswordTextField.text != ""
+    }
+    
+    private func goToReadMe() {
+        
+        let url = NSURL(string: "https://github.com/taaapo/ThirdPlace/blob/master/README.md")
+        if UIApplication.shared.canOpenURL(url! as URL) {
+            UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
+        }
     }
     
     //MARK: - Options of Personalities and Worries
