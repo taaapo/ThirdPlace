@@ -85,6 +85,7 @@ class FirebaseListener {
                         
                         if !(FUser.currentUser()?.likedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
                             && !(FUser.currentUser()?.nextedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
+                            && !(FUser.currentUser()?.blockedIdArray?.contains(userObject[kOBJECTID] as! String) ?? false)
                             && (FUser.currentId() != userObject[kOBJECTID] as! String) {
                             
                             users.append(FUser(_dictionary: userObject))
@@ -261,4 +262,9 @@ class FirebaseListener {
         }
     }
     
+    func deleteChatsFromFireStore(chat: Chat) {
+        
+        FirebaseReference(.Chat).document(chat.objectId).delete()
+        print("delete Chat in deleteChatsFromFireStore")
+    }
 }

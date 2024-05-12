@@ -26,6 +26,7 @@ public let kPUSHID = "pushId"
 public let kPREMIUM = "premium"
 public let kLIKEDIDARRAY = "likedIdArray"
 public let kNEXTEDIDARRAY = "nextedIdArray"
+public let kBLOCKEDIDARRAY = "blockededIdArray"
 
 public let kCURRENTUSER = "currentUser"
 
@@ -41,6 +42,7 @@ public let kPLACEHOLDERIMAGE = "プロフィール画像_ヒトの影_丸_v2"
 public let kCHATROOMID = "chatRoomId"
 public let kSENDERID = "senderId"
 public let kSENDERNAME = "senderName"
+//下記の値が間違っているため修正必要
 public let kRECEIVERID = "receinverId"
 public let kRECEIVERNAME = "receiverName"
 public let kDATE = "date"

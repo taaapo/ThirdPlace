@@ -31,6 +31,7 @@ class FUser: Equatable {
     
     var likedIdArray: [String]?
     var nextedIdArray: [String]?
+    var blockedIdArray: [String]?
     
     var userDictionary: NSDictionary {
         
@@ -44,6 +45,7 @@ class FUser: Equatable {
                                  self.avatarLink,
                                  self.likedIdArray ?? [],
                                  self.nextedIdArray ?? [],
+                                 self.blockedIdArray ?? [],
                                  self.aboutMe,
                                  self.registeredDate,
                                  self.pushId ?? "",
@@ -58,6 +60,7 @@ class FUser: Equatable {
                                  kAVATARLINK as NSCopying,
                                  kLIKEDIDARRAY as NSCopying,
                                  kNEXTEDIDARRAY as NSCopying,
+                                 kBLOCKEDIDARRAY as NSCopying,
                                  kABOUTME as NSCopying,
                                  kREGISTEREDDATE as NSCopying,
                                  kPUSHID as NSCopying,
@@ -78,6 +81,7 @@ class FUser: Equatable {
         premium = 0
         likedIdArray = []
         nextedIdArray = []
+        blockedIdArray = []
         
         print("end of init(_objectId:")
     }
@@ -96,6 +100,7 @@ class FUser: Equatable {
         premium = _dictionary[kPREMIUM] as? Int ?? 0
         likedIdArray = _dictionary[kLIKEDIDARRAY] as? [String]
         nextedIdArray = _dictionary[kNEXTEDIDARRAY] as? [String]
+        blockedIdArray = _dictionary[kBLOCKEDIDARRAY] as? [String]
         
         avatar = UIImage(contentsOfFile: fileInDocumentsDirectory(filename: self.objectId)) ?? UIImage(named: kPLACEHOLDERIMAGE)
     

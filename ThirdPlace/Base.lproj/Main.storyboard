@@ -1221,7 +1221,16 @@
                             <outlet property="delegate" destination="ffs-eh-EcG" id="40q-gD-v8J"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="メッセージ" id="L7h-p2-RZR"/>
+                    <navigationItem key="navigationItem" title="メッセージ" id="L7h-p2-RZR">
+                        <barButtonItem key="rightBarButtonItem" image="questionmark.circle" catalog="system" style="plain" id="Fzg-6I-GtU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="1yO-mN-CA7">
+                                <rect key="frame" x="290" y="5" width="34.333333333333329" height="34.333333333333329"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system" title=""/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sc-o8-f4e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1365,6 +1374,7 @@
         <image name="house.fill" catalog="system" width="32" height="32"/>
         <image name="person.circle" catalog="system" width="32" height="32"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <image name="smiley" catalog="system" width="128" height="123"/>
         <image name="smiley.fill" catalog="system" width="128" height="123"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>

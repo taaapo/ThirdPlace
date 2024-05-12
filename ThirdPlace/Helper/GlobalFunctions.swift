@@ -46,8 +46,27 @@ func saveLikeToUser(userId: String) {
 }
 
 func didLikeUserWith(userId: String) -> Bool {
-    
     return FUser.currentUser()?.likedIdArray?.contains(userId) ?? false
+}
+
+//MARK: - Delete Like
+func deleteLikeToUser(userId: String) {
+    
+    let like = LikeObject(id: UUID().uuidString, userId: FUser.currentId(), likedUserId: userId, date: Date())
+    like.saveToFireStore()
+    
+    if let currentUser = FUser.currentUser() {
+        
+        if didLikeUserWith(userId: userId) {
+            
+            currentUser.likedIdArray!.remove(userId)
+            
+            currentUser.updateCurrentUserInFireStore(withValues: [kLIKEDIDARRAY: currentUser.likedIdArray!]) { (error) in
+                
+                print("updated current user with error ", error?.localizedDescription)
+            }
+        }
+    }
 }
 
 //MARK: - Do Next
@@ -84,8 +103,6 @@ func resetNext(userId: String) {
     
     if let currentUser = FUser.currentUser() {
         
-        deleteNextUserWith(userId:currentUser.nextedIdArray!)
-        
         currentUser.nextedIdArray = []
         
         currentUser.updateCurrentUserInFireStore(withValues: [kNEXTEDIDARRAY: currentUser.nextedIdArray!]) { (error) in
@@ -93,10 +110,6 @@ func resetNext(userId: String) {
             print("updated current user with error ", error?.localizedDescription)
         }
     }
-}
-
-func deleteNextUserWith(userId: [String]) {
-    
 }
 
 //MARK: - Starting chat
@@ -198,4 +211,18 @@ func getReceiverFrom(users: [FUser]) -> FUser {
     allUsers.remove(at: allUsers.firstIndex(of: FUser.currentUser()!)!)
     
     return allUsers.first!
+}
+
+//MARK: - Do Block
+func saveblockToUser(userId: String) {
+    
+    if let currentUser = FUser.currentUser() {
+        
+        currentUser.blockedIdArray!.append(userId)
+        
+        currentUser.updateCurrentUserInFireStore(withValues: [kBLOCKEDIDARRAY: currentUser.blockedIdArray!]) { (error) in
+            
+            print("updated current user with error ", error?.localizedDescription)
+        }
+    }
 }
