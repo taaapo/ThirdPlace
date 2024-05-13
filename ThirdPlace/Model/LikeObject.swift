@@ -19,7 +19,6 @@ struct LikeObject {
     }
     
     func saveToFireStore() {
-        
         FirebaseReference(.Like).document(self.id).setData(self.dictionary)
     }
 }

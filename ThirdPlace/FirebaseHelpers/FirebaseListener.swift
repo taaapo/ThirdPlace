@@ -263,7 +263,6 @@ class FirebaseListener {
     }
     
     func deleteChatsFromFireStore(chat: Chat) {
-        
         FirebaseReference(.Chat).document(chat.objectId).delete()
         print("delete Chat in deleteChatsFromFireStore")
     }

@@ -101,7 +101,7 @@ class ChatListTableViewController: UITableViewController {
         let deleteAction = UIContextualAction(style: .normal, title: "非表示") { (action, view, completionHandler) in
             
             //非表示処理を記述
-            self.showAction(title: "非表示", message: "メッセージを非表示にしてよろしいですか？", completion: { result in
+            self.showAction(title: "非表示", message: "メッセージを非表示にしてもよろしいですか？", completion: { result in
                 
                 if result {
                     //Chatsの削除
@@ -118,13 +118,33 @@ class ChatListTableViewController: UITableViewController {
         
         // ブロック処理
         let blockAction = UIContextualAction(style: .destructive, title: "ブロック") { (action, view, completionHandler) in
+            print("get action, view, completionHandler")
             // 編集処理を記述
-            self.showAction(title: "ブロック", message: "ユーザーをブロックしてよろしいですか？", completion: { result in
+            self.showAction(title: "ブロック", message: "ユーザーをブロックしてもよろしいですか？", completion: { result in
                 
+                print("get result")
                 if result {
-                    //チャット削除。Like削除。Userのブロックリストに追加。
+                    print("result is true")
+                    
+                    //Like削除
+                    //TODO: ブロックした相手がUserProfileからチャットした場合、チャット画面に出てきてしまうため、修正が必要
+                    //TODO: いいね画面でユーザーを表示したまま、そのユーザーをブロックした場合、いいね画面に戻ってきて操作をするとエラーにならないかテスト必要
+                    deleteLikeToUser(userId: self.chatList[indexPath.row].receiverId)
+                    print("after deleteLikeToUser")
+                    
+                    //blickedIdArray追加
                     saveblockToUser(userId: self.chatList[indexPath.row].receiverId)
-                    print("ブロック")
+                    print("after saveblockToUser")
+                    
+                    //チャット削除
+                    FirebaseListener.shared.deleteChatsFromFireStore(chat: self.chatList[indexPath.row])
+                    self.chatList.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    print("after chatList.remove")
+                    
+//                    tableView.reloadData()
+                    
+                    print("ブロック完了")
                 }
             })
             
@@ -141,7 +161,7 @@ class ChatListTableViewController: UITableViewController {
         // 報告処理
         let reportAction = UIContextualAction(style: .destructive, title: "報告") { (action, view, completionHandler) in
             // 編集処理を記述
-            self.showAction(title: "報告", message: "ユーザーを報告してよろしいですか？", completion: { result in
+            self.showAction(title: "報告", message: "ユーザーを報告してもよろしいですか？", completion: { result in
                 
                 if result {
                     print("報告")

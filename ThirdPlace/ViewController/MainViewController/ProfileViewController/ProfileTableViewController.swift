@@ -455,7 +455,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     private func showChangePassword() {
         
-        let alertView = UIAlertController(title: "パスワードの変更", message: "パスワードを変更してよろしいですか？", preferredStyle: .alert)
+        let alertView = UIAlertController(title: "パスワードの変更", message: "パスワードを変更してもよろしいですか？", preferredStyle: .alert)
         
         alertView.addAction(UIAlertAction(title: "変更", style: .destructive, handler: { action in
             
@@ -470,7 +470,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     private func showLogOutUser() {
         
-        let alertView = UIAlertController(title: "ログアウト", message: "ログアウトしてよろしいですか？", preferredStyle: .alert)
+        let alertView = UIAlertController(title: "ログアウト", message: "ログアウトしてもよろしいですか？", preferredStyle: .alert)
         
         alertView.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { action in
             

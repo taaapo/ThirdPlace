@@ -52,21 +52,29 @@ func didLikeUserWith(userId: String) -> Bool {
 //MARK: - Delete Like
 func deleteLikeToUser(userId: String) {
     
-    let like = LikeObject(id: UUID().uuidString, userId: FUser.currentId(), likedUserId: userId, date: Date())
-    like.saveToFireStore()
-    
-    if let currentUser = FUser.currentUser() {
-        
-        if didLikeUserWith(userId: userId) {
+    FirebaseReference(.Like)
+        .whereField(kUSERID, isEqualTo: FUser.currentId())
+        .whereField(kLIKEDUSERID, isEqualTo: userId)
+        .getDocuments { snapshot, error in
             
-            currentUser.likedIdArray!.remove(userId)
+            guard let snapshot = snapshot else { return }
             
-            currentUser.updateCurrentUserInFireStore(withValues: [kLIKEDIDARRAY: currentUser.likedIdArray!]) { (error) in
+            for likeData in snapshot.documents {
                 
-                print("updated current user with error ", error?.localizedDescription)
+                let currentLike = likeData.data() as Dictionary
+                deleteFromFireStore(userId: currentLike[kOBJECTID] as! String)
             }
         }
+    
+    if let currentUser = FUser.currentUser() {
+        if didLikeUserWith(userId: userId) {
+            currentUser.likedIdArray!.removeAll(where: {$0 == userId})
+        }
     }
+}
+
+private func deleteFromFireStore(userId: String) {
+    FirebaseReference(.Like).document(userId).delete()
 }
 
 //MARK: - Do Next
@@ -168,20 +176,25 @@ func createChatItems(chatRoomId: String, users: [FUser]) {
                 
                 let receiverUser = userId == FUser.currentId() ? getReceiverFrom(users: users) : FUser.currentUser()!
                 
-                let chatObject = Chat()
                 
-                chatObject.objectId = UUID().uuidString
-                chatObject.chatRoomId = chatRoomId
-                chatObject.senderId = senderUser.objectId
-                chatObject.senderName = senderUser.username
-                chatObject.receiverId = receiverUser.objectId
-                chatObject.receiverName = receiverUser.username
-                chatObject.date = Date()
-                chatObject.memberIds = [senderUser.objectId, receiverUser.objectId]
-                chatObject.lastMessage = ""
-                chatObject.unreadCounter = 0
-                chatObject.avatarLink = receiverUser.avatarLink
-                chatObject.saveChatToFireStore()
+                //currentUserのblockedIdArrayにreceiverUserが含まれない場合
+                if ((senderUser.blockedIdArray?.contains(receiverUser.objectId)) == false) {
+                    
+                    let chatObject = Chat()
+                    
+                    chatObject.objectId = UUID().uuidString
+                    chatObject.chatRoomId = chatRoomId
+                    chatObject.senderId = senderUser.objectId
+                    chatObject.senderName = senderUser.username
+                    chatObject.receiverId = receiverUser.objectId
+                    chatObject.receiverName = receiverUser.username
+                    chatObject.date = Date()
+                    chatObject.memberIds = [senderUser.objectId, receiverUser.objectId]
+                    chatObject.lastMessage = ""
+                    chatObject.unreadCounter = 0
+                    chatObject.avatarLink = receiverUser.avatarLink
+                    chatObject.saveChatToFireStore()
+                }
             }
         }
 }
