@@ -662,8 +662,8 @@
 				DEVELOPMENT_TEAM = 2WK544ZFV3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThirdPlace/Info.plist;
-				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ThirdPlaceはメディアライブラリにアクセスします";
-				INFOPLIST_KEY_NSCameraUsageDescription = "ThirdPlaceはカメラにアクセスします";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ThirdPlaceはメディアライブラリにアクセスします。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。";
+				INFOPLIST_KEY_NSCameraUsageDescription = "ThirdPlaceはカメラにアクセスします。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "ThirdPlaceは写真ライブラリにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -700,8 +700,8 @@
 				DEVELOPMENT_TEAM = 2WK544ZFV3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThirdPlace/Info.plist;
-				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ThirdPlaceはメディアライブラリにアクセスします";
-				INFOPLIST_KEY_NSCameraUsageDescription = "ThirdPlaceはカメラにアクセスします";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ThirdPlaceはメディアライブラリにアクセスします。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。";
+				INFOPLIST_KEY_NSCameraUsageDescription = "ThirdPlaceはカメラにアクセスします。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "ThirdPlaceは写真ライブラリにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

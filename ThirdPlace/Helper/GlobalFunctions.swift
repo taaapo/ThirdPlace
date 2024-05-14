@@ -23,6 +23,26 @@ func removeCurrentUserIdFrom(userIds: [String]) -> [String] {
     return allIds
 }
 
+//MARK: - Delete User
+func deleteUserWith(userId: String) {
+    
+    FirebaseReference(.User)
+        .whereField(kOBJECTID, isEqualTo: userId)
+        .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            for userData in snapshot.documents {
+                
+                let currentUser = userData.data() as Dictionary
+                deleteUserFromFireStoreWith(objectId: currentUser[kOBJECTID] as! String)
+            }
+        }
+}
+
+private func deleteUserFromFireStoreWith(objectId: String) {
+    FirebaseReference(.User).document(objectId).delete()
+}
 
 //MARK: - Like
 func saveLikeToUser(userId: String) {
@@ -62,7 +82,20 @@ func deleteLikeToUser(userId: String) {
             for likeData in snapshot.documents {
                 
                 let currentLike = likeData.data() as Dictionary
-                deleteFromFireStore(userId: currentLike[kOBJECTID] as! String)
+                deleteLikeFromFireStoreWith(objectId: currentLike[kOBJECTID] as! String)
+            }
+        }
+    
+    FirebaseReference(.User)
+        .whereField(kOBJECTID, isEqualTo: FUser.currentId())
+        .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            for userData in snapshot.documents {
+                
+                let currentUser = userData.data() as Dictionary
+                deleteLikedIdWith(objectId: currentUser[kOBJECTID] as! String, userId: userId)
             }
         }
     
@@ -73,8 +106,41 @@ func deleteLikeToUser(userId: String) {
     }
 }
 
-private func deleteFromFireStore(userId: String) {
-    FirebaseReference(.Like).document(userId).delete()
+func deleteAllLikeWith(userId: String) {
+    
+    FirebaseReference(.Like)
+        .whereField(kUSERID, isEqualTo: userId)
+        .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            for likeData in snapshot.documents {
+                
+                let currentLike = likeData.data() as Dictionary
+                deleteLikeFromFireStoreWith(objectId: currentLike[kOBJECTID] as! String)
+            }
+        }
+    
+    FirebaseReference(.Like)
+        .whereField(kLIKEDUSERID, isEqualTo: userId)
+        .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            for likeData in snapshot.documents {
+                
+                let currentLike = likeData.data() as Dictionary
+                deleteLikeFromFireStoreWith(objectId: currentLike[kOBJECTID] as! String)
+            }
+        }
+}
+
+private func deleteLikeFromFireStoreWith(objectId: String) {
+    FirebaseReference(.Like).document(objectId).delete()
+}
+
+private func deleteLikedIdWith(objectId: String, userId: String) {
+    FirebaseReference(.User).document(objectId).updateData([kLIKEDIDARRAY: FieldValue.arrayRemove([userId])])
 }
 
 //MARK: - Do Next
@@ -225,6 +291,40 @@ func getReceiverFrom(users: [FUser]) -> FUser {
     
     return allUsers.first!
 }
+
+func deleteAllChatWith(userId: String) {
+    
+    FirebaseReference(.Chat)
+        .whereField(kSENDERID, isEqualTo: userId)
+        .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            for chatData in snapshot.documents {
+                
+                let currentChat = chatData.data() as Dictionary
+                deleteChatFromFireStoreWith(objectId: currentChat[kOBJECTID] as! String)
+            }
+        }
+    
+    FirebaseReference(.Chat)
+        .whereField(kRECEIVERID, isEqualTo: userId)
+        .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else { return }
+            
+            for chatData in snapshot.documents {
+                
+                let currentChat = chatData.data() as Dictionary
+                deleteChatFromFireStoreWith(objectId: currentChat[kOBJECTID] as! String)
+            }
+        }
+}
+
+private func deleteChatFromFireStoreWith(objectId: String) {
+    FirebaseReference(.Chat).document(objectId).delete()
+}
+
 
 //MARK: - Do Block
 func saveblockToUser(userId: String) {

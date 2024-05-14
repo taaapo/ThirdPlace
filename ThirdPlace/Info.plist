@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>ThirdPlaceはメディアライブラリにアクセスします。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。</string>
+	<key>NSCameraUsageDescription</key>
+	<string>ThirdPlaceはカメラにアクセスします。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>ja</string>

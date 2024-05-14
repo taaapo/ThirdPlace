@@ -97,7 +97,8 @@ class ChatListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        // 非表示処理
+        //MARK: - 非表示処理
+        //「メッセージが非表示になります。「いいね」欄にユーザーが表示されている場合は、ユーザーをタップし、右上の編集ボタンからメッセージ画面に遷移できます。新しいメッセージを送信すると、チャット画面にメッセージが再表示されます。」
         let deleteAction = UIContextualAction(style: .normal, title: "非表示") { (action, view, completionHandler) in
             
             //非表示処理を記述
@@ -105,7 +106,6 @@ class ChatListTableViewController: UITableViewController {
                 
                 if result {
                     //Chatsの削除
-                    //「メッセージが非表示になります。「いいね」欄にユーザーが表示されている場合は、ユーザーをタップし、右上の編集ボタンからメッセージ画面に遷移できます。新しいメッセージを送信すると、チャット画面にメッセージが再表示されます。」
                     FirebaseListener.shared.deleteChatsFromFireStore(chat: self.chatList[indexPath.row])
                     self.chatList.remove(at: indexPath.row)
                     self.tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -116,7 +116,8 @@ class ChatListTableViewController: UITableViewController {
             completionHandler(true)
         }
         
-        // ブロック処理
+        //MARK: - ブロック処理
+        //「メッセージ画面といいね画面からブロックしたユーザーが表示されなくなります。ブロックしたユーザーがメッセージを送信しても表示されません。」※ブロック中にいいね画面で該当ユーザーのプロフィールを見ていた場合、メッセージが送信できてしまう。ただ、いいね画面に戻ると、該当ユーザーがいいね画面から消える。
         let blockAction = UIContextualAction(style: .destructive, title: "ブロック") { (action, view, completionHandler) in
             print("get action, view, completionHandler")
             // 編集処理を記述
@@ -126,13 +127,12 @@ class ChatListTableViewController: UITableViewController {
                 if result {
                     print("result is true")
                     
-                    //Like削除
-                    //TODO: ブロックした相手がUserProfileからチャットした場合、チャット画面に出てきてしまうため、修正が必要
-                    //TODO: いいね画面でユーザーを表示したまま、そのユーザーをブロックした場合、いいね画面に戻ってきて操作をするとエラーにならないかテスト必要
+                    //Like削除 & UserのlikedIdArrayから削除
                     deleteLikeToUser(userId: self.chatList[indexPath.row].receiverId)
                     print("after deleteLikeToUser")
                     
-                    //blickedIdArray追加
+                    
+                    //UserのblickedIdArrayに追加
                     saveblockToUser(userId: self.chatList[indexPath.row].receiverId)
                     print("after saveblockToUser")
                     
@@ -158,13 +158,13 @@ class ChatListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        // 報告処理
+        //MARK: - 報告処理
         let reportAction = UIContextualAction(style: .destructive, title: "報告") { (action, view, completionHandler) in
             // 編集処理を記述
             self.showAction(title: "報告", message: "ユーザーを報告してもよろしいですか？", completion: { result in
                 
                 if result {
-                    print("報告")
+                    self.goToReportForm()
                 }
             })
             
@@ -233,5 +233,14 @@ class ChatListTableViewController: UITableViewController {
 //        }
 //        return setAvatarImage
 //    }
+    
+    //MARK: - Contact
+    private func goToReportForm() {
+        
+        let url = NSURL(string: "https://forms.gle/2Cph8xYLZB8TMTWR8")
+        if UIApplication.shared.canOpenURL(url! as URL) {
+            UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
+        }
+    }
 }
 

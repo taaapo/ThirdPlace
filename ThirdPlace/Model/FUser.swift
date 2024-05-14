@@ -261,10 +261,26 @@ class FUser: Equatable {
             userDefaults.removeObject(forKey: kCURRENTUSER)
             userDefaults.synchronize()
             completion(nil)
+            
         } catch let error as NSError {
             completion(error)
         }
     }
+    
+    //MARK: - Delete user
+    class func deleteCurrentUser(completion: @escaping(_ error: Error?) -> Void) {
+        
+        do {
+            try Auth.auth().currentUser?.delete()
+            
+            userDefaults.removeObject(forKey: kCURRENTUSER)
+            userDefaults.synchronize()
+            completion(nil)
+        } catch let error as NSError {
+            completion(error)
+        }
+    }
+    
     
     //MARK: - Save user funcs
     func saveUserLocally() {
@@ -321,7 +337,7 @@ class FUser: Equatable {
 //        }
 //    }
     
-//    //MARK: - Delete User funcs
+    //MARK: - Delete User funcs
 //    func deleteUserFromFireStore(withField: String) async {
 //        
 //        do {
@@ -334,6 +350,11 @@ class FUser: Equatable {
 //          print("Error updating document: \(error)")
 //        }
 //    }
+    
+//    func deleteCurrentUserFromFireStore() {
+//        FirebaseReference(.User).document(FUser.currentId()).delete()
+//    }
+    
 }
 
 

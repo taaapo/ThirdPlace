@@ -303,7 +303,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     
     private func showEditOptions() {
         
-        let alertController = UIAlertController(title: "アカウント情報の編集", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         //メアドの変更で障害が出てしまうためコメントアウト。メアド変更したい場合はお問い合わせしてもらうフローにする。
 //        alertController.addAction(UIAlertAction(title: "メールアドレスの変更", style: .default, handler: { (alert) in
@@ -311,23 +311,41 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
 //            self.showChangeEmail()
 //        }))
         
-        alertController.addAction(UIAlertAction(title: "パスワードの変更", style: .default, handler: { (alert) in
-            
-            self.showChangePassword()
+        alertController.addAction(UIAlertAction(title: "アカウント管理", style: .default, handler: { (alert) in
+            self.showAccountManageOptions()
         }))
         
         alertController.addAction(UIAlertAction(title: "お問い合わせ", style: .default, handler: { (alert) in
-            
             self.goToContactForm()
         }))
         
+        alertController.addAction(UIAlertAction(title: "利用規約およびプライバシーポリシー", style: .default, handler: { (alert) in
+            self.goToReadMe()
+        }))
+        
         alertController.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { (alert) in
-            
             self.showLogOutUser()
         }))
         
         alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showAccountManageOptions() {
+        
+        let alertController = UIAlertController(title: "アカウント管理", message: nil, preferredStyle: .actionSheet)
+        
+        
+        alertController.addAction(UIAlertAction(title: "パスワードの変更", style: .default, handler: { (alert) in
+            self.showChangePassword()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "アカウントの削除", style: .destructive, handler: { (alert) in
+            self.deleteAccount()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
     }
@@ -453,6 +471,19 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         self.present(alertView, animated: true, completion: nil)
     }
     
+    private func showLogOutUser() {
+        
+        let alertView = UIAlertController(title: "ログアウト", message: "ログアウトしてもよろしいですか？", preferredStyle: .alert)
+        
+        alertView.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { action in
+            self.logOutUser()
+        }))
+        
+        alertView.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
     private func showChangePassword() {
         
         let alertView = UIAlertController(title: "パスワードの変更", message: "パスワードを変更してもよろしいですか？", preferredStyle: .alert)
@@ -468,19 +499,16 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         
     }
     
-    private func showLogOutUser() {
+    //下記で削除するユーザーをいいね画面でプロフィール表示していた場合、ユーザー削除後でも、チャット画面が開き、メッセージ画面にチャット履歴が残ってしまう。
+    private func deleteAccount() {
         
-        let alertView = UIAlertController(title: "ログアウト", message: "ログアウトしてもよろしいですか？", preferredStyle: .alert)
+        let userId = FUser.currentId()
         
-        alertView.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: { action in
-            
-            self.logOutUser()
-        }))
+        deleteUser()
         
-        alertView.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
-        
-        self.present(alertView, animated: true, completion: nil)
-        
+        deleteAllLikeWith(userId: userId)
+        deleteAllChatWith(userId: userId)
+        deleteUserWith(userId: userId)
     }
     
     //MARK: - Update Email/Password
@@ -555,10 +583,39 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         }
     }
     
+    //MARK: - Delete
+    private func deleteUser() {
+        
+        FUser.deleteCurrentUser { error in
+            
+            if error == nil {
+                
+                let loginView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "loginView")
+                
+                DispatchQueue.main.async {
+                    
+                    loginView.modalPresentationStyle = .fullScreen
+                    self.present(loginView, animated: true, completion: nil)
+                }
+                
+            } else {
+                ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
+            }
+        }
+    }
+    
     //MARK: - Contact
     private func goToContactForm() {
         
         let url = NSURL(string: "https://forms.gle/P1yCcmNC1ksTX5sW7")
+        if UIApplication.shared.canOpenURL(url! as URL) {
+            UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    private func goToReadMe() {
+        
+        let url = NSURL(string: "https://github.com/taaapo/ThirdPlace/blob/master/README.md")
         if UIApplication.shared.canOpenURL(url! as URL) {
             UIApplication.shared.open(url! as URL, options: [:], completionHandler: nil)
         }
