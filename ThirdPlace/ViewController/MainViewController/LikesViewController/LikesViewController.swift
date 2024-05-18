@@ -17,10 +17,31 @@ class LikesViewController: UIViewController {
     var allLikes: [LikeObject] = []
     var allUsers: [FUser] = []
     
+    //ExplanationMarkの挙動に必要
+    let popupView = UIView()
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.alpha = 0.8
+        view.isHidden = true
+        return view
+    }()
+    var popUpSettings = PopUpSettings(
+        titleLabelText: "「いいね画面」の使い方",
+        contentLabelText: """
+                        ①「いいね」したユーザーの一覧が表示されます。各行をタップすると、ユーザーのプロフィール画面に遷移します。
+                        
+                        ②ユーザーのプロフィール画面の右上の編集ボタンをタップすると、チャット画面に遷移します。
+                        """,
+        popupViewHeight: 250
+    )
+    
     //MARK: - ViewLifecycle
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        ProgressHUD.dismiss()
         
         downloadLikes()
     }
@@ -29,6 +50,12 @@ class LikesViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        
+        //ExplanationMarkの挙動に必要
+        popUpSettings.popupView = popupView
+        popUpSettings.blurEffectView = blurEffectView
+        popUpSettings.setupUI(view: self.view)
+        popUpSettings.addTapGestureToBlurEffectView()
     }
     
     
@@ -60,6 +87,12 @@ class LikesViewController: UIViewController {
                 ProgressHUD.dismiss()
             }
         }
+    }
+    
+    //MARK: - IBActions
+    @IBAction func questionMarkPressed(_ sender: UIButton) {
+        print("questionMarkPressed")
+        popUpSettings.togglePopup()
     }
 
     //MARK: - Navigation

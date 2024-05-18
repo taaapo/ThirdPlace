@@ -52,6 +52,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ProgressHUD.dismiss()
+        
         setupBackgroundTouch()
         setupTableView()
         setupAboutMeTextField()

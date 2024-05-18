@@ -56,6 +56,7 @@
 		318882862BE28BB000D082AF /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318882852BE28BB000D082AF /* PushNotifications.swift */; };
 		3194FEA72B964533001FAA99 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3194FEA62B964533001FAA99 /* FileStorage.swift */; };
 		3198D2EA2B7BD92B00BE215D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3198D2E92B7BD92B00BE215D /* Constants.swift */; };
+		3198E7552BF8637F002850AA /* PopUpSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3198E7542BF8637F002850AA /* PopUpSettings.swift */; };
 		319FCB152B7A755700199B7C /* FUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319FCB142B7A755700199B7C /* FUser.swift */; };
 		31A09FD32B9F0FC700CFB294 /* UserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A09FD22B9F0FC700CFB294 /* UserCard.swift */; };
 		31A09FD62B9F125F00CFB294 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A09FD52B9F125F00CFB294 /* UserCardModel.swift */; };
@@ -110,6 +111,7 @@
 		318BC0FC2BE03C3300CE0AFF /* ThirdPlace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThirdPlace.entitlements; sourceTree = "<group>"; };
 		3194FEA62B964533001FAA99 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		3198D2E92B7BD92B00BE215D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3198E7542BF8637F002850AA /* PopUpSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSettings.swift; sourceTree = "<group>"; };
 		319FCB142B7A755700199B7C /* FUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FUser.swift; sourceTree = "<group>"; };
 		31A09FD22B9F0FC700CFB294 /* UserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCard.swift; sourceTree = "<group>"; };
 		31A09FD52B9F125F00CFB294 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				3198D2E92B7BD92B00BE215D /* Constants.swift */,
 				31F234F72B86DFC6008943CA /* Extensions.swift */,
 				31CCCD4E2BAB152600754839 /* GlobalFunctions.swift */,
+				3198E7542BF8637F002850AA /* PopUpSettings.swift */,
 				31F922E72BB1CD7500C15A86 /* MessageDefaults.swift */,
 			);
 			path = Helper;
@@ -503,6 +506,7 @@
 				315BB4F22BB92A9900431010 /* TypingListener.swift in Sources */,
 				3188820F2BB338C70021EB36 /* OutgoingMessage.swift in Sources */,
 				31A09FDA2B9F135600CFB294 /* UserCardContentView.swift in Sources */,
+				3198E7552BF8637F002850AA /* PopUpSettings.swift in Sources */,
 				31AC3FF62BAC88E400FE69EB /* ChatListTableViewCell.swift in Sources */,
 				312C93F32BAAAFD700818E5F /* UserProfileTableViewController.swift in Sources */,
 				31A09FDC2B9F137900CFB294 /* UserCardFooterView.swift in Sources */,

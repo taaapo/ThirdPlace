@@ -669,10 +669,13 @@
                     <navigationItem key="navigationItem" title="さがす" id="BnV-yg-kPs">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="CML-Lv-QS2">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hgp-dy-tk7">
-                                <rect key="frame" x="290" y="5" width="87" height="34.333333333333336"/>
+                                <rect key="frame" x="327.33333333333331" y="5" width="49.666666666666686" height="34.333333333333336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="questionMarkPressed:" destination="MB9-Qm-FcF" eventType="touchUpInside" id="Zci-CT-Akw"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -1232,11 +1235,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="メッセージ" id="L7h-p2-RZR">
                         <barButtonItem key="rightBarButtonItem" image="questionmark.circle" catalog="system" style="plain" id="Fzg-6I-GtU">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="1yO-mN-CA7">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="1yO-mN-CA7">
                                 <rect key="frame" x="327.33333333333331" y="5" width="49.666666666666686" height="34.333333333333336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system" title=""/>
+                                <connections>
+                                    <action selector="questionMarkPressed:" destination="ffs-eh-EcG" eventType="touchUpInside" id="xSh-VT-GgZ"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -1320,11 +1326,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="いいね" id="JZd-dn-X7E">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="MFb-Ld-O74">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QVc-T8-ufh">
-                                <rect key="frame" x="-37" y="-17" width="87" height="33"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QVc-T8-ufh">
+                                <rect key="frame" x="290" y="5" width="34.333333333333329" height="34.333333333333329"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="questionMarkPressed:" destination="WSb-8f-SeA" eventType="touchUpInside" id="vRv-d0-AOA"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>

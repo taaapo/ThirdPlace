@@ -6,18 +6,48 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class ChatListTableViewController: UITableViewController {
     
     //MARK: - Vars
     var chatList: [Chat] = []
     
+    //ExplanationMarkの挙動に必要
+    let popupView = UIView()
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.alpha = 0.8
+        view.isHidden = true
+        return view
+    }()
+    var popUpSettings = PopUpSettings(
+        titleLabelText: "「メッセージ画面」の使い方",
+        contentLabelText: """
+                        ①チャットしているユーザーの一覧が表示されます。各行をタップすると、チャット画面に遷移します。
+                        
+                        ②各行を左にスワイプすると、非表示ボタンが表示されます。メッセージを再表示する場合は、「いいね」画面から該当ユーザーのチャット画面に遷移し、新しいメッセージを送信するとメッセージが再表示されます。「いいね」画面にユーザーがいない場合、相手からチャットが来ない限りメッセージは再表示されません。
+                        
+                        ③各行を左にスワイプすると、ブロックボタンが表示されます。ユーザーをブロックすると、メッセージ画面といいね画面からユーザーが表示されなくなります。ブロックしたユーザーがメッセージを送信しても表示されません。
+                        """,
+        popupViewHeight: 450
+    )
+    
     //MARK: - ViewLifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ProgressHUD.dismiss()
+        
         setupTableView()
         downloadChats()
+        
+        //ExplanationMarkの挙動に必要
+        popUpSettings.popupView = popupView
+        popUpSettings.blurEffectView = blurEffectView
+        popUpSettings.setupUI(view: self.view)
+        popUpSettings.addTapGestureToBlurEffectView()
     }
     
     
@@ -32,6 +62,11 @@ class ChatListTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    //MARK: - IBActions
+    @IBAction func questionMarkPressed(_ sender: UIButton) {
+        popUpSettings.togglePopup()
     }
     
     //MARK: - Navigation

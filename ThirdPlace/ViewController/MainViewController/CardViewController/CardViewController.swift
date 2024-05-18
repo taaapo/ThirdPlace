@@ -28,18 +28,51 @@ class CardViewController: UIViewController {
     var numberOfCardsAdded = 0
     //下記のIntは自由に変更可能
     var initialLoadNumber = 20
-
+    
+    //ExplanationMarkの挙動に必要
+    //    let popupView = UIView(frame: CGRect(x: 50, y: 200, width: 300, height: 400))
+    let popupView = UIView()
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.alpha = 0.8
+        view.isHidden = true
+        return view
+    }()
+    var popUpSettings = PopUpSettings(
+        titleLabelText: "「さがす画面」の使い方",
+        contentLabelText: """
+                        ①ユーザーカードを右へスワイプすると、ユーザーを「いいね」し、次のユーザーカードへ行きます。
+                        
+                        ②ユーザーカードを左へスワイプすると、そのまま次のユーザーカードへ行きます。
+                        
+                        ③「いいね」したユーザーは「いいね画面」から確認することができます。
+                        
+                        ④ユーザーカードをタップすると、ユーザーのプロフィールを見ることができます。
+                        """,
+        popupViewHeight: 350
+    )
+    
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ProgressHUD.dismiss()
         
         showEmptyDataView(loading: true)
         emptyDataView.delegate = self
         
         //ユーザーを作るときはcreateUsersを加えてdownloadInitialUsersをコメントアウト
-//        createUsers()
+        //        createUsers()
         
         downloadInitialUsers()
+        
+        //ExplanationMarkの挙動に必要
+        popUpSettings.popupView = popupView
+        popUpSettings.blurEffectView = blurEffectView
+        popUpSettings.emptyDataView = self.emptyDataView
+        popUpSettings.setupUI(view: self.view)
+        popUpSettings.addTapGestureToBlurEffectView()
     }
     
     private func showEmptyDataView(loading: Bool) {
@@ -76,6 +109,10 @@ class CardViewController: UIViewController {
     
     
     //MARK: - IBActions
+    @IBAction func questionMarkPressed(_ sender: UIButton) {
+        popUpSettings.togglePopup()
+    }
+    
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
         cardStack.swipe(.right, animated: true)
@@ -103,17 +140,17 @@ class CardViewController: UIViewController {
         //下記でCardStackの場所を設定
         cardStack.anchor(
             //topを設定するとsafeAreaLayoutGuide.topAnchorまでtopが伸びてしまう
-//            top: view.safeAreaLayoutGuide.topAnchor,
-                         left: view.safeAreaLayoutGuide.leftAnchor,
-                         bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                         right: view.safeAreaLayoutGuide.rightAnchor,
-                         paddingLeft: 30,
-                         paddingBottom: (view.frame.height - 600) / 2,
-                         paddingRight: 30,
-                         height: 500
+            //            top: view.safeAreaLayoutGuide.topAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 30,
+            paddingBottom: (view.frame.height - 600) / 2,
+            paddingRight: 30,
+            height: 500
         )
-//        cardStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        cardStack.frame = CGRect(x: (view.frame.width - 350)/2, y: 150, width: 350, height: 500)
+        //        cardStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //        cardStack.frame = CGRect(x: (view.frame.width - 350)/2, y: 150, width: 350, height: 500)
         print("view cardStacks")
     }
     
@@ -138,7 +175,7 @@ class CardViewController: UIViewController {
             for user in allUsers {
                 user.getUserAvatarFromFirestore { (didSet) in
                     
-                    let cardModel = UserCardModel(id: user.objectId, 
+                    let cardModel = UserCardModel(id: user.objectId,
                                                   name: user.username,
                                                   personality: user.personality,
                                                   worry: user.worry,
@@ -167,7 +204,7 @@ class CardViewController: UIViewController {
     
     private func downloadMoreUsersInBackground() {
         
-//        self.showReserve = true
+        //        self.showReserve = true
         
         FirebaseListener.shared.downloadUsersFromFirebase(isInitialLoad: isInitialLoad, limit: 1000, lastDocumentSnapshot: lastDocumentSnapshot) { allUsers, snapshot in
             
@@ -198,7 +235,7 @@ class CardViewController: UIViewController {
                             ProgressHUD.dismiss()
                             print("call layoutCardStackView")
                             self.layoutCardStackView()
-
+                            
                         }
                     }
                 }
@@ -251,6 +288,112 @@ class CardViewController: UIViewController {
         }
         return setAvatarImage
     }
+    
+    //MARK: - PopUp Settings
+//    func setupUI() {
+//        // ブラーの設定
+//        blurEffectView.frame = self.view.bounds
+//        blurEffectView.isHidden = true
+//        view.addSubview(blurEffectView)
+//        
+//        // ポップアップの設定
+//        popupView.backgroundColor = .white
+//        popupView.layer.cornerRadius = 10
+//        popupView.isHidden = true
+//        view.addSubview(popupView)
+//        popupView.anchor(
+//            top: view.safeAreaLayoutGuide.topAnchor,
+//            left: view.safeAreaLayoutGuide.leftAnchor,
+//            //            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+//            right: view.safeAreaLayoutGuide.rightAnchor,
+//            paddingTop: 100,
+//            paddingLeft: 30,
+//            //            paddingBottom: 200,
+//            paddingRight: 30,
+//            //            width: 300,
+//            height: 350
+//        )
+//        
+//        // ポップアップのコンテンツの設定
+//        addContentToDialog()
+//        blurEffectView.isUserInteractionEnabled = true
+//    }
+//    
+//    // ブラー効果ビューにタップジェスチャーを追加
+//    func addTapGestureToBlurEffectView() {
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(togglePopup))
+//        blurEffectView.addGestureRecognizer(tapGesture)
+//    }
+//    
+//    func addContentToDialog() {
+//        let titleLabel = UILabel()
+//        titleLabel.text = "「さがす画面」の使い方"
+//        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+//        popupView.addSubview(titleLabel)
+//        titleLabel.anchor(
+//            top: popupView.topAnchor,
+//            left: popupView.leftAnchor,
+//            //            bottom: popupView.bottomAnchor,
+//            right: popupView.rightAnchor,
+//            paddingTop: 10,
+//            paddingLeft: 30,
+//            //            paddingBottom: 200,
+//            paddingRight: 30,
+//            //            width: 300,
+//            height: 30
+//        )
+//        
+//        let contentLabel = UILabel()
+//        contentLabel.text = """
+//                            ①ユーザーカードを右へスワイプすると、ユーザーを「いいね」し、次のユーザーカードへ行きます。
+//                            
+//                            ②ユーザーカードを左へスワイプすると、そのまま次のユーザーカードへ行きます。
+//                            
+//                            ③「いいね」したユーザーは「いいね画面」から確認することができます。
+//                            
+//                            ④ユーザーカードをタップすると、ユーザーのプロフィールを見ることができます。
+//                            """
+//        contentLabel.font = UIFont.systemFont(ofSize: 15)
+//        contentLabel.numberOfLines = 0
+//        popupView.addSubview(contentLabel)
+//        contentLabel.anchor(
+//            top: popupView.topAnchor,
+//            left: popupView.leftAnchor,
+//            bottom: popupView.bottomAnchor,
+//            right: popupView.rightAnchor,
+//            paddingTop: 70,
+//            paddingLeft: 30,
+//            paddingBottom: 50,
+//            paddingRight: 30
+//            //            width: 300,
+//            //            height: 400
+//        )
+//        
+//        let closeButton = UIButton() // ボタンの位置とサイズを調整
+//        closeButton.setTitle("×", for: .normal)
+//        closeButton.titleLabel?.font = UIFont.systemFont(ofSize: 20) // フォントサイズの調整
+//        closeButton.setTitleColor(.black, for: .normal) // ボタンのテキスト色を黒に設定
+//        closeButton.addTarget(self, action: #selector(togglePopup), for: .touchUpInside)
+//        popupView.addSubview(closeButton)
+//        closeButton.anchor(
+//            top: popupView.topAnchor,
+//            //            left: popupView.leftAnchor,
+//            //            bottom: popupView.bottomAnchor,
+//            right: popupView.rightAnchor,
+//            paddingTop: 10,
+//            //            paddingLeft: 30,
+//            //            paddingBottom: 200,
+//            paddingRight: 10,
+//            width: 20,
+//            height: 20
+//        )
+//    }
+//    
+//    @objc func togglePopup() {
+//        emptyDataView.isHidden = !emptyDataView.isHidden
+//        blurEffectView.isHidden = !blurEffectView.isHidden
+//        popupView.isHidden = !popupView.isHidden
+//    }
 }
 
 extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
@@ -340,5 +483,5 @@ extension CardViewController: EmptyDataViewDelegate {
         downloadInitialUsers()
 //        emptyDataView.reloadButton.isEnabled = false
     }
-    
 }
+
