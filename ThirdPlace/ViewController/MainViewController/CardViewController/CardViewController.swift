@@ -70,8 +70,6 @@ class CardViewController: UIViewController {
         //ExplanationMarkの挙動に必要
         popUpSettings.popupView = popupView
         popUpSettings.blurEffectView = blurEffectView
-        popUpSettings.emptyDataView = self.emptyDataView
-        popUpSettings.setupUI(view: self.view)
         popUpSettings.addTapGestureToBlurEffectView()
     }
     
@@ -94,6 +92,8 @@ class CardViewController: UIViewController {
         emptyDataView.titleLabel.text = title
         emptyDataView.subTitleLabel.text = subTitle
         emptyDataView.reloadButton.isHidden = loading
+        
+        popUpSettings.setupUI(view: self.view, addedView: emptyDataView)
     }
     
     private func hideEmptyDataView() {
@@ -136,6 +136,9 @@ class CardViewController: UIViewController {
         cardStack.dataSource = self
         
         view.addSubview(cardStack)
+        
+        //CardStqackが存在する時のPopUpの設定
+        popUpSettings.setupUI(view: self.view, addedView: cardStack as UIView)
         
         //下記でCardStackの場所を設定
         cardStack.anchor(

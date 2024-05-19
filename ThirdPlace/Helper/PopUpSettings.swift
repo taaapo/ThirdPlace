@@ -26,17 +26,38 @@ class PopUpSettings {
         self.popupViewHeight = popupViewHeight
     }
     
-    func setupUI(view: UIView) {
+    func setupUI(view: UIView, addedView: UIView? = nil) {
         // ブラーの設定
         blurEffectView.frame = view.bounds
         blurEffectView.isHidden = true
-        view.addSubview(blurEffectView)
+        if let addedView = addedView {
+            addedView.addSubview(blurEffectView)
+        } else {
+            view.addSubview(blurEffectView)
+        }
+        blurEffectView.anchor(
+            top: view.safeAreaLayoutGuide.topAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+                bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor
+//                paddingTop: 100,
+//                paddingLeft: 30,
+//                    paddingBottom: 200,
+//                paddingRight: 30,
+//                    width: 300,
+//                height: popupViewHeight
+        )
+        
         
         // ポップアップの設定
         popupView.backgroundColor = .white
         popupView.layer.cornerRadius = 10
         popupView.isHidden = true
-        view.addSubview(popupView)
+        if let addedView = addedView {
+            addedView.addSubview(popupView)
+        } else {
+            view.addSubview(popupView)
+        }
         popupView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -91,7 +112,7 @@ class PopUpSettings {
             right: popupView.rightAnchor,
             paddingTop: 70,
             paddingLeft: 30,
-            paddingBottom: 50,
+            paddingBottom: 30,
             paddingRight: 30
     //            width: 300,
     //            height: 400
@@ -118,11 +139,6 @@ class PopUpSettings {
     }
 
     @objc func togglePopup() {
-        
-        if emptyDataView != nil {
-            emptyDataView!.isHidden = !emptyDataView!.isHidden
-        }
-        
         blurEffectView.isHidden = !blurEffectView.isHidden
         popupView.isHidden = !popupView.isHidden
     }

@@ -37,6 +37,11 @@ class LikesViewController: UIViewController {
     )
     
     //MARK: - ViewLifecycle
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        downloadLikes()
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -50,6 +55,8 @@ class LikesViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        
+        downloadLikes()
         
         //ExplanationMarkの挙動に必要
         popUpSettings.popupView = popupView

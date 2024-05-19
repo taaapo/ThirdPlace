@@ -31,7 +31,7 @@ class ChatListTableViewController: UITableViewController {
                         
                         ③各行を左にスワイプすると、ブロックボタンが表示されます。ユーザーをブロックすると、メッセージ画面といいね画面からユーザーが表示されなくなります。ブロックしたユーザーがメッセージを送信しても表示されません。
                         """,
-        popupViewHeight: 450
+        popupViewHeight: 500
     )
     
     //MARK: - ViewLifeCycles

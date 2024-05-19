@@ -145,6 +145,11 @@ class FirebaseListener {
         }
     }
     
+    func deleteUserFromFireStore(userId: String) {
+        FirebaseReference(.User).document(userId).delete()
+        print("delete User in deleteUserFromFireStore")
+    }
+    
     //MARK: - Likes
     func downloadUserLikes(completion: @escaping (_ likedUserIds: [String]) -> Void) {
         
@@ -175,6 +180,10 @@ class FirebaseListener {
         }
     }
 
+    
+    func deleteLikeFromFireStoreWith(objectId: String) {
+        FirebaseReference(.Like).document(objectId).delete()
+    }
     
     //MARK: - Chats
     func downloadChatsFromFireStore(completion: @escaping (_ allChats: [Chat]) -> Void) {
@@ -265,5 +274,9 @@ class FirebaseListener {
     func deleteChatsFromFireStore(chat: Chat) {
         FirebaseReference(.Chat).document(chat.objectId).delete()
         print("delete Chat in deleteChatsFromFireStore")
+    }
+    
+    func deleteChatFromFireStoreWith(objectId: String) {
+        FirebaseReference(.Chat).document(objectId).delete()
     }
 }

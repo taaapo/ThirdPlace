@@ -35,6 +35,8 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     var alertTextFieldCurrentPassword: UITextField!
     var alertTextFieldNewEmail: UITextField!
     
+    var alertTextFieldPassword: UITextField!
+    
     //MARK: - ViewLifrCycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -344,7 +346,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         }))
         
         alertController.addAction(UIAlertAction(title: "アカウントの削除", style: .destructive, handler: { (alert) in
-            self.deleteAccount()
+            self.showDeleteAccount()
         }))
         
         alertController.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
@@ -498,19 +500,19 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         alertView.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
         
         self.present(alertView, animated: true, completion: nil)
-        
     }
     
-    //下記で削除するユーザーをいいね画面でプロフィール表示していた場合、ユーザー削除後でも、チャット画面が開き、メッセージ画面にチャット履歴が残ってしまう。
-    private func deleteAccount() {
+    private func showDeleteAccount() {
         
-        let userId = FUser.currentId()
+        let alertView = UIAlertController(title: "アカウントの削除", message: "アカウントを削除してもよろしいですか？", preferredStyle: .alert)
         
-        deleteUser()
+        alertView.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { action in
+            self.deleteUser()
+        }))
         
-        deleteAllLikeWith(userId: userId)
-        deleteAllChatWith(userId: userId)
-        deleteUserWith(userId: userId)
+        alertView.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        
+        self.present(alertView, animated: true, completion: nil)
     }
     
     //MARK: - Update Email/Password
@@ -588,22 +590,53 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     //MARK: - Delete
     private func deleteUser() {
         
-        FUser.deleteCurrentUser { error in
-            
-            if error == nil {
-                
-                let loginView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "loginView")
-                
-                DispatchQueue.main.async {
-                    
-                    loginView.modalPresentationStyle = .fullScreen
-                    self.present(loginView, animated: true, completion: nil)
-                }
-                
-            } else {
-                ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
-            }
+//        let uid = FUser.currentId()
+        
+        let alertView = UIAlertController(title: "ユーザー認証", message: "パスワードを入力してください。", preferredStyle: .alert)
+        
+        alertView.addTextField { textField in
+            self.alertTextFieldPassword = textField
+            self.alertTextFieldPassword.isSecureTextEntry = true
+            self.alertTextFieldPassword.placeholder = "パスワード"
         }
+        
+        alertView.addAction(UIAlertAction(title: "削除", style: .destructive, handler: { action in
+            
+            FUser.deleteCurrentAccount(password: self.alertTextFieldPassword.text!) {error in
+                
+                if error == nil {
+                    print("error is nil in alertView.addAction")
+                    
+//                    FirebaseReference(.User).document(uid).delete()
+                    
+                    //下記3つの関数の場所がわからない
+//                    deleteAllLikeWith(userId: uid)
+//                    deleteAllChatWith(userId: uid)
+//                    deleteUserWith(userId: uid)
+                    
+                    ProgressHUD.symbol("アカウントの削除が完了しました。", name: "exclamationmark.circle")
+                    
+                    let loginView = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "loginView")
+                    
+                    DispatchQueue.main.async {
+                        
+                        loginView.modalPresentationStyle = .fullScreen
+                        self.present(loginView, animated: true, completion: nil)
+                        
+                        print("アカウント削除完了 in alertView.addAction")
+                    }
+                    
+                } else {
+//                    ProgressHUD.symbol("エラーが発生しました。/nお問合せください", name: "exclamationmark.circle")
+                    ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
+                }
+            }
+        }))
+        
+        alertView.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        
+        present(alertView, animated: true, completion: nil)
+        
     }
     
     //MARK: - Contact

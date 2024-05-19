@@ -205,6 +205,7 @@ class FUser: Equatable {
             FUser.resendVerificationEmail { error in
                 completion(error)
             }
+            
             completion(error)
         })
     }
@@ -268,18 +269,95 @@ class FUser: Equatable {
     }
     
     //MARK: - Delete user
-    class func deleteCurrentUser(completion: @escaping(_ error: Error?) -> Void) {
+//    class func deleteCurrentUser(completion: @escaping(_ error: Error?) -> Void) {
+//        
+//        do {
+//            try Auth.auth().currentUser?.delete()
+//            
+//            userDefaults.removeObject(forKey: kCURRENTUSER)
+//            userDefaults.synchronize()
+//            completion(nil)
+//            
+//        } catch let error as NSError {
+//            completion(error)
+//        }
+//    }
+    
+    class func deleteCurrentAccount(password: String, completion: @escaping (_ error: Error?) -> Void ) {
         
-        do {
-            try Auth.auth().currentUser?.delete()
+        print("first step in deleteCurrentAccount")
+        
+        let uid = FUser.currentId()
+        
+        reauthenticateUser(password: password) { error in
             
-            userDefaults.removeObject(forKey: kCURRENTUSER)
-            userDefaults.synchronize()
-            completion(nil)
-        } catch let error as NSError {
-            completion(error)
+            if let error = error {
+                
+                print("Failure in reauthResult")
+                completion(error)
+                
+            } else {
+                
+                deleteAllLikeWith(userId: uid)
+                deleteAllChatWith(userId: uid)
+                deleteUserWith(userId: uid)
+                
+                deleteUser { error in
+                    
+                    if let error = error {
+                        print("Failure in deleteResult")
+                        completion(error)
+                    } else {
+                        print("Success in deleteResult")
+                        
+//                        deleteAllLikeWith(userId: uid)
+//                        deleteAllChatWith(userId: uid)
+                        
+//                        deleteUserWith(userId: uid)
+                        
+                        completion(nil)
+                        
+                    }
+                }
+            }
+        }
+        
+        func deleteUser(completion: @escaping (_ error: Error?) -> Void) {
+            
+            let user = Auth.auth().currentUser
+            
+            user?.delete { error in
+                
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+        
+        func reauthenticateUser(password: String, completion: @escaping (_ error: Error?) -> Void) {
+            print("first step in reauthenticateUser")
+            
+            let user = Auth.auth().currentUser
+            let email = user!.email
+            
+            // ここでユーザーの再認証を行います。例としてメールとパスワードを使用します。
+            let credential = EmailAuthProvider.credential(withEmail: email!, password: password)
+            
+            user!.reauthenticate(with: credential) { result, error in
+                
+                print("first step in reauthenticate")
+                
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            }
         }
     }
+
     
     
     //MARK: - Save user funcs
