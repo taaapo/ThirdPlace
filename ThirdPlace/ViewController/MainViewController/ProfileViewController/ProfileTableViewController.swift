@@ -9,6 +9,8 @@ import UIKit
 import Foundation
 import ProgressHUD
 import CropViewController
+import AVFoundation
+import Photos
 
 class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
     
@@ -249,6 +251,135 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         saveUserData(user: user)
     }
     
+    //MARK: - カメラアクセス許可
+    func requestCameraAccess() {
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch cameraAuthorizationStatus {
+        case .notDetermined:
+            // 初めてのリクエスト
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    // アクセスが許可された
+                    DispatchQueue.main.async {
+                        self.startCamera()
+                    }
+                } else {
+                    // アクセスが拒否された
+                    DispatchQueue.main.async {
+                        self.showSettingsAlert()
+                    }
+                }
+            }
+        case .authorized:
+            // すでに許可されている
+            startCamera()
+        case .restricted, .denied:
+            // アクセスが拒否または制限されている
+            showSettingsAlert()
+        @unknown default:
+            // 他のケース（将来的に追加される可能性のあるケース）
+            fatalError("Unhandled case")
+        }
+    }
+
+    func startCamera() {
+        // カメラの起動処理
+        self.openCamera()
+    }
+
+    func showSettingsAlert() {
+        let alert = UIAlertController(
+            title: "カメラアクセスが必要です",
+            message: "カメラへのアクセスが拒否されています。設定アプリでアクセスを許可してください。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "設定を開く", style: .default) { _ in
+            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+            }
+        })
+        
+        // 現在表示しているViewControllerにアラートを表示
+        if let viewController = UIApplication.shared.keyWindow?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: - フォトライブラリアクセス許可
+    func requestPhotoLibraryAccess() {
+        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+        
+        switch photoAuthorizationStatus {
+        case .notDetermined:
+            // 初めてのリクエスト
+            PHPhotoLibrary.requestAuthorization { status in
+                switch status {
+                case .authorized:
+                    // アクセスが許可された
+                    DispatchQueue.main.async {
+                        self.accessPhotoLibrary()
+                    }
+                case .denied, .restricted:
+                    // アクセスが拒否または制限された
+                    DispatchQueue.main.async {
+                        self.showPhotoLibrarySettingsAlert()
+                    }
+                case .limited:
+                    // アクセスが限定的に許可された
+                    DispatchQueue.main.async {
+                        self.accessPhotoLibrary()
+                    }
+                case .notDetermined:
+                    // 予期しないケース
+                    fatalError("PHPhotoLibrary requestAuthorization completed with .notDetermined status")
+                @unknown default:
+                    // 他のケース（将来的に追加される可能性のあるケース）
+                    fatalError("Unhandled case")
+                }
+            }
+        case .authorized:
+            // すでに許可されている
+            accessPhotoLibrary()
+        case .restricted, .denied:
+            // アクセスが拒否または制限されている
+            showPhotoLibrarySettingsAlert()
+        case .limited:
+            // アクセスが限定的に許可されている
+            accessPhotoLibrary()
+        @unknown default:
+            // 他のケース（将来的に追加される可能性のあるケース）
+            fatalError("Unhandled case")
+        }
+    }
+
+    func accessPhotoLibrary() {
+        // フォトライブラリへのアクセス処理
+        self.openPhotoLibrary()
+    }
+
+    func showPhotoLibrarySettingsAlert() {
+        let alert = UIAlertController(
+            title: "写真ライブラリへのアクセスが必要です",
+            message: "写真ライブラリへのアクセスが拒否されています。設定アプリでアクセスを許可してください。設定した画像は、他ユーザーがチャット相手を探す際に利用されます。",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "設定を開く", style: .default) { _ in
+            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+            }
+        })
+        
+        // 現在表示しているViewControllerにアラートを表示
+        if let viewController = UIApplication.shared.keyWindow?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     //MARK: - FileStorae
     private func uploadAvatar(_ image: UIImage, completion: @escaping (_ avatarLink: String?) -> Void) {
         
@@ -286,13 +417,13 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: "写真を撮る", style: .default, handler: { alert in
-            
-            self.openCamera()
+            self.requestCameraAccess()
+//            self.openCamera()
         }))
         
         alertController.addAction(UIAlertAction(title: "ライブラリから選択する", style: .default, handler: { alert in
-            
-            self.openPhotoLibrary()
+            self.requestPhotoLibraryAccess()
+//            self.openPhotoLibrary()
         }))
         
         alertController.addAction(UIAlertAction(title: "おまかせ", style: .default, handler: { alert in
@@ -627,7 +758,7 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
                     }
                     
                 } else {
-//                    ProgressHUD.symbol("エラーが発生しました。/nお問合せください", name: "exclamationmark.circle")
+//                    ProgressHUD.symbol("エラーが発生しました。\nお問合せください", name: "exclamationmark.circle")
                     ProgressHUD.symbol(error!.localizedDescription, name: "exclamationmark.circle")
                 }
             }
