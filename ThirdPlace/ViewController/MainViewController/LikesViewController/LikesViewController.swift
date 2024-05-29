@@ -7,6 +7,7 @@
 
 import UIKit
 import ProgressHUD
+import GoogleMobileAds
 
 class LikesViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class LikesViewController: UIViewController {
     //MARK: - Vars
     var allLikes: [LikeObject] = []
     var allUsers: [FUser] = []
+    var bannerView: GADBannerView!
     
     //ExplanationMarkの挙動に必要
     let popupView = UIView()
@@ -63,6 +65,20 @@ class LikesViewController: UIViewController {
         popUpSettings.blurEffectView = blurEffectView
         popUpSettings.setupUI(view: self.view)
         popUpSettings.addTapGestureToBlurEffectView()
+        
+        // AdMobのバナー広告を作成する
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.adUnitID = adUnitID(key: "banner")
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
+        // バナー広告を画面の上部に配置する
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        NSLayoutConstraint.activate([
+            bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
     

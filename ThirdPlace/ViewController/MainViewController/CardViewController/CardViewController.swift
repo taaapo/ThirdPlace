@@ -89,13 +89,6 @@ class CardViewController: UIViewController {
         bannerView.load(GADRequest())
     }
     
-    func adUnitID(key: String) -> String? {
-        guard let adUnitIDs = Bundle.main.object(forInfoDictionaryKey: "AdUnitIDs") as? [String: String] else {
-            return nil
-        }
-        return adUnitIDs[key]
-    }
-    
     private func showEmptyDataView(loading: Bool) {
         
         emptyDataView.isHidden = false
@@ -180,7 +173,8 @@ class CardViewController: UIViewController {
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingLeft: 30,
-            paddingBottom: (view.frame.height - 600) / 2,
+            //広告バナーを表示するため、Bottomを+50にしている
+            paddingBottom: ((view.frame.height - 600) / 2) + 35,
             paddingRight: 30,
             height: 500
         )

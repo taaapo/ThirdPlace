@@ -316,3 +316,11 @@ func saveblockToUser(userId: String) {
         }
     }
 }
+
+//広告IDの設定
+func adUnitID(key: String) -> String? {
+    guard let adUnitIDs = Bundle.main.object(forInfoDictionaryKey: "AdUnitIDs") as? [String: String] else {
+        return nil
+    }
+    return adUnitIDs[key]
+}

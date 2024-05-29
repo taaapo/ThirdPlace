@@ -7,11 +7,13 @@
 
 import UIKit
 import ProgressHUD
+import GoogleMobileAds
 
 class ChatListTableViewController: UITableViewController {
     
     //MARK: - Vars
     var chatList: [Chat] = []
+    var bannerView: GADBannerView!
     
     //ExplanationMarkの挙動に必要
     let popupView = UIView()
@@ -50,8 +52,21 @@ class ChatListTableViewController: UITableViewController {
         popUpSettings.blurEffectView = blurEffectView
         popUpSettings.setupUI(view: self.view)
         popUpSettings.addTapGestureToBlurEffectView()
+        
+        // AdMobのバナー広告を作成する
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.adUnitID = adUnitID(key: "banner")
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
+        // バナー広告を画面の上部に配置する
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        NSLayoutConstraint.activate([
+            bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
-    
     
     //MARK: - Download
     private func downloadChats() {

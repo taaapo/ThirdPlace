@@ -605,7 +605,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0w8-dY-JSc">
-                                <rect key="frame" x="243" y="699" width="50" height="50"/>
+                                <rect key="frame" x="243" y="649" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="JCy-3X-DeC"/>
                                     <constraint firstAttribute="width" constant="50" id="Ywz-Sj-GW9"/>
@@ -617,7 +617,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9O-9l-Mvc">
-                                <rect key="frame" x="100" y="699" width="50" height="50"/>
+                                <rect key="frame" x="100" y="649" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="IqX-xX-CG6"/>
                                     <constraint firstAttribute="width" constant="50" id="LCf-eQ-JSA"/>
@@ -636,34 +636,34 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="いいね" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bel-Z7-FzV">
-                                <rect key="frame" x="246.66666666666663" y="673" width="43" height="18"/>
+                                <rect key="frame" x="246.66666666666663" y="623" width="43" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.9197074771" green="0.38908338549999999" blue="0.36468404529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次へ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVV-w2-CEt">
-                                <rect key="frame" x="110" y="673" width="30" height="20"/>
+                                <rect key="frame" x="110" y="623" width="30" height="20"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BEe-gn-1I0" customClass="GADBannerView">
-                                <rect key="frame" x="36.666666666666657" y="103" width="320" height="50"/>
+                                <rect key="frame" x="36" y="719" width="320" height="50"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KWF-kV-F2t"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="KWF-kV-F2t" firstAttribute="bottom" secondItem="0w8-dY-JSc" secondAttribute="bottom" constant="20" id="6u0-h5-3cb"/>
+                            <constraint firstItem="KWF-kV-F2t" firstAttribute="bottom" secondItem="0w8-dY-JSc" secondAttribute="bottom" constant="70" id="6u0-h5-3cb"/>
                             <constraint firstAttribute="bottom" secondItem="j88-y8-VYB" secondAttribute="bottom" id="Awt-gL-cN8"/>
                             <constraint firstItem="j88-y8-VYB" firstAttribute="top" secondItem="WCv-VU-sGh" secondAttribute="top" id="Cnd-rZ-Yoh"/>
                             <constraint firstItem="N9O-9l-Mvc" firstAttribute="leading" secondItem="KWF-kV-F2t" secondAttribute="leading" constant="100" id="Dca-kS-efp"/>
                             <constraint firstItem="N9O-9l-Mvc" firstAttribute="centerY" secondItem="0w8-dY-JSc" secondAttribute="centerY" id="Nca-so-Gkh"/>
                             <constraint firstItem="vVV-w2-CEt" firstAttribute="centerX" secondItem="N9O-9l-Mvc" secondAttribute="centerX" id="Zh9-qA-NSg"/>
                             <constraint firstItem="rYs-Il-580" firstAttribute="leading" secondItem="KWF-kV-F2t" secondAttribute="leading" constant="16" id="aAM-6w-wBy"/>
-                            <constraint firstItem="BEe-gn-1I0" firstAttribute="top" secondItem="KWF-kV-F2t" secondAttribute="top" id="bsz-cz-RDK"/>
                             <constraint firstItem="j88-y8-VYB" firstAttribute="trailing" secondItem="KWF-kV-F2t" secondAttribute="trailing" id="cUu-j8-nLh"/>
+                            <constraint firstItem="BEe-gn-1I0" firstAttribute="bottom" secondItem="KWF-kV-F2t" secondAttribute="bottom" id="fde-yN-JI8"/>
                             <constraint firstItem="0w8-dY-JSc" firstAttribute="top" secondItem="bel-Z7-FzV" secondAttribute="bottom" constant="8" symbolic="YES" id="geS-rZ-rEu"/>
                             <constraint firstItem="BEe-gn-1I0" firstAttribute="centerX" secondItem="WCv-VU-sGh" secondAttribute="centerX" id="iir-xM-m1a"/>
                             <constraint firstItem="N9O-9l-Mvc" firstAttribute="top" secondItem="vVV-w2-CEt" secondAttribute="bottom" constant="6" id="ju4-kW-2XF"/>
