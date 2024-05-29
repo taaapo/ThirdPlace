@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "CFDEEBA5-AF41-4053-9A04-705AA58B99AE"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "39F69C33-55C1-493D-9FE5-EAA531D4FBE4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ThirdPlace/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "requestPushNotificationPermission()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "39F69C33-55C1-493D-9FE5-EAA531D4FBE4 - 890417d1e90db11c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ThirdPlace.AppDelegate.requestPushNotificationPermission() -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "39F69C33-55C1-493D-9FE5-EAA531D4FBE4 - 6bed7cc36c8875ed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ThirdPlace.AppDelegate.requestPushNotificationPermission() -&gt; ()"
+                  moduleName = "ThirdPlace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taku/Library/Mobile%20Documents/com~apple~CloudDocs/%E3%82%A2%E3%83%95%E3%82%9A%E3%83%AA/ThirdPlace/ThirdPlace/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
